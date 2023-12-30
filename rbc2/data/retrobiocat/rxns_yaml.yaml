@@ -1,0 +1,2491 @@
+Alcoholysis:
+  enzymes:
+    Lipase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CCCOC(=O)CC
+  - O=C(OC1=CC=CC=C1)OCCC
+  product_seeds:
+  - C(=O)OC
+  requires_absence_of_water: true
+  smarts:
+  - '[#6:1]-[#6:2](=[O:3])-[#8X2:4]-[#6:5]>>[#6:1]-[#6:2](=[O:3])-[#8X2]-[C].[#8X2:4]-[#6:5]'
+  - '[#6:5]-[#8X2:4]-[#6:1](=[O:6])-[#8:2]-[#6:3]>>[#6:3]-[#8:2]-[#6:1](=[O:6])-[#8]-[#6].[#6:5]-[#8X2:4]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)OC
+  substrate_2_seeds:
+  - CO
+  type: C-X bond formation
+Aldehyde amination:
+  enzymes:
+    AmDH:
+      cofactors_minus:
+      - NADH
+      - NH3
+      cofactors_plus:
+      - NAD
+    IRED:
+      cofactors_minus:
+      - NADPH
+      - NH3
+      cofactors_plus:
+      - NADP
+    TA:
+      cofactors_minus:
+      - Amine
+      cofactors_plus:
+      - Carbonyl
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - CN
+  smarts:
+  - '[#6:5][#6H2:6]([#7H2;R0:3])>>[#6:5][#6H1:6](=[#8])'
+  steps: []
+  substrate_1_seeds:
+  - C=O
+  substrate_2_seeds: []
+  type: C-X bond formation
+Aldehyde decarbonylation:
+  enzymes:
+    ADC:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CCC(C)C
+  positive_tests:
+  - CCCCC
+  - CCCCCCCC=CC
+  product_seeds: []
+  smarts:
+  - '[#6H3:1]-[#6H2:2]-[#6H2:3]-[#6H2:4]>>[#6:4]-[#6:3]-[#6:2]-[#6:1]-[#6]=[O]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Aldehyde nitrilation:
+  enzymes:
+    AlOx:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C#N
+  smarts:
+  - '[#6:1][#6X2H0:2]#[NX3H0:3]>>[#6:1][#6X3H1:2](=[O])'
+  steps: []
+  substrate_1_seeds:
+  - C=O
+  substrate_2_seeds: []
+  type: C-X bond formation
+Aldehyde oxidation:
+  enzymes:
+    ADH:
+      cofactors_minus:
+      - NADP
+      cofactors_plus:
+      - NADPH
+    AlDH:
+      cofactors_minus:
+      - NAD
+      cofactors_plus:
+      - NADH
+    AlOx:
+      cofactors_minus:
+      - O2
+      cofactors_plus:
+      - H2O
+    XOR:
+      cofactors_minus:
+      - O2
+      cofactors_plus:
+      - H2O
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(=O)O
+  smarts:
+  - '[#6:10]-[#6H0;R0:1](=[OH0:2])[OH1:3]>>[#6:10]-[#6:1]=[O:2]'
+  steps: []
+  substrate_1_seeds:
+  - C=O
+  substrate_2_seeds: []
+  type: Oxidation
+Aldehyde reduction:
+  enzymes:
+    ADH:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+    KRED:
+      cofactors_minus:
+      - NAD(P)H
+      cofactors_plus:
+      - NAD(P)
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - CO
+  smarts:
+  - '[#6:1][#6H2:2][#8H1:4]>>[#6:1][#6H1:2]=[#8:4]'
+  steps: []
+  substrate_1_seeds:
+  - C=O
+  substrate_2_seeds: []
+  type: Reduction
+Aldol reaction (1,3-dihydroxyacetone (OH)):
+  enzymes:
+    Aldolase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6:2]([OH:3])[#6:5]([OH:4])[#6H0:6](=[O:7])[#6H2:8][OH:9]>>[#6:1][#6:2](=[O:3]).[OH:4][#6H2:5][#6H0:6](=[O:7])[#6H2:8][OH:9]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Aldol reaction (1,3-dihydroxyacetone):
+  enzymes:
+    Aldolase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6:2]([OH:3])[#6:5]([OH:4])[#6H0:6](=[O:7])[#6H2:8][O:9][P:10](=[O:11])([O:12])[O:13]>>[#6:1][#6:2](=[O:3]).[OH:4][#6:5][#6:6](=[O:7])[#6H2:8][O:9][P:10](=[O:11])([O:12])[O:13]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Aldol reaction (DERA):
+  enzymes:
+    Aldolase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC(O)C1CCCC1=O
+  - CC(=O)C[C@H](C)O
+  - CCC(=O)C(C)C(O)CCl
+  - O=C(Cc1ccccc1)C(Cc1ccccc1)C(O)CCl
+  - CC(O)C1CCCC1=O
+  - CC(=O)C[C@H](C)O
+  - CCC(=O)C(C)C(O)CCl
+  - O=C(Cc1ccccc1)C(Cc1ccccc1)C(O)CCl
+  - CC(O)C1CCCC1=O
+  - CC(=O)C[C@H](C)O
+  - CCC(=O)C(C)C(O)CCl
+  - O=C(Cc1ccccc1)C(Cc1ccccc1)C(O)CCl
+  - OC(C(O)C(O)C(C#C)=O)CP(OO[O])=O
+  product_seeds: []
+  smarts:
+  - '[#6X4:1]-[#6X4:2](-[OH:3])-[#6X4:4]-[#6X3:5]=[OH0:6]>>[#6X4:1]-[#6X3:2]=[OH0:3].[#6X4:4]-[#6X3:5]=[OH0:6]'
+  - '[#6X4:1]-[#6:2](-[OH:3])-[#6X4:4]-[#6H0;R0:5](=[OH0:6])-[#6X4:7]>>[#6X4:1]-[#6H1:2]=[OH0:3].[#6X4:4]-[#6H0;R0:5](=[OH0:6])-[#6X4:7]'
+  - '[#6X4:1]-[#6:2](-[OH:3])-[#6H1R1:4]-[#6H0:5](=[O:6])-[#6:7]>>[#6X4:1]-[#6H1:2]=[O:3].[#6H2;R1:4]-[#6H0:5](=[O:6])-[#6:7]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Aldol reaction (pyruvate):
+  enzymes:
+    Aldolase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - O=C(O)C(=O)CCO
+  product_seeds: []
+  smarts:
+  - '[#6X4;z1:2]([OH:3])[#6H2:4][#6H0:5](=[O:6])[#6H0:7](=[O:8])[OH:9]>>[#6X4;z1:2](=[O:3]).[#6H3:4][#6H0:5](=[O:6])[#6H0:7](=[O:8])[OH:9]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Aldol reaction (threonine aldolase):
+  enzymes:
+    Aldolase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6:2]([OH:3])[#6:5]([NH2:4])[#6H0:6](=[O:7])[OH:8]>>[#6:1][#6:2](=[O:3]).[NH2:4][#6H2:5][#6H0:6](=[O:7])[OH:8]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Aldoxime dehydration:
+  enzymes:
+    Oxd:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+  negative_tests: []
+  positive_tests:
+  - N#Cc1ccco1
+  product_seeds: []
+  smarts:
+  - '[#6:1][C:2]#[N:3]>>[#6:1]\[#6H1:2]=[#7:3]/[#8]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Alkene oxidation:
+  enzymes:
+    P450:
+      cofactors_minus:
+      - O2
+      - NADPH
+      - NADPH
+      cofactors_plus:
+      - H2O
+      - NADP
+      - NADP
+    SMO:
+      cofactors_minus:
+      - O2
+      - FADH2
+      cofactors_plus:
+      - H2O
+      - FAD
+  negative_tests: []
+  positive_tests:
+  - CC1(C)OC1(C)c1ccccc1
+  - c1ccc(C2CO2)cc1
+  - c1ccc2c(c1)CCC1OC21
+  - '[CH]1OC1c1ccccc1'
+  product_seeds:
+  - CC1OC1
+  smarts:
+  - '[#6:1]-[#6X4:2]-1-[OH0:5]-[#6z1:3]-1>>[#6:1]-[#6:2]=[#6:3]'
+  steps: []
+  substrate_1_seeds:
+  - CC=C
+  substrate_2_seeds: []
+  type: Oxidation
+Amidation:
+  enzymes:
+    ANL-AS:
+      cofactors_minus:
+      - ATP
+      cofactors_plus:
+      - PPi
+      - AMP
+    ATase:
+      cofactors_minus: []
+      cofactors_plus: []
+    Amidase:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+    CAR:
+      cofactors_minus:
+      - ATP
+      cofactors_plus:
+      - AMP
+      - Ppi
+    Lipase:
+      cofactors_minus: []
+      cofactors_plus: []
+    PGA:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(=O)N
+  smarts:
+  - '[#6:1][#6H0;R0:2](=[O:3])-[NX3:5]>>[#6:1][#6H0;R0:2](=[O:3])[OH].[Nh1X3:5]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)O[H]
+  substrate_2_seeds:
+  - N
+  type: C-X bond formation
+Amide hydrolysis (COOH):
+  enzymes:
+    Amidase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-NH2
+    PGA:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-NH2
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(=O)O
+  smarts:
+  - '[#6:1][#6;H0:2](=[OH0:3])[OH:4]>>[#6:1][#6:2](=[O:3])[NH][#6X4]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)N
+  substrate_2_seeds: []
+  type: Hydrolysis
+Amide hydrolysis (NH):
+  enzymes:
+    Amidase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-COOH
+    PGA:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-COOH
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - N
+  smarts:
+  - '[#6X4:5][NH2:6]>>[#6][#6](=[O])[NH:6][#6X4:5]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)N
+  substrate_2_seeds: []
+  type: Hydrolysis
+Amination (TPL):
+  enzymes:
+    TPL:
+      cofactors_minus:
+      - NH3
+      cofactors_plus:
+      - H2O
+  negative_tests:
+  - CC(=O)NC(Cc1ccc(O)cc1)C(=O)O
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[c:6]1[c:7][c:2](-[OH:1])[c:3][c:4][c:5]1-[#6:8]-[#6h1:9](-[NH2:20])-[#6:11](=[O:12])-[OH:13]>>[c:6]1[c:7][c:2](-[O:1])[c:3][c:4][c:5]1.[#6:8]-[#6H0:9](=[O])-[#6:11](=[O:12])-[OH:13]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Amine deracemization:
+  enzymes:
+    AmOx:
+      cofactors_minus:
+      - O2
+      - Reducing agent
+      cofactors_plus:
+      - H2O2
+    IRED:
+      cofactors_minus:
+      - NADPH
+      - Reducing agent
+      cofactors_plus:
+      - NADP+
+  negative_tests:
+  - C1=N[C@H](c2ccccc2)CCC1
+  positive_tests:
+  - CC[C@H](C)N
+  - C[C@@H]1CNCCN1C
+  product_seeds:
+  - CN
+  smarts: []
+  steps:
+  - - Imine reduction
+    - Amine oxidation
+  - - Iminium reduction
+    - Amine oxidation
+  substrate_1_seeds:
+  - CN
+  substrate_2_seeds: []
+  two_step: true
+  type: Oxidation
+Amine oxidation:
+  enzymes:
+    AmOx:
+      cofactors_minus:
+      - O2
+      cofactors_plus:
+      - H2O2
+    IRED:
+      cofactors_minus:
+      - NADP+
+      cofactors_plus:
+      - NADPH
+  negative_tests:
+  - C(N)=N
+  - C=NC(=O)C
+  - CN=C(C)O
+  - C[N+]=C(C)CC
+  positive_tests:
+  - C=N
+  - C=NC
+  - CN=C(C)CC
+  - CC(C)=N
+  - CC(C)=[N+](C)C
+  - CC1=CCC[N+](C)=C1
+  - COc1ccc(F)c2c1CCC=N2
+  product_seeds:
+  - C=N
+  smarts:
+  - '[#6z1;X3:1]=[NH1;+0:2]>>[#6:1]-[NH2:2]'
+  - '[#6z1:1]=[NH0;+0:2]-[#6z1:3]>>[#6:1]-[NH1:2]-[#6:3]'
+  - '[#6X4:1]-[#6H0:2](-[#6X4:4])=[NX2;+0:3]>>[#6:1]-[#6@@H1:2](-[#6:4])-[N:3]'
+  - '[#6z1;X4:1]-[#7+;H0:2](-[#6z1;X4:3])=[#6z1;X3:4]>>[#6:1]-[#7+0;H0:2](-[#6:3])-[#6:4]'
+  steps: []
+  substrate_1_seeds:
+  - CN
+  substrate_2_seeds: []
+  type: Oxidation
+Amine oxidation and hydrolysis:
+  enzymes:
+    AmOx:
+      cofactors_minus:
+      - O2
+      - H2O
+      cofactors_plus:
+      - H2O2
+      - NH3
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - CN
+  smarts: []
+  steps:
+  - - Imine Hydrolysis
+    - Amine oxidation
+  substrate_1_seeds:
+  - C=O
+  substrate_2_seeds: []
+  two_step: true
+  type: Oxidation
+Amino acid oxidation:
+  enzymes:
+    AAD:
+      cofactors_minus:
+      - O2
+      - H2O
+      cofactors_plus:
+      - H2O2
+      - NH2
+    AADH:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+    AAO:
+      cofactors_minus:
+      - O2
+      - H2O
+      cofactors_plus:
+      - H2O2
+      - NH2
+  negative_tests:
+  - CC(C1=CC(=O)[C@H](C)CC1)=C(C(=O)O)C(=O)O
+  positive_tests:
+  - CC(=O)C(=O)O
+  product_seeds: []
+  smarts:
+  - '[#6:3]-[#6:2](=[O:6])-[#6:1](-[#8H1:4])=[O:5]>>[#6:3]-[#6@@H:2](-[NH2])-[#6:1](-[#8H:4])=[O:5]'
+  - '[#6:3]-[#6:2](=[O:6])-[#6:1](-[#8H1:4])=[O:5]>>[#6:3]-[#6@H:2](-[NH2])-[#6:1](-[#8H:4])=[O:5]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+Aminolysis:
+  enzymes:
+    ATase:
+      cofactors_minus: []
+      cofactors_plus: []
+    Lipase:
+      cofactors_minus: []
+      cofactors_plus: []
+    PGA:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(C)OC(=O)N(C)C
+  positive_tests:
+  - CNC(=O)OC(C)C
+  - COC(=O)Nc1ccccc1
+  product_seeds:
+  - C(=O)N
+  requires_absence_of_water: true
+  smarts:
+  - '[#6:1][#6H0;R0:2](=[O:3])-[NX3:5]>>[#6:1][#6H0;R0:2](=[O:3])[O]-[#6].[Nh1X3:5]'
+  - '[#6:5]-[#7H1:4]-[#6:1](=[O:6])-[#8:2]-[#6:3]>>[#6:3]-[#8:2]-[#6:1](=[O:6])-[#8]-[#6].[#6:5]-[#7:4]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)OC
+  substrate_2_seeds:
+  - N
+  type: C-X bond formation
+Aza micheal addition:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - C#CCNC(C(=O)C(=O)O)c1ccccc1
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1]-[#6H1:2](-[NH1;R0:10])-[#6H2:3]-[#6:4]=[O:5]>>[#6:1]-[#6H1:2]=[#6H1:3]-[#6:4]=[O:5].[NH2;R0:10]'
+  - '[#6:1]-[#6:2](-[NH1;R0:10])-[#6:3]-[#6:4]-[N:5](-[O:6])-[O:7]>>[#6:1]-[#6:2]=[#6:3]-[#6:4]-[N:5](-[O:6])-[O:7].[NH2;R0:10]'
+  - '[#6:1][#6:2]([NH1;R0:10])[#6:3][#6:4]#[N:6]>>[#6:1][#6:2]=[#6:3][#6:4]#[N:6].[NH2;R0:10]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+C-acylation:
+  enzymes:
+    ATase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(=O)c1ccc(O)c(C)c1O
+  - CC(=O)c1c(C)cc(O)cc1O
+  - COc1cc(O)ccc1C(C)=O
+  - CC(=O)c1ccc(O)cc1
+  - CC(O)c1ccc(O)cc1O
+  positive_tests:
+  - CC(=O)c1ccc(O)cc1O
+  - O=C(COc1ccccc1)c2ccc(O)cc2O
+  - CC(=O)c1cc(C)c(O)cc1O
+  product_seeds: []
+  smarts:
+  - '[#6:10]-[#6:9](=[O:11])-[c:2]1[cH1:3][c:4][c:5](-[#8H1:8])[cH1:6][c:1]1-[#8H1:7]>>[#8:7]-[c:1]1[c:2][c:3][c:4][c:5](-[#8:8])[c:6]1.[#6]-[#8]-[#6:9](-[#6:10])=[O:11]'
+  - '[#6:10]-[#6:9](=[O:11])-[c:2]1[cH1:3][c:4][c:5](-[#8H1:8])[cH1:6][c:1]1-[#8H1:7]>>[#8:7]-[c:1]1[c:2][c:3][c:4][c:5](-[#8:8])[c:6]1.[#6]-[#16]-[#6:9](-[#6:10])=[O:11]'
+  - '[#6:8]-[#6:7](=[O:9])-[c:1]1[cH1:6][c:5][c:4](-[#8H1:11])[cH1:3][c:2]1-[#8H1:10]>>[#8:10]-[c:2]1[c:1][c:6][c:5][c:4](-[#8:11])[c:3]1.[#6]-[#6](=[O])-[c]1[c](-[#8])[c][c](-[#8])[c](-[#6:7](-[#6:8])=[O:9])[c]1-[#8]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+C-methylation:
+  enzymes:
+    CMT:
+      cofactors_minus:
+      - SAM
+      cofactors_plus:
+      - SAH
+  negative_tests:
+  - COC(=O)C(=O)[C@H](C)c1ccccc1
+  positive_tests:
+  - C[C@@H](C(=O)C(=O)O)c1ccccc1
+  - C[C@H](C(=O)C(=O)O)c1ccccc1
+  - CC(C(=O)C(=O)O)c1ccccc1
+  product_seeds: []
+  smarts:
+  - '[#6:1]-[#6h1:2](-[#6H3:8])-[#6:3](=[O:4])-[#6:5](-[#8H1:7])=[O:6]>>[#6:1]-[#6:2]-[#6:3](=[O:4])-[#6:5](-[#8H1:7])=[O:6]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+"Carbene N\u2013H insertion":
+  enzymes:
+    P450:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CCOC(=O)C(C)NC
+  product_seeds: []
+  smarts:
+  - '[#6:9]-[#6:8]-[#8:7]-[#6:3](=[O:6])-[#6:2](-[#6:1])-[#7:4]-[#6:5]>>[#6:5]-[#7:4].[#6:9]-[#6:8]-[#8:7]-[#6:3](=[O:6])-[#6:2]([#6:1])=[#7][#7]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Carboxylation:
+  enzymes:
+    DC:
+      cofactors_minus:
+      - CO2
+      cofactors_plus: []
+  negative_tests:
+  - COc1ccccc1C(=O)O
+  - O=C(O)C1CCCCC1O
+  - COc1ccc(/C=C/C(=O)O)cc1
+  - C/C(=C\C(=O)O)c1ccc(O)cc1
+  - Cc1cc(O)ccc1/C=C/C(=O)O
+  - COC(=O)c1cc(C(=O)CNC(C)(C)C)ccc1O
+  positive_tests:
+  - O=C(O)c1ccccc1O
+  - Cc1ccc(O)c(C(=O)O)c1
+  - O=C(O)/C=C/c1ccc(O)cc1
+  - Cc1cc(/C=C/C(=O)O)ccc1O
+  product_seeds: []
+  smarts:
+  - '[#8H:10]-[#6:8](=[O:9])-[c:6]1[c:5][c:4][c:3][c:2][c:1]1-[#8H1:7]>>[#8:7]-[c:1]1[cH1:6][c:5][c:4][c:3][c:2]1'
+  - '[#8H:11]-[#6:10](=[O:12])\[#6H1:9]=[#6H1:8]\[c:6]1[cH1:1][c:2][c:3](-[#8H1:7])[c:4][cH1:5]1>>[#8:7]-[c:3]1[c:2][c:1][c:6](-[#6:8]=[#6:9])[c:5][c:4]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Carboxylic acid reduction:
+  enzymes:
+    CAR:
+      cofactors_minus:
+      - NADPH
+      - ATP
+      cofactors_plus:
+      - NADP
+      - AMP
+      - Ppi
+  negative_tests:
+  - CCCCO
+  - CCCC(=O)O
+  - CCCCOCCCC
+  positive_tests:
+  - CCCC=O
+  - N[C@@H](CC=O)Cc1cc(F)c(F)cc1F
+  product_seeds:
+  - C=O
+  smarts:
+  - '[#6:1][#6H1:2](=[O:3])>>[#6:1][#6H0:2](=[O:3])[OH]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)O[H]
+  substrate_2_seeds: []
+  type: Reduction
+CoA ligation:
+  enzymes:
+    CoAL:
+      cofactors_minus:
+      - ATP
+      - CoA
+      cofactors_plus:
+      - AMP
+      - PPi
+  experimental: true
+  negative_tests:
+  - CC(O)SCCNC(=O)CCNC(=O)[C@H](O)C(C)(C)COP(O)(=O)OP(O)(=O)OC[C@H]1O[C@H]([C@H](O)[C@@H]1OP(O)(O)=O)N1C=NC2=C(N)N=CN=C12
+  positive_tests:
+  - CC(=O)SCCNC(=O)CCNC(=O)[C@H](O)C(C)(C)COP(O)(=O)OP(O)(=O)OC[C@H]1O[C@H]([C@H](O)[C@@H]1OP(O)(O)=O)N1C=NC2=C(N)N=CN=C12
+  product_seeds: []
+  smarts:
+  - '[#6:3]-[#6:1](=[O:2])-[#16:51]-[#6:50]-[#6:49]-[#7:48]-[#6:46](=[O:47])-[#6:45]-[#6:44]-[#7:43]-[#6:41](=[O:42])-[#6@H:39](-[#8:40])[C:5]([#6:4])([#6:6])[#6:7]-[#8:8][P:9]([#8:10])(=[O:11])[#8:12][P:13]([#8:14])(=[O:15])[#8:16]-[#6:17]-[#6@H:18]-1-[#8:19]-[#6@H:20](-[#6@H:21](-[#8:22])-[#6@@H:23]-1-[#8:24][P:25]([#8:26])([#8:27])=[O:28])-[n:29]1[c:30][n:31][c:32]2[c:33](-[#7:34])[n:35][c:36][n:37][c:38]12>>[#6:3]-[#6:1](-[#8])=[O:2]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Conjugate addition amine to enone:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - N#Cc1ccc(CC(=O)N[C@@H](CCN)CC(=O)c2nc3ccccc3[nH]2)cc1
+  positive_tests:
+  - CC(=O)CCNCC
+  product_seeds: []
+  smarts:
+  - '[#6;z1:7]-[N;R0:6]-[#6:1]-[#6:2]-[#6:3](=[O:4])-[#6:5]>>[#6:1]=[#6:2]-[#6:3](=[O:4])-[#6:5].[N:6]-[#6:7]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Conjugate addition amine to enone 6 ring closure:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[N:1]1[#6:2][#6:3][#6:4][#6:5][#6:6]1[#6:7][#6:8](=[O:9])[#6:10]>>[N:1][#6:2][#6:3][#6:4][#6:5][#6:6]=[#6:7][#6:8](=[O:9])[#6:10]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Conjugate reduction eneimine:
+  enzymes:
+    IRED:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP+
+      - H2O
+  negative_tests:
+  - CC1CCC[N+](O)=C1
+  - CC1CCC[NH+]=N1
+  - CC1CCC(=O)N=C1
+  - O[N+]1=C[C@H](F)CCC1
+  - C[C@@H](F)C=[N+](O)O
+  - C1=NC=C(c2ccccc2)CC1
+  positive_tests:
+  - CCC=N
+  - CCCCC=NCC
+  - CC1CCCN=C1
+  - C1CCC[N+](C)=C1
+  - CC1N=C(C)C(C)C(C)C1C
+  - CC1C(C)C(C)[N+](C)=C(C)C1C
+  - C[N+]1=C[C@H](F)CCC1
+  - C[C@@H](F)C=[N+](C)C
+  - C[C@@H](F)CC=[N+](C)C
+  - C[N+]1=C[C@H](F)CCC1
+  - C[C@@H](F)C=[N+](C)C
+  - F[C@@H]1CCCN=C1
+  product_seeds: []
+  smarts:
+  - '[#6X4@@:1]-[#6X4@@:2]-[#6:3]=[Nz0:5]-[#6z1X4:6]>>[#6H0:1]=[#6H0:2]-[#6:3]=[Nz0:5]-[#6z1:6]'
+  - '[#6X4@@:1]-[#6X4@@:2]-[#6:3]=[N:5]>>[#6H0:1]=[#6H0:2]-[#6:3]=[NH:5]'
+  - '[#6:1]-[#6:2]-[#6z1:3]=[N;z0:5]-[#6z1;X4:6]>>[#6:1]=[#6:2][#6z1:3]=[N;z0:5]-[#6z1;X4:6]'
+  - '[#6@@H:1]-[#6:2]-[#6z1:3]=[N;z0:5]-[#6z1;X4:6]>>[#6H0:1]=[#6:2][#6z1:3]=[N;z0:5]-[#6z1;X4:6]'
+  - '[#6@@H:1]-[#6:2]-[#6z1:3]=[N+;z0:5]-[#6z1;X4:6]>>[#6H0:1]=[#6:2][#6z1:3]=[N+;z0:5]-[#6z1;X4:6]'
+  - '[#6:1]-[#6:2]-[#6z1:3]=[NH;z0:5]>>[#6:1]=[#6:2][#6z1:3]=[NH;z0:5]'
+  - '[#6@@H:1]-[#6:2]-[#6z1:3]=[NH;z0:5]>>[#6H0:1]=[#6:2][#6z1:3]=[NH;z0:5]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Reduction
+Cyanohydrin cleavage:
+  enzymes:
+    HNL:
+      cofactors_minus: []
+      cofactors_plus: []
+  experimental: true
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6H1:2]=[O:3]>>[#6:1][#6:2]([OH:3])[#6]#[N]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Decarboxylation:
+  enzymes:
+    DC:
+      cofactors_minus: []
+      cofactors_plus:
+      - CO2
+  negative_tests: []
+  positive_tests:
+  - C=Cc1ccc(O)cc1
+  - CCCCN
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6H1:2](=[O:3])>>[#6:1][#6H0:2](=[O:3])[#6H0](=[O])[OH]'
+  - '[#6:1][#6H2:2]([NH2:3])>>[#6:1][#6@@H1:2]([NH2:3])[#6H0](=[O])[OH]'
+  - '[#6:1][#6H2:2]([NH2:3])>>[#6:1][#6@H1:2]([NH2:3])[#6H0](=[O])[OH]'
+  - '[#6:4]=[#6:5]-[c:6]>>[OH][#6](=[O])\[#6:4]=[#6:5]\[c:6]'
+  - '[#6:4]=[#6:5]-[#6:6]=[#6:7]>>[OH][#6](=[O])[#6:4]=[#6:5][#6:6]=[#6:7]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Decarboxylation (arylmalonate):
+  enzymes:
+    DC:
+      cofactors_minus: []
+      cofactors_plus:
+      - CO2
+  experimental: true
+  negative_tests:
+  - C\C=C\CC(O)=O
+  - COC(=O)C(C)\C=C\C
+  - CCC(C(O)=O)c1ccccc1
+  - COC(=O)C(C)c1ccccc1
+  - CC(C)(C(O)=O)c1ccccc1
+  positive_tests:
+  - C\C=C\C(C)C(O)=O
+  - CC(C(O)=O)c1cccc(C)c1
+  - C[C@H](C(O)=O)C1=CC=CC=C1
+  - C[C@@H](C(O)=O)C1=CC=CC=C1
+  - CC(C(O)=O)C1=CC=CC=C1
+  - CC(C=C)C(O)=O
+  - C[C@H](C=C)C(O)=O
+  product_seeds: []
+  smarts:
+  - '[#6H3:7][#6:1](-[#6:2]=[#6:3])-[#6:4](-[#8H1:5])=[O:6]>>[#6H3:7][C:1]([#6:2]=[#6:3])([#6:4](-[#8H1:5])=[O:6])[#6](-[#8H1])=[O]'
+  - '[#6H3:8][#6:6](-[#6:7](-[#8H1:9])=[O:10])-[c:1]1[c:2][c:3][c:11][c:4][c:5]1>>[#6H3:8][C:6]([#6](-[#8H1])=[O])([#6:7](-[#8H1:9])=[O:10])[c:1]1[c:2][c:3][c:11][c:4][c:5]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Ene amination (fumaric acid):
+  enzymes:
+    EDDS lyase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - COC(=O)C(CC(O)=O)NC1COC1
+  - NC(CC(O)=O)C(O)=O
+  positive_tests:
+  - OC(=O)CC(NC1COC1)C(O)=O
+  product_seeds: []
+  smarts:
+  - '[#6:10]-[#7:9]-[#6:3](-[#6:1]-[#6:2](-[#8H1:7])=[O:8])-[#6:4](-[#8H1:5])=[O:6]>>[#8H1:7]-[#6:2](=[O:8])\[#6:1]=[#6:3]\[#6:4](-[#8H1:5])=[O:6].[#6:10]-[#7H2:9]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Ene hydrolysis:
+  enzymes:
+    Hydratase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:4]-[#6H2X4:3]-[#6h1X4:2](-[#6:1])-[#8H:5]>>[#6:1]\[#6H1:2]=[#6H1:3]\[#6:4]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+Ene reduction:
+  enzymes:
+    ERED:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+    NTR:
+      cofactors_minus:
+      - NAD(P)H
+      cofactors_plus:
+      - NAD(P)
+  negative_tests:
+  - O=CC[C@]12c3c4ccc(O)c3O[C@H]1C(=O)C=C[C@H]2C(=O)C4
+  - O=C(O)CC=CC(=O)c1ccccc1
+  positive_tests:
+  - C=C(C)[C@H]1CC[C@@H](C)C(=O)C1
+  - CCC(C[NH+](O)O)c1ccccc1
+  - C[C@@H](F)CC=O
+  - C[C@@H](F)C(F)C=O
+  - CC(F)[C@@H](C)C=O
+  - CC(F)[C@@H](F)C=O
+  - C[C@@H](F)[C@@H](F)C=O
+  - C[C@H]1C[C@@H](O)C(=O)C=C1
+  product_seeds:
+  - CC
+  smarts:
+  - '[#6X4:1]-[#6X4:2]-[#6:3]=[O:5]>>[#6X3:1]=[#6:2]-[#6:3]=[O:5]'
+  - '[#6@@HX4:1]-[#6:2]-[#6:3]=[O:5]>>[#6H0:1]=[#6:2]-[#6:3]=[O:5]'
+  - '[#6X4:1]-[#6@@H:2]-[#6:3]=[O:5]>>[#6X3:1]=[#6H0:2]-[#6:3]=[O:5]'
+  - '[#6X4@@:1]-[#6X4@@:2]-[#6:3]=[O:5]>>[#6H0:1]=[#6H0:2]-[#6:3]=[O:5]'
+  - '[#6@@HX4,#6X4:1]-[#6:2]-[#6:3]-[N:5](-[OH:6])[OH:7]>>[#6H0,#6:1]=[#6:2]-[#6:3]-[N:5](-[OH:6])-[OH:7]'
+  - '[#6X4:3]-[#6:2]-[#6:1]-[#7:4](-[#8:5])-[#8:6]>>[#6:3]\[#6:2]=[#6:1]/[#7:4](-[#8:6])-[#8:5]'
+  - '[#6@@HX4,#6X4:1]-[#6:2]-[#6:3]#[N:6]>>[#6H0,#6:1]=[#6:2][#6:3]#[N:6]'
+  steps: []
+  substrate_1_seeds:
+  - C=C
+  substrate_2_seeds: []
+  type: Reduction
+"Enzymatic Morita\u2013Baylis\u2013Hillman reaction":
+  enzymes:
+    MBHase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(=O)C(=C)C(O)C
+  - CC(=O)C(=C/O)\[C@H](O)c1ccc(C)cc1
+  positive_tests:
+  - Cc1ccc(cc1)[C@@H](O)C1=CCCCC1=O
+  - O[C@H](C1=CC=C(S1)C=O)C1=CCCCC1=O
+  product_seeds: []
+  smarts:
+  - '[#6:1]-[#6:2](=[O:3])-[#6:4](=[#6z0:5])-[#6:6](-[OH:7])-[c:8]>>[#6:1]-[#6:2](=[O:3])-[#6:4](=[#6:5]).[#6:6](=[O:7])-[c:8]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Epoxide hydrolysis:
+  enzymes:
+    EH:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+  negative_tests:
+  - O=C(O)[C@@H](O)c1ccccc1
+  positive_tests:
+  - OCC(O)c1ccccc1
+  product_seeds: []
+  smarts:
+  - '[#8;R0;H1:2]-[#6X4;z1:1]-[#6X4;z1:3]-[#8;R0;H1]>>[#6X4;z1:1]-1-[#6X4;z1:3]-[#8H0:2]-1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+Ester hydrolysis (COOH):
+  enzymes:
+    Esterase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-OH
+    Lipase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-OH
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(=O)O
+  smarts:
+  - '[#6:1][#6;H0:2](=[OH0:3])[OH:4]>>[#6:1][#6:2](=[O:3])[O:4][#6]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)OC
+  substrate_2_seeds: []
+  type: Hydrolysis
+Ester hydrolysis (OH):
+  enzymes:
+    Esterase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-COOH
+    Lipase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - R-COOH
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - OC
+  smarts:
+  - '[#6;X4:5]-[#8H1:6]>>[#6;X4:5]-[#8:6]-[#6](-[#6])=O'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)OC
+  substrate_2_seeds: []
+  type: Hydrolysis
+Esterification:
+  enzymes:
+    Esterase:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+    Lipase:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+  negative_tests: []
+  positive_tests:
+  - CCOC(=O)CC
+  product_seeds:
+  - C(=O)OC
+  requires_absence_of_water: true
+  smarts:
+  - '[#6:5]-[#8:3]-[#6:2](-[#6:1])=[O:4]>>[#6:1]-[#6:2](-[#8:3])=[O:4].[#6:5]-[#8]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)O
+  substrate_2_seeds:
+  - OC
+  type: Reverse hydrolysis
+Ethylbenzene oxidation:
+  enzymes:
+    EBDH:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - 2H+
+      - 2e-
+    P450:
+      cofactors_minus:
+      - NADPH
+      - NADPH
+      - O2
+      cofactors_plus:
+      - NAD
+      - NAD
+      - H2O
+  negative_tests:
+  - C(O)c1ccccc1
+  positive_tests:
+  - C[C@H](O)c1ccccc1
+  - CC(O)c1ccccc1
+  - CCC(O)c1ccccc1
+  product_seeds: []
+  smarts:
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1[#6z1:7]([OH:9])[#6H3:8]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1[#6H2:7][#6H3:8]'
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1[#6z1:7]([OH:9])[#6H2:8][#6:10]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1[#6H2:7][#6H2:8][#6:10]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+Fries rearrangement:
+  enzymes:
+    ATase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CCC(=O)c1ccc(O)cc1O
+  - CC(=O)c1ccc(O)c(C)c1O
+  - CC(=O)c1cc(C)c(O)cc1O
+  - CC(=O)c1c(C)cc(O)cc1O
+  - COc1cc(O)ccc1C(C)=O
+  positive_tests:
+  - CC(=O)c1ccc(O)cc1O
+  product_seeds: []
+  smarts:
+  - '[#6H3:10]-[#6:9](=[O:11])-[c:2]1[cH1:3][cH1:4][c:5](-[#8H1:8])[cH1:6][c:1]1-[#8H1:7]>>[#6:10]-[#6:9](=[O:11])-[#8:7]-[c:1]1[c:2][c:3][c:4][c:5](-[#8:8])[c:6]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Hemiacetal closure:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - OC1CCCCO1
+  product_seeds: []
+  smarts:
+  - ([OH:1][#6:2]1.[#6r5,r6:6][O:7]1)>>([O:1]=[#6:2].[#6r5,r6:6][OH:7])
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Hemiacetal opening:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - O=CCc1ccc(O)c(O)c1
+  - O=C1OC1(O)Cc1ccccc1
+  positive_tests:
+  - O=CCCCCO
+  product_seeds: []
+  smarts:
+  - ([O:1]=[#6:2][#6:3][#6:4].[#6:5][#6R0:6][OH:7])>>([OH:1][#6:2]1[#6:3][#6:4].[#6:5][#6:6][O:7]1)
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Hydantoinase ring close:
+  enzymes:
+    Hydantoinase:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+  negative_tests:
+  - CN(CC(O)=O)C(N)=O
+  positive_tests:
+  - NC(=O)NCC(O)=O
+  - C[C@H](NC(N)=O)C(O)=O
+  product_seeds: []
+  smarts:
+  - '[#7H2:9]-[#6:4](=[O:5])-[#7H1:3]-[#6:2]-[#6:7](-[O:8])=[O:6]>>[O:6]=[#6:7]-1-[#6:2]-[#7:3]-[#6:4](=[O:5])-[#7:9]-1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Hydantoinase ring open:
+  enzymes:
+    Hydantoinase:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+  negative_tests:
+  - CC1N(C)C(=O)N(C)C1=O
+  positive_tests:
+  - O=C1CNC(=O)N1
+  - CC1C(=O)NC(=O)N1
+  - C[C@H]1C(=O)NC(=O)N1
+  product_seeds: []
+  smarts:
+  - '[#6:2]-1-[#6:6](=[O:8])-[#7H1:5]-[#6:4](=[O:7])-[#7H1:3]-1>>[#6:2](-[#6:6](-[#8])=[O:8])-[#7:3]-[#6:4](-[#7:5])=[O:7]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Hydrocyanation:
+  enzymes:
+    HNL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6:2]([OH:3])[#6:4]#[N:5]>>[#6:1][#6H1:2]=[O:3].[#6:4]#[N:5]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Hydroxylamine reduction:
+  enzymes:
+    NTR:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+  negative_tests:
+  - CNc1ccccc1
+  positive_tests:
+  - Cc1ccc(N)cc1
+  product_seeds: []
+  smarts:
+  - '[#7:7]-[c:1]1[c:2][c:3][c:4][c:5][c:6]1>>[#8H1]-[#7H1:7]-[c:1]1[c:2][c:3][c:4][c:5][c:6]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Reduction
+Imine Hydrolysis:
+  enzymes:
+    Chemical:
+      cofactors_minus:
+      - H2O
+      cofactors_plus:
+      - NH3
+  negative_tests: []
+  positive_tests:
+  - CC(=O)C(=O)O
+  product_seeds: []
+  smarts:
+  - '[#6X3;z1:1]=[OH0:2] >> [#6X3;z1:1]=[NH1]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Imine formation:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - C/N=C(/C)O
+  - CCCC(C)=NC(=O)c1ccccc1
+  - CCCC=NC(=O)c1ccccc1
+  positive_tests:
+  - C/C=N/C
+  - C(=N/c1ccccc1)\c1ccccc1
+  - CC/C=N\c1ccccc1
+  - O=C(O)/C=N\c1ccccc1
+  - c1ccc(N=C(c2ccccc2)c2ccccc2)cc1
+  - CCC/C(C)=N/C
+  product_seeds: []
+  smarts:
+  - '[#6z1X3:1]=[#7H0;+0;R0:2][#6X4z1,c:3]>>[#6:1]=[O].[#7:2][#6,c:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Imine oxidation:
+  enzymes:
+    XOR:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CCC(C)CNC=O
+  - O=C1Cc2ccccc2C=N1
+  positive_tests:
+  - O=C1Cc2ccccc2CN1
+  - CC1CCC(=O)NC1
+  - COc1ccc(F)c2c1CCC(=O)N2
+  product_seeds: []
+  smarts:
+  - '[#6r5,r6:1]-[#7R1:2]-[#6R1:3]=[O:4]>>[#6r5,r6:1]-[#7R1:2]=[#6R1:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+Imine reduction:
+  enzymes:
+    IRED:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+  negative_tests:
+  - C1=CN[C@H](c2ccccc2)C=C1
+  positive_tests:
+  - CCNC
+  - CC(C)NC
+  - CCN[C@H](CO)CCO
+  - N[C@@H](CF)CCl
+  - N[C@H](CF)CCl
+  - NC(CF)CCl
+  product_seeds:
+  - CN
+  smarts:
+  - '[#6X4;z1:2]-[NX3;z0:3]>>[#6X3;z1:2]=[NX2;z0:3]'
+  - '[CX4:1]-[#6@@H;X4:3]-[NX3;z0:4]>>[C:1]-[#6H0;X3:3]=[NX2;z0:4]'
+  - '[CX4:1]-[#6@H;X4:3]-[NX3;z0:4]>>[C:1]-[#6H0;X3:3]=[NX2;z0:4]'
+  steps: []
+  substrate_1_seeds:
+  - C=N
+  substrate_2_seeds: []
+  type: Reduction
+Imine-enaminetautomerisation Fwd:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - C=CNC(=O)C
+  positive_tests:
+  - C=CNCC
+  product_seeds: []
+  smarts:
+  - '[#6z0:1]=[#6z1:2](-[N:3]-[#6z1;X4:5])>>[#6z0;X4:1]-[#6z1:2](=[N:3]-[#6z1;X4:5])'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Imine-enaminetautomerisation Rev:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CCCC(=O)N=CCCC
+  positive_tests:
+  - CC=NCC
+  product_seeds: []
+  smarts:
+  - '[#6z0;X4:1]-[#6z1:2](=[N:3]-[#6z1;X4:5])>>[#6z0:1]=[#6z1:2](-[N:3]-[#6z1;X4:5])'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Iminium formation:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC(C)=[N+](C)C
+  - CCCCC(C)=[N+](C)CCCC
+  - CC=[N+](C)C
+  - CCCCCC=[N+](C)CCCCC
+  - CC=[N+]1CCC[C@@]1(C)c1cccnc1
+  - C1CCC(=[N+]2CCCC2)C1
+  - C1CCC(=[N+]2CCCC2)C1
+  - CC(C)=[N+](C)C
+  - CCCCC(C)=[N+](C)CCCC
+  - CC=[N+](C)C
+  - CCCCCC=[N+](C)CCCCC
+  - CC=[N+]1CCC[C@@]1(C)c1cccnc1
+  - C1CCC(=[N+]2CCCC2)C1
+  - C1CCC(=[N+]2CCCC2)C1
+  - CC(C)=[N+](C)C
+  - CCCCC(C)=[N+](C)CCCC
+  - CC=[N+](C)C
+  - CCCCCC=[N+](C)CCCCC
+  - CC=[N+]1CCC[C@@]1(C)c1cccnc1
+  - C1CCC(=[N+]2CCCC2)C1
+  - C1CCC(=[N+]2CCCC2)C1
+  product_seeds: []
+  smarts:
+  - '[#6:3][#6;R0:1](-[#6:4])=[#7+:2]([#6:5])-[#6:6]>>[#6:5]-[#7H1;+0:2]-[#6:6].[#6:3]-[#6;R0:1](-[#6:4])=[O]'
+  - '[#6H1;R0:1](-[#6:4])=[#7+:2](/[#6:5])-[#6:6]>>[#6:5]-[#7H1;+0:2]-[#6:6].[#6H1;R0:1](-[#6:4])=[O]'
+  - '[#6;R1:3]@[#6;R1:1](@[#6;R1:4])=[#7+:2](/[#6:5])-[#6:6]>>[#6:5]-[#7H1;+0:2]-[#6:6].[#6;x1;R1:3][#6x1;R1:1]([#6;x1;R1:4])=[O;R1]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Iminium reduction:
+  enzymes:
+    IRED:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:10][#6X4:1][#7H0;+0;X3:2](-[#6X4:3])-[#6X4:4]>>[#6:10][#6X3;H1:1]=[#7H0+X3:2](-[#6X4:3])-[#6X4:4]'
+  - '[#6:10][#6X4:1]([#6:11])[#7H0;+0;X3:2](-[#6X4:3])-[#6X4:4]>>[#6:10][#6H0X3:1]([#6:11])=[#7H0+X3:2](-[#6X4:3])-[#6X4:4]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Reduction
+Intramolecular imine formation:
+  enzymes:
+    Chemical:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+  negative_tests:
+  - C#CCN=C1CCCCC1
+  positive_tests:
+  - c1ccc(C2=NCCCC2)cc1
+  product_seeds: []
+  smarts:
+  - ([NH0;+0;R:1]1[#6X4:2].[#6r5,r6,r7:6]=1)>>([N;+0:1][#6X4:2].[#6r5,r6,r7:6]=[O])
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Intramolecular imine hydrolysis:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - ([N;+0:1][#6X4:2].[#6:4][#6:5][#6;z1:6]=[OH0:10])>>([NH0;+0:1]1[#6X4:2].[#6:4][#6:5][#6:6]=1)
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Intramolecular iminium formation:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(C)(C)OC(=O)c1ccc(C=[N+]2CCC(CN[C@@H]3C[C@H]3c3ccccc3)CC2)cc1
+  positive_tests:
+  - C[N+]1=CCCC1
+  - C[N+]1=CCCCC1
+  - C[N+]1=CCCCCC1
+  product_seeds: []
+  smarts:
+  - ([#6r5,r6,r7:7][#7+:1]1=[#6R:6].[#6:2]1)>>([#6r5,r6,r7:7][#7;+0:1][#6:2].[#6:6]=[O])
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Intramolecular iminium hydrolysis:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(C)(C)OC(=O)c1ccc(CN2CCC(CN[C@@H]3C[C@H]3c3ccccc3)CC2)cc1
+  - O=C(O)C(=O)Cc1c[nH]c2ccccc12
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - ([#6:7][#7R0;+0:1][#6:2].[#6:4][#6:5][#6;z1:6]=[OH0:10])>>([#6:7][#7+;H0:1]1=[#6:6][#6:5][#6:4].[#6:2]1)
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Keto acid reduction:
+  enzymes:
+    AADH:
+      cofactors_minus:
+      - NAD(P)H
+      cofactors_plus:
+      - NAD(P)
+  negative_tests:
+  - N(C)[C@H](Cc1ccc(O)cc1)C(=O)O
+  - N[C@H](Cc1ccc(O)cc1)C(=O)OCC
+  positive_tests:
+  - N[C@H](Cc1ccc(O)cc1)C(=O)O
+  - N[C@@H](Cc1ccc(O)cc1)C(=O)O
+  - NC(Cc1ccc(O)cc1)C(=O)O
+  product_seeds: []
+  smarts:
+  - '[#7H2:1]-[#6@H:2](-[#6H2X4:3])-[#6:11](-[#8H:13])=[O:12]>>[#8H:13]-[#6:11](=[O:12])-[#6H0:2](=[O])-[#6H2X4:3]'
+  - '[#7H2:1]-[#6H:2](-[#6H2X4:3])-[#6:11](-[#8H:13])=[O:12]>>[#8H:13]-[#6:11](=[O:12])-[#6H0:2](=[O])-[#6H2X4:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Reduction
+Ketone amination:
+  enzymes:
+    AmDH:
+      cofactors_minus:
+      - NADH
+      - NH3
+      cofactors_plus:
+      - NAD
+    IRED:
+      cofactors_minus:
+      - NADPH
+      - NH3
+      cofactors_plus:
+      - NADP
+    TA:
+      cofactors_minus:
+      - Amine
+      cofactors_plus:
+      - Carbonyl
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(N)C
+  smarts:
+  - '[#6:5][#6:6]([#7H2;R0:3])[#6:8]>>[#6:5][#6H0:6](=[#8])[#6:8]'
+  steps: []
+  substrate_1_seeds:
+  - CC(=O)C
+  substrate_2_seeds: []
+  type: C-X bond formation
+Ketone oxidation (BVMO):
+  enzymes:
+    BVMO:
+      cofactors_minus:
+      - NADPH
+      - O2
+      cofactors_plus:
+      - NADP
+      - H2O
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:5]-[#6:4]-[#8:6]-[#6:2](-[#6:1])=[O:3]>>[#6:5]-[#6:4]-[#6:2](-[#6:1])=[O:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+Ketone reduction:
+  enzymes:
+    ADH:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+    KRED:
+      cofactors_minus:
+      - NAD(P)H
+      cofactors_plus:
+      - NAD(P)
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - COC
+  smarts:
+  - '[#6:1][#6:2]([#6:3])[#8H1:4]>>[#6:1][#6H0:2]([#6:3])=[#8:4]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)C
+  substrate_2_seeds: []
+  type: Reduction
+"Keto\u2013enol tautomerism fwd":
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  experimental: true
+  negative_tests:
+  - CC(=O)O
+  positive_tests:
+  - CC(=O)C
+  - CC(=O)C(C)CC
+  product_seeds: []
+  smarts:
+  - '[#6:1]-[#6:2](-[#6z0;X4:4])=[O:3]>>[#6:1]-[#6:2](-[#8:3])=[#6z0;X3:4]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+"Keto\u2013enol tautomerism rev":
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(O)=O
+  positive_tests:
+  - CC(O)=C
+  product_seeds: []
+  smarts:
+  - '[#6:1]-[#6:2](-[#8:3])=[#6z0;X3:4]>>[#6:1]-[#6:2](-[#6z0;X4:4])=[O:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Lactam closure:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC1CCCNC1=O
+  product_seeds: []
+  smarts:
+  - ([N:1]1[#6:2].[#6:4][#6R1:5](=[OH0:6])1)>>([N:1][#6:2].[#6:4][#6:5](=[O:6])[O][#6])
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Lactam hydrolysis:
+  enzymes:
+    Amidase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - COC(=O)CCCC(N)c1ccccc1
+  - N[C@H]1C[C@@H](C(=O)O)CC1=C(F)F
+  positive_tests:
+  - CC(CCCN)C(=O)O
+  product_seeds: []
+  smarts:
+  - ([N:1][#6X4:2][#6:3].[#6R0:4][#6R0:5](=[O:6])[OH:7])>>([N:1]1[#6:2][#6:3].[#6R1:4][#6R1:5](=[OH0:6])1)
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+Lactone closure:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC1CCCOC1=O
+  product_seeds: []
+  smarts:
+  - ([OH0:1]1[#6:2].[#6:4][#6R1:5](=[OH0:6])1)>>([OH:1][#6:2].[#6:4][#6:5](=[O:6])[O][#6])
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Lactone hydrolysis:
+  enzymes:
+    Esterase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+    Lipase:
+      cofactors_minus:
+      - H20
+      cofactors_plus: []
+  negative_tests:
+  - O=C(O)/C=C/c1ccc(O)cc1
+  - N[C@@H](Cc1ccc(O)cc1)C(=O)O
+  positive_tests:
+  - CC(CCCO)C(=O)O
+  product_seeds: []
+  smarts:
+  - ([OH:1][#6X4:2].[#6:4][#6:5](=[O:6])[OH:7])>>([OH0:1]1[#6:2].[#6:4][#6R1:5](=[OH0:6])1)
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+Limonene hydrolysis:
+  enzymes:
+    Limonene Hydratase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1]-[#6:2](-[OH:5])(-[#6:3])-[#6H3:4]>>[#6:1]-[#6:2](-[#6:3])=[#6H2:4]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+N-methylation:
+  enzymes:
+    NMT:
+      cofactors_minus:
+      - N
+      cofactors_plus: []
+  negative_tests:
+  - CCCC(=O)NC
+  positive_tests:
+  - CCCCCNC
+  - CCCCC(CC)NC
+  - CCCN(C)CC
+  product_seeds: []
+  smarts:
+  - '[#6X4z1:1][Nz0:2][#6H3:3]>>[#6:1][N:2]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Nitrile hydrolysis (CONH):
+  enzymes:
+    NHase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(=O)N
+  smarts:
+  - '[#6:1][#6X3H0:2](=[O:4])[NX3H2:3]>>[#6:1][#6X2H0:2]#[NX3H0:3]'
+  steps: []
+  substrate_1_seeds:
+  - C#N
+  substrate_2_seeds: []
+  type: Hydrolysis
+Nitrile hydrolysis (COOH):
+  enzymes:
+    NHase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+    NIT:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC(C)c1ccc([C@@H](CC#N)CC(=O)O)cc1
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6X3H0:2](=[O:4])[OH:5]>>[#6:1][#6X2H0:2]#[NX3H0]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+Nitrile reduction:
+  enzymes:
+    NIR:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6X4H2:2][NX3H2:3]>>[#6:1][#6X2:2]#[NX3:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Reduction
+Nitro over-reduction:
+  enzymes:
+    NTR:
+      cofactors_minus:
+      - NAD(P)
+      - NAD(P)
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+      - NAD(P)H
+      - NAD(P)H
+  negative_tests:
+  - CNc1ccccc1
+  positive_tests:
+  - Cc1ccc(N)cc1
+  product_seeds: []
+  smarts:
+  - '[#7H2:7]-[c:1]1[c:2][c:3][c:4][c:5][c:6]1>>[O:8]-[#7+:7](=[O])-[c:1]1[c:2][c:3][c:4][c:5][c:6]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  two_step: true
+  type: Reduction
+Nitro reduction:
+  enzymes:
+    NTR:
+      cofactors_minus:
+      - NAD(P)
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+      - NAD(P)H
+  negative_tests:
+  - ONC1CCCCC1
+  - CONc1ccc(C)cc1
+  positive_tests:
+  - Cc1ccc(NO)cc1
+  product_seeds: []
+  smarts:
+  - '[#8H1:8]-[#7:7]-[c:1]1[c:2][c:3][c:4][c:5][c:6]1>>[O:8]-[#7+:7](=[O])-[c:1]1[c:2][c:3][c:4][c:5][c:6]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Reduction
+Nitroaldol reaction:
+  enzymes:
+    HNL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - OC(C[N+]([O-])=O)c1ccccc1
+  - O[C@@H](C[N+]([O-])=O)c1ccccc1
+  - CC(C(O)c1ccccc1)[N+]([O-])=O
+  - C[C@H]([C@@H](O)c1ccccc1)[N+]([O-])=O
+  - C[C@@H]([C@@H](O)c1ccccc1)[N+]([O-])=O
+  product_seeds:
+  - CC(O)C[N+](=O)O
+  smarts:
+  - '[#6:1]-[#6:2](-[OH:3])-[#6H2:4]-[N+:5](-[O-:6])=[O:7]>>[#6:1]-[#6H1:2]=[O:3].[#6H3:4]-[N+:5](-[O-:6])=[O:7]'
+  - '[#6:1]-[#6:2](-[OH:3])-[#6H1:4](-[#6H3:8])-[N+:5](-[O-:6])=[O:7]>>[#6:1]-[#6H1:2]=[O:3].[#6H3:8]-[#6H2:4]-[N+:5](-[O-:6])=[O:7]'
+  - '[#6:1]-[#6@:2](-[OH:3])-[#6@@H1:4](-[#6H3:8])-[N+:5](-[O-:6])=[O:7]>>[#6:1]-[#6H1:2]=[O:3].[#6H3:8]-[#6H2:4]-[N+:5](-[O-:6])=[O:7]'
+  - '[#6:1]-[#6@@:2](-[OH:3])-[#6@@H1:4](-[#6H3:8])-[N+:5](-[O-:6])=[O:7]>>[#6:1]-[#6H1:2]=[O:3].[#6H3:8]-[#6H2:4]-[N+:5](-[O-:6])=[O:7]'
+  steps: []
+  substrate_1_seeds:
+  - CC=O
+  substrate_2_seeds:
+  - C[N+](O)=O
+  type: C-C bond formation
+Nitrostyrene michael-type addition:
+  enzymes:
+    4-OT:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - ON(O)C[C@H](CC=O)C1=CC=CC=C1
+  - CC1=CC(=CC(C)=C1C)[C@@H](CC=O)CN(O)O
+  product_seeds:
+  - ON(O)C[C@H](CC=O)C1=CC=CC=C1
+  smarts:
+  - '[c:6]-[#6@@H:7](-[#6H2:12]-[#6H1:13]=[OH0:14])-[#6H2:8]-[#7:9](-[#8:10])-[#8:11]>>[c:6]-[#6:7]=[#6:8][#7:9](-[#8:10])-[#8:11].[#6H3:12]-[#6H1:13]=[OH0:14]'
+  steps: []
+  substrate_1_seeds:
+  - CC=O
+  substrate_2_seeds:
+  - ON(O)C=CC1=CC=CC=C1
+  type: C-X bond formation
+Oxidative Ring Closure:
+  enzymes:
+    BBE:
+      cofactors_minus:
+      - O2
+      cofactors_plus:
+      - H2O2
+  negative_tests:
+  - COc1ccc2CC3N(CCc4cc(OC)c(O)cc34)Cc2c1
+  - COc1ccc2CC3(C)N(CCc4cc(OC)c(O)cc34)Cc2c1O
+  - COc1cc2CCN3Cc4c(CC3c2cc1O)ccc(OC)c4OC
+  - COc1cc2CCN3Cc4c(O)c(OC)ccc4C(C)C3c2cc1O
+  positive_tests:
+  - COc1cc2CCN3Cc4c(CC3c2cc1O)ccc(OC)c4O
+  - COc1cc2c(cc1OC)[C@@H]1Cc3cccc(O)c3CN1CC2
+  product_seeds: []
+  smarts:
+  - '[#8H1:19]-[c:18]1[c:17][c:16][c:15][c:12]2-[#6H2:11]-[#6H1:7]-3-[#7:8](-[#6H2:9]-[#6H2:10]-[c:6]4[cH1:1][c:2][c:3][c:4][c:5]-34)-[#6H2:14]-[c:13]12>>[#6H3:14]-[#7:8]-1-[#6H2:9]-[#6H2:10]-[c:6]2[cH1:1][c:2][c:3][c:4][c:5]2-[#6H1:7]-1-[#6H2:11]-[c:12]1[c:15][c:16][c:17][c:18](-[#8H1:19])[cH1:13]1'
+  - '[#8H1:19]-[c:18]1[c:17][c:16][c:15][c:12]2-[#6H2:11]-[#6@@H1:7]-3-[#7:8](-[#6H2:9]-[#6H2:10]-[c:6]4[cH1:1][c:2][c:3][c:4][c:5]-34)-[#6H2:14]-[c:13]12>>[#6H3:14]-[#7:8]-1-[#6H2:9]-[#6H2:10]-[c:6]2[cH1:1][c:2][c:3][c:4][c:5]2-[#6H1:7]-1-[#6H2:11]-[c:12]1[c:15][c:16][c:17][c:18](-[#8H1:19])[cH1:13]1'
+  - '[#8H1:19]-[c:16]1[c:17][c:18][c:13]2-[#6H2:14]-[#7:8]-3-[#6H2:9]-[#6H2:10]-[c:6]4[cH1:1][c:2][c:3][c:4][c:5]4-[#6H1:7]-3-[#6H2:11]-[c:12]2[c:15]1>>[#6H3:14]-[#7:8]-1-[#6H2:9]-[#6H2:10]-[c:6]2[cH1:1][c:2][c:3][c:4][c:5]2-[#6H1:7]-1-[#6H2:11]-[c:12]1[cH1:13][c:18][c:17][c:16](-[#8H1:19])[c:15]1'
+  - '[#8H1:19]-[c:16]1[c:17][c:18][c:13]2-[#6H2:14]-[#7:8]-3-[#6H2:9]-[#6H2:10]-[c:6]4[cH1:1][c:2][c:3][c:4][c:5]4-[#6@@H1:7]-3-[#6H2:11]-[c:12]2[c:15]1>>[#6H3:14]-[#7:8]-1-[#6H2:9]-[#6H2:10]-[c:6]2[cH1:1][c:2][c:3][c:4][c:5]2-[#6H1:7]-1-[#6H2:11]-[c:12]1[cH1:13][c:18][c:17][c:16](-[#8H1:19])[c:15]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Oxidative de-aromatisation:
+  enzymes:
+    FMO:
+      cofactors_minus:
+      - NADPH
+      - O2
+      cofactors_plus:
+      - NADP
+  negative_tests: []
+  positive_tests:
+  - CC1=CC(=O)[C@@](C)(O)C(=O)\C1=C/O
+  - CC1=CC(=O)C(C)(O)C(=O)\C1=C/O
+  product_seeds: []
+  smarts:
+  - '[#6:10]-[#6:5]1=[#6:4]-[#6:3](=[O:7])[C@:2]([#6:8])([#8:9])[#6:1](=[O:11])\[#6:6]-1=[#6:12]/[#8:13]>>[#6:10]-[c:5]1[c:4][c:3](-[#8:7])[c:2](-[#6:8])[c:1](-[#8:11])[c:6]1-[#6:12]=[O:13]'
+  - '[#6:10]-[#6:5]1=[#6:4]-[#6:3](=[O:7])[C:2]([#6:8])([#8:9])[#6:1](=[O:11])\[#6:6]-1=[#6:12]/[#8:13]>>[#6:10]-[c:5]1[c:4][c:3](-[#8:7])[c:2](-[#6:8])[c:1](-[#8:11])[c:6]1-[#6:12]=[O:13]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+Oxidative lactamization:
+  enzymes:
+    ADH:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+  negative_tests:
+  - O=CN1CCCN1
+  - O=C1OCCN1
+  positive_tests:
+  - O=C1CCCN1
+  product_seeds: []
+  smarts:
+  - ([#6R1z2:2](=[O:1])1.[#6r5,r6,r7:6][N:7]1)>>([O:1]=[#6:2].[#6r5,r6,r7:6][N:7])
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+PNP:
+  enzymes:
+    PNP:
+      cofactors_minus: []
+      cofactors_plus:
+      - PO4
+  negative_tests: []
+  positive_tests:
+  - C#C[C@]1(CO)O[C@@H](n2cnc3c(N)nc(F)nc32)C[C@@H]1O
+  - OCC1OC(CC1O)n1ccc(=O)[nH]c1=O
+  - CC1=CN([C@H]2C[C@H](O)C(CO)O2)C(=O)NC1=O
+  product_seeds: []
+  smarts:
+  - '[#8:18]-[#6:17]-[#6:16]-1-[#8:19]-[#6@H:12](-[#6:13]-[#6@@H:14]-1-[#8:15])-[n:9]1[c:8][n:7][c:2]2[c:1][c,n:6][c:5][n:4][c:3]12>>[#8:18]-[#6:17]-[#6:16]-1-[#8:19]-[#6@H:12](-[#6:13]-[#6@@H:14]-1-[#8:15])-[#8][P]([#8])([#8-])=[O].[c:8]1[n:7][c:2]2[c:1][c,n:6][c:5][n:4][c:3]2[nH:9]1'
+  - '[#8:18]-[#6:17]-[#6:16]-1-[#8:19]-[#6:12](-[#6:13]-[#6:14]-1-[#8:15])-[n:4]1[c:5][c:6][c:1](=[O:7])[n:2][c:3]1=[O:8]>>[#8:18]-[#6:17]-[#6:16]-1-[#8:19]-[#6:12](-[#6:13]-[#6:14]-1-[#8:15])-[#8]P([#8])([#8-])=O.[O:7]=[#6:1]1[#6:6][#6:5][#7:4][#6:3](=[O:8])[#7:2]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Phosphate hydrolysis:
+  enzymes:
+    Phosphatase:
+      cofactors_minus:
+      - H2O
+      cofactors_plus: []
+  negative_tests:
+  - CCOC
+  - CC(=O)O
+  positive_tests:
+  - CO
+  product_seeds: []
+  smarts:
+  - '[#6z1:1]-[#8:2]>>[#6;X4:1]-[#8:2][P]([#8])([#8-])=[O]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Hydrolysis
+Phosphate transfer:
+  enzymes:
+    PPM:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#8:8]-[#6:7]-[#6:2]-1-[#6:3]-[#6:4]-[#6:5](-[#8:6][P:9]([#8:11])([#8-:10])=[O:12])-[#8:1]-1>>[#8:6]-[#6:5]-1-[#6:4]-[#6:3]-[#6:2](-[#6:7]-[#8:8][P:9]([#8:11])([#8-:10])=[O:12])-[#8:1]-1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Phosphorylation:
+  enzymes:
+    Kinase:
+      cofactors_minus:
+      - ATP
+      cofactors_plus:
+      - ADP
+  negative_tests:
+  - CC(C)(C)OP(=O)(OCC[C@H](Oc1cccc2ccccc12)c1cccs1)OC(C)(C)C
+  - CC(=O)OP(O)([O-])=O
+  - CNOP(O)([O-])=O
+  positive_tests:
+  - C#C[C@](O)(C=O)COP(=O)([O-])O
+  - CC(C)OP(O)([O-])=O
+  - OP([O-])(=O)OC1CCCCN1
+  product_seeds: []
+  smarts:
+  - '[#6;X4:1]-[#8:2][P:3]([#8:6])([#8-:5])=[O:4]>>[#6:1]-[#8:2]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Pictet Spengler:
+  enzymes:
+    PSase:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC1NCCc2cc(O)c(O)cc21
+  - CCCC[C@H]1NCCc2c1[nH]c1ccccc21
+  - CC1NCCc2cc(O)c(O)cc21
+  - CCCC[C@H]1NCCc2c1[nH]c1ccccc21
+  product_seeds: []
+  smarts:
+  - '[#6:11]-[#6:12]-1-[#7:10]-[#6:9]-[#6:8]-[c:6]2[c:1][c:2](-[#8:7])[c:3][c:4][c:5]-12>>[#7:10]-[#6:9]-[#6:8]-[c:6]1[c:5][c:4][c:3][c:2](-[#8:7])[c:1]1.[#6:11]-[#6:12]=[O]'
+  - '[#6:14][#6:13]1[#7:12][#6:11][#6:10][c:9]2[c:8]1[#7:7][c:5]1[c:4][c:3][c:2][c:1][c:6]21>>[#7:12][#6:11][#6:10][c:9]1[c:8][#7:7][c:5]2[c:4][c:3][c:2][c:1][c:6]12.[#6:14][#6:13]=[O]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+Primary alcohol over-oxidation:
+  enzymes:
+    AlOx:
+      cofactors_minus:
+      - O2
+      - O2
+      cofactors_plus:
+      - H2O2
+      - H2O2
+  negative_tests:
+  - CCC(=O)OC
+  positive_tests:
+  - CCC(O)=O
+  product_seeds:
+  - C(=O)O
+  smarts:
+  - '[#6:2]-[#6:1](-[#8H1:3])=[O:4]>>[#6:2]-[#6:1]-[#8H1:3]'
+  steps: []
+  substrate_1_seeds:
+  - CO
+  substrate_2_seeds: []
+  two_step: true
+  type: Oxidation
+Primary alcohol oxidation:
+  enzymes:
+    ADH:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+    ADH(FAD):
+      cofactors_minus: []
+      cofactors_plus: []
+    AlOx:
+      cofactors_minus:
+      - O2
+      cofactors_plus:
+      - H2O2
+    KRED:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+    Laccase:
+      cofactors_minus:
+      - TEMPO
+      cofactors_plus:
+      - TEMPO_red
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C=O
+  smarts:
+  - '[#6:1][#6H1:2]=[#8:4]>>[#6:1][#6H2:2][#8H1:4]'
+  - '[#6H2:2]=[#8:4]>>[#6H3:2][#8H1:4]'
+  steps: []
+  substrate_1_seeds:
+  - CO
+  substrate_2_seeds: []
+  type: Oxidation
+Primary amine deamination:
+  enzymes:
+    AmDH:
+      cofactors_minus:
+      - NAD
+      cofactors_plus:
+      - NADH
+      - NH3
+    TA:
+      cofactors_minus:
+      - Carbonyl
+      cofactors_plus:
+      - Amine
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C=O
+  smarts:
+  - '[#6:5][#6H1:6]=[#8:7]>>[#6:5][#6H2:6][#7;R0]'
+  steps: []
+  substrate_1_seeds:
+  - CN
+  substrate_2_seeds: []
+  type: C-X bond formation
+Reductive Carbocyclization:
+  enzymes:
+    ERED:
+      cofactors_minus:
+      - NADH
+      cofactors_plus:
+      - NAD+
+  negative_tests: []
+  positive_tests:
+  - CC1CC1(C)C=O
+  - CC1(CC1C1=CC=CC=C1)C=O
+  - O=CC1CC1C1=CC=CC=C1
+  product_seeds: []
+  smarts:
+  - '[#6H3:1]-[#6H1:2]1-[#6H2:3]-[#6:4]1([#6H3:5])-[#6H1:6]=[O:7]>>[#6:1]-[#6:2](-[#6:3]-[Cl])=[#6:4](-[#6:5])-[#6:6]=[O:7]'
+  - '[#6H3:1]-[#6H1:2]1-[#6H2:3]-[#6H1:4]1-[#6H1:6]=[O:7]>>[#6:1]-[#6:2](-[#6:3]-[Cl])=[#6:4]-[#6:6]=[O:7]'
+  - '[#6H2:2]1-[#6H2:3]-[#6:4]1([#6H3:5])-[#6H1:6]=[O:7]>>[#6:1]-[#6:2](-[#6:3]-[Cl])=[#6:4](-[#6:5])-[#6:6]=[O:7]'
+  - '[#6H2:2]1-[#6H2:3]-[#6H1:4]1-[#6H1:6]=[O:7]>>[#6:1]-[#6:2](-[#6:3]-[Cl])=[#6:4]-[#6:6]=[O:7]'
+  - '[c:1]-[#6H1:2]1-[#6H2:3]-[#6:4]1([#6H3:5])-[#6H1:6]=[O:7]>>[#6:1]-[#6:2](-[#6:3]-[Cl])=[#6:4](-[#6:5])-[#6:6]=[O:7]'
+  - '[c:1]-[#6H1:2]1-[#6H2:3]-[#6H1:4]1-[#6H1:6]=[O:7]>>[#6:1]-[#6:2](-[#6:3]-[Cl])=[#6:4]-[#6:6]=[O:7]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Misc biocatalysts
+Reductive amination:
+  enzymes:
+    IRED:
+      cofactors_minus:
+      - NADPH
+      cofactors_plus:
+      - NADP
+  negative_tests:
+  - CCCC(=O)NCC
+  positive_tests:
+  - CCCNCC
+  - C[C@H](NCC#C)C1CCCC1
+  - CNC(C)C
+  - CN(C)C(C)C
+  - CCN(C)C
+  - CC(CCO)N(C)CC
+  product_seeds:
+  - CN
+  smarts: []
+  steps:
+  - - Imine reduction
+    - Imine formation
+  - - Iminium reduction
+    - Iminium formation
+  substrate_1_seeds:
+  - C=O
+  substrate_2_seeds:
+  - N
+  two_step: true
+  type: C-X bond formation
+Secondary alcohol deracemization:
+  enzymes:
+    AlOx:
+      cofactors_minus:
+      - O2
+      - Reducing agent
+      cofactors_plus:
+      - H2O2
+  negative_tests: []
+  positive_tests:
+  - CC[C@@H](C)O
+  - CC[C@H](C)O
+  product_seeds:
+  - C(C)O
+  smarts:
+  - '[#6:1]-[#6@@H1:2](-[#6:3])-[#8H1:4]>>[#6:1]-[#6H1:2](-[#6:3])-[#8H1:4]'
+  steps: []
+  substrate_1_seeds:
+  - C(C)O
+  substrate_2_seeds:
+  - C(C)O
+  type: Oxidation
+Secondary alcohol oxidation:
+  enzymes:
+    ADH:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+    ADH(FAD):
+      cofactors_minus: []
+      cofactors_plus: []
+    AlOx:
+      cofactors_minus:
+      - O2
+      cofactors_plus:
+      - H2O2
+    KRED:
+      cofactors_minus:
+      - NAD(P)
+      cofactors_plus:
+      - NAD(P)H
+    Laccase:
+      cofactors_minus:
+      - TEMPO
+      cofactors_plus:
+      - TEMPO_red
+  negative_tests: []
+  positive_tests:
+  - CC(=O)C
+  product_seeds:
+  - C(=O)C
+  smarts:
+  - '[#6:1][#6H0:2]([#6:3])=[#8:4]>>[#6:1][#6@@H1:2]([#6:3])[#8H1:4]'
+  steps: []
+  substrate_1_seeds:
+  - C(O)C
+  substrate_2_seeds: []
+  type: Oxidation
+Secondary amine deamination:
+  enzymes:
+    AmDH:
+      cofactors_minus:
+      - NAD
+      cofactors_plus:
+      - NADH
+      - NH3
+    TA:
+      cofactors_minus:
+      - Carbonyl
+      cofactors_plus:
+      - Amine
+  negative_tests: []
+  positive_tests: []
+  product_seeds:
+  - C(=O)C
+  smarts:
+  - '[#6:5][#6H0:6](=[#8:7])[#6:8]>>[#6:5][#6@H1:6]([#7;R0])[#6:8]'
+  steps: []
+  substrate_1_seeds:
+  - CNC
+  substrate_2_seeds: []
+  type: C-X bond formation
+Spontaneous ring close:
+  enzymes:
+    Chemical:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CC1=CC2=CC(=O)C(C)(O)C(=O)C2=CO1
+  - C\C=C\C1=CC2=CC(=O)[C@](C)(O)C(=O)C2=CO1
+  - C\C=C\C1=CC2=CC(=O)[C@@](C)(O)C(=O)C2=CO1
+  product_seeds: []
+  smarts:
+  - '[#6:15]-[#6:13]-1=[#6:12]-[#6:5]-2=[#6:4]-[#6:3](=[O:16])[C:2]([#6:8])([#8:7])[#6:1](=[O:9])-[#6:6]-2=[#6:10]-[#8:14]-1>>[#6:15]-[#6:13](=[O:14])-[#6:12]-[#6:5]1=[#6:4]-[#6:3](=[O:16])[C:2]([#6:8])([#8:7])[#6:1](=[O:9])\[#6:6]-1=[#6:10]/[#8]'
+  - '[#6:15]-[#6:13]-1=[#6:12]-[#6:5]-2=[#6:4]-[#6:3](=[O:16])[C@:2]([#6:8])([#8:7])[#6:1](=[O:9])-[#6:6]-2=[#6:10]-[#8:14]-1>>[#6:15]-[#6:13](=[O:14])-[#6:12]-[#6:5]1=[#6:4]-[#6:3](=[O:16])[C@:2]([#6:8])([#8:7])[#6:1](=[O:9])\[#6:6]-1=[#6:10]/[#8]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Chemical
+Styrene oxide isomerisation:
+  enzymes:
+    SOI:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#8:3]=[#6H1:1][#6H2:2][c:9]2[c:8][c:7][c:6][c:12][c:11]2>>[#6H1:1]-1-[#8:3]-[#6H1:2]-1-[c:9]2[c:8][c:7][c:6][c:12][c:11]2'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+Sulfide oxidation (BVMO):
+  enzymes:
+    BVMO:
+      cofactors_minus:
+      - NADPH
+      - O2
+      cofactors_plus:
+      - NADP
+      - H2O
+  negative_tests: []
+  positive_tests:
+  - CS(=O)c1ccccc1
+  product_seeds: []
+  smarts:
+  - '[#6:2][S:1]([#6:3])=[O:4]>>[#6:2]-[#16:1]-[#6:3]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: Oxidation
+TDL 1,4-addition:
+  enzymes:
+    TDL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - C#C[C@]1(C(=O)C(=O)O)O[C@@H](n2cnc3c(N)cc(F)nc32)C[C@@H]1C(C)=O
+  - C#C[C@]1(C=O)O[C@@H](n2cnc3c(N)cc(F)nc32)C[C@@H]1C(C)=O
+  - O=C1CCC(=O)C1
+  - CC(=O)[C@@H](Br)CC=O
+  positive_tests:
+  - CC(=O)CCC=O
+  - CC(=O)CCC=O
+  product_seeds: []
+  smarts:
+  - '[#6:10][#6X3;R0:1](=[OH0:2])-[#6X4;z0:3]-[#6X4H2:4]-[#6;R0:5]=[OH0:6]>>[#6:10][#6X3;R0:1](=[OH0:2]).[#6X3;z0:3]=[#6X3H1:4]-[#6;R0:5]=[OH0:6]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+TDL Carboligation (Ar Acceptor):
+  enzymes:
+    TDL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - O=C[C@H](O)c1ccccc1
+  product_seeds: []
+  smarts:
+  - '[#6;X3;z1:2](=[O:3])[#6:4]([OH:5])[c:6]>>[#6X3;z1:2]=[O:3].[#6H1:4](=[O:5])[c:6]'
+  - '[#6:1][#6H0:2](=[O:3])[#6:4]([OH:5])[c:6]>>[#6:1][#6H0:2]([#6](=[OH0])[OH])=[O:3].[#6H1:4](=[O:5])[c:6]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+TDL Carboligation (Ar Acceptor) CO2:
+  enzymes:
+    TDL:
+      cofactors_minus: []
+      cofactors_plus: []
+  experimental: true
+  negative_tests: []
+  positive_tests: []
+  product_seeds: []
+  smarts:
+  - '[#6:1][#6H0:2](=[O:3])[#6:4]([OH:5])[c:6]>>[#6:1][#6H0:2]([#6](=[OH0])[OH])=[O:3].[#6H1:4](=[O:5])[c:6]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+TDL Carboligation (Ar Donor):
+  enzymes:
+    TDL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - O=C(CO)c1ccccc1
+  product_seeds: []
+  smarts:
+  - '[c:1][#6H0:2](=[O:3])[#6X4;z1:4]([OH:5])>>[c:1][#6H1:2]=[O:3].[#6X4;z1:4](=[O:5])'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+TDL Hydroxymethylation:
+  enzymes:
+    TDL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - COCC(=O)CC1=CC=CC=C1
+  - CC(O)C(=O)CC1=CC=CC=C1
+  - OC(O)C(=O)CC1=CC=CC=C1
+  - CC(C)C(=O)C(C)O
+  positive_tests:
+  - OCC(=O)CC1=CC=CC=C1
+  - CC(=O)CO
+  - CC(C)C(=O)CO
+  product_seeds: []
+  smarts:
+  - '[#6H0;X3;z1:2](=[O:3])[#6X4;z1:4]([OH:5])>>[#6H1;X3;z1:2]=[O:3].[#6H2:4](=[O:5])'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Thioesterification:
+  enzymes:
+    ANL-AS:
+      cofactors_minus:
+      - ATP
+      cofactors_plus:
+      - PPi
+      - AMP
+    Amidase:
+      cofactors_minus: []
+      cofactors_plus:
+      - H2O
+    CAR:
+      cofactors_minus:
+      - ATP
+      cofactors_plus:
+      - AMP
+      - Ppi
+    Lipase:
+      cofactors_minus: []
+      cofactors_plus: []
+    PGA:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CC(=O)SN1CCCC1
+  - CNC(=O)SC
+  positive_tests:
+  - CC(=O)SC
+  - CCC(=O)SCCC
+  - O=C(SC1CCCC1)C1=CC=CC=C1
+  product_seeds:
+  - C(=O)SC
+  smarts:
+  - '[#6:1]-[#6H0;R0:2](=[O:3])-[SX2:5]-[#6X4;z1:6]>>[#6:1]-[#6H0;R0:2](=[O:3])-[OH].[SX2:5]-[#6X4;z1:6]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)O
+  substrate_2_seeds:
+  - CS
+  type: C-X bond formation
+Transamidation:
+  enzymes:
+    Lipase:
+      cofactors_minus: []
+      cofactors_plus: []
+    PGA:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - CCCNC(=O)CC
+  product_seeds:
+  - C(=O)NC
+  requires_absence_of_water: true
+  smarts:
+  - '[#6:1]-[#6:2](=[O:3])-[#7X3:4]>>[#6:1]-[#6:2](=[O:3])-[#7X3]-[C].[#7X3:4]'
+  steps: []
+  substrate_1_seeds:
+  - C(=O)NC
+  substrate_2_seeds:
+  - N
+  type: C-X bond formation
+Transketolase:
+  enzymes:
+    TK:
+      cofactors_minus: []
+      cofactors_plus: []
+  experimental: true
+  negative_tests: []
+  positive_tests:
+  - CC(O)C(O)C(=O)CO
+  - CC[C@H](O)C(C)=O
+  product_seeds: []
+  smarts:
+  - '[#8:8]-[#6:7]-[#6:5](-[#8:6])-[#6:3](=[O:4])-[#6:2]-[#8:1]>>[#8:1]-[#6:2]-[#6:3](=[O:4])-[#6](-[#8])=[O].[#8:8]-[#6:7]-[#6:5]=[O:6]'
+  - '[#6:1]-[#6:2]-[#6@H:3](-[#8:4])-[#6:5](-[#6:7])=[O:6]>>[#6:1]-[#6:2]-[#6:3]=[O:4].[#6:7]-[#6:5](=[O:6])-[#6](-[#8])=[O]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+Tryptophan Synthase:
+  enzymes:
+    TrpS:
+      cofactors_minus:
+      - L-Ser
+      cofactors_plus:
+      - H2O
+  negative_tests:
+  - Cn2cc(C[C@H](N)C(=O)O)c1ccccc12
+  - N[C@@H](Cc1c[nH]c2ccccc12)C(=O)OC
+  positive_tests:
+  - N[C@@H](Cc1c[nH]c2ccccc12)C(=O)O
+  - N[C@@H](Cc1c[nH]c2cc(F)ccc12)C(=O)O
+  product_seeds: []
+  smarts:
+  - '[#7H2:15]-[#6@@H:11](-[#6:10]-[c:9]1[c:8][nH1:7][c:4]2[c:3][c:2][c:1][c:6][c:5]12)-[#6:12](-[#8H1:13])=[O:14]>>[c:8]1[c:9][c:5]2[c:6][c:1][c:2][c:3][c:4]2[n:7]1'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-C bond formation
+"\u03B1-amino amination":
+  enzymes:
+    AL:
+      cofactors_minus:
+      - NH4
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - N[C@@H](Cc1ccccc1)C(=O)O
+  - NC(Cc1ccccc1)C(=O)O
+  product_seeds:
+  - CC(N)C(=O)O
+  smarts:
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1[C:7][C:8]([NH2])[C:9](=[O:10])[O:11]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1/[C:7]=[C:8]/[C:9](=[O:10])[O:11]'
+  steps: []
+  substrate_1_seeds:
+  - C=CC(=O)O
+  substrate_2_seeds: []
+  type: C-X bond formation
+"\u03B1-amino amination (MAL)":
+  enzymes:
+    MAL:
+      cofactors_minus: []
+      cofactors_plus: []
+  negative_tests:
+  - CNC(C(N)C(O)=O)C(O)=O
+  - CNC(C(C)C(O)=O)C(OC)=O
+  - CNC(C(C)C(OC)=O)C(O)=O
+  - CC(C(O)=O)C1(CCN1)C(O)=O
+  - CCC(C(N)C(O)=O)C(O)=O
+  positive_tests:
+  - CNC(C(C)C(O)=O)C(O)=O
+  - N[C@H](C(C)C(O)=O)C(O)=O
+  - CCN(C)C(C(C)C(O)=O)C(O)=O
+  product_seeds: []
+  smarts:
+  - '[#6H3:1]-[#6R0:3](-[#6R0:7](-[#7:6])-[#6:2](-[#8H:5])=[O:4])-[#6:9](-[#8H:11])=[O:10]>>[#6H3:1][#6:3](=[#6:7][#6:2](-[#8H:5])=[O:4])-[#6:9](-[#8H:11])=[O:10]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+"\u03B1-amino deamination":
+  enzymes:
+    AL:
+      cofactors_minus: []
+      cofactors_plus:
+      - NH4
+  negative_tests: []
+  positive_tests:
+  - O=C(O)/C=C/c1ccccc1
+  product_seeds:
+  - C=CC(=O)O
+  smarts:
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1/[C:7]=[C:8]/[C:9](=[O:10])[O:11]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1[C:7]-[C@@H1:8](-[NH2])[C:9](=[O:10])[O:11]'
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1/[C:7]=[C:8]/[C:9](=[O:10])[O:11]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1[C:7]-[C@H1:8](-[NH2])[C:9](=[O:10])[O:11]'
+  steps: []
+  substrate_1_seeds:
+  - CC(N)C(=O)O
+  substrate_2_seeds: []
+  type: C-X bond formation
+"\u03B1-amino deamination (MAL)":
+  enzymes:
+    MAL:
+      cofactors_minus: []
+      cofactors_plus:
+      - NH3
+  negative_tests:
+  - NC(=CC(O)=O)C(O)=O
+  - CNC(=CC(O)=O)C(O)=O
+  - COC(=O)C=C(C)C(O)=O
+  - CCC(=CC(O)=O)C(O)=O
+  positive_tests:
+  - CC(=CC(O)=O)C(O)=O
+  product_seeds: []
+  smarts:
+  - '[#6H3:1][#6:3](=[#6:7][#6:2](-[#8H:5])=[O:4])-[#6:9](-[#8H:11])=[O:10]>>[#6H3:1]-[#6R0:3](-[#6R0H1:7](-[#7:6])-[#6:2](-[#8H:5])=[O:4])-[#6:9](-[#8H:11])=[O:10]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+"\u03B2-amino amination":
+  enzymes:
+    PAM:
+      cofactors_minus:
+      - NH3
+      cofactors_plus: []
+    TAM:
+      cofactors_minus:
+      - NH3
+      cofactors_plus: []
+  negative_tests: []
+  positive_tests:
+  - N[C@H](CC(=O)O)c1ccccc1
+  - NC(CC(=O)O)c1ccccc1F
+  - N[C@H](CC(=O)O)c1ccccc1F
+  product_seeds: []
+  smarts:
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1[#6h1:7]([NH2])[C:8][C:9](=[O:10])[O:11]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1/[#6:7]=[C:8]/[C:9](=[O:10])[O:11]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation
+"\u03B2-amino deamination":
+  enzymes:
+    PAM:
+      cofactors_minus: []
+      cofactors_plus:
+      - NH3
+    TAM:
+      cofactors_minus: []
+      cofactors_plus:
+      - NH3
+  negative_tests: []
+  positive_tests:
+  - O=C(O)/C=C/c1ccccc1
+  - O=C(O)/C=C/c1ccccc1F
+  - O=C(O)/C=C/c1ccccc1
+  - O=C(O)/C=C/c1ccccc1F
+  product_seeds: []
+  smarts:
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1/[C:7]=[C:8]/[C:9](=[O:10])[O:11]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1[C@@H1:7](-[NH2])[C:8][C:9](=[O:10])[O:11]'
+  - '[c:1]1[c:2][c:3][c:4][c:5][c:6]1/[C:7]=[C:8]/[C:9](=[O:10])[O:11]>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1[C@H1:7](-[NH2])[C:8][C:9](=[O:10])[O:11]'
+  steps: []
+  substrate_1_seeds: []
+  substrate_2_seeds: []
+  type: C-X bond formation

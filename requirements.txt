@@ -1,0 +1,11 @@
+rdkit>=2021.03.5
+pytest
+sqlalchemy
+six
+pandas
+openpyxl
+tables
+scikit-learn>=1.0.0
+PyYAML
+tensorflow>=2.6.0
+jupyter

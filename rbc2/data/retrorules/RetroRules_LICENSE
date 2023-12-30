@@ -1,0 +1,23 @@
+RetroRules downloaded from https://retrorules.org/dl on 20-Mar-2021
+
+As stated in the readme:
+
+This work is licensed under the Creative Commons Attribution 4.0
+International License. To view a copy of this license, visit
+http://creativecommons.org/licenses/by/4.0/.
+
+The current release of RetroRules is based on MNXref v3.0 for the
+chemical structures, the reaction definitions and their respective
+crosslinks to other databases.
+
+Please consider that MNXref information is gathered from different
+metabolic databases (MetaCyc, KeGG, Bigg, Rhea, ...) and each have
+different license policies (especially concerning the reuse for
+commercial purpose). As a consequence, the license related to each
+individual reaction rule depends of the licensing agreements of the
+reference database(s) chosen in MNXref to describe each reaction as
+well as the chemicals involved in it. This information is available
+at https://www.metanetx.org/mnxdoc/mnxref.html.
+
+Sequence annotations is obtained by cross-referencing MNXref v3.0
+with Rhea release 81 and UniProt release 2017_04.

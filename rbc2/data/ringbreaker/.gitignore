@@ -1,0 +1,12 @@
+/models/checkpoints/
+/models/checkpoints/weights.hdf5
+/models/uspto_standard/
+/models/uspto_standard/weights.hdf5
+/models/uspto_ringbreaker_timing.txt
+/models/uspto_ringbreaker_training_log.log
+/data/
+/data/.ipynb_checkpoints/
+/data/standard_uspto_template_library.csv
+/data/uspto_filter_array.pkl
+/data/uspto_ringformations.csv
+

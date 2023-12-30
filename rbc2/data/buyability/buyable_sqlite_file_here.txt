@@ -1,0 +1,1 @@
+In this directory, retrobiocat will look for building_blocks.db, which should have a table BUYABLE, with a column called SMILES.
