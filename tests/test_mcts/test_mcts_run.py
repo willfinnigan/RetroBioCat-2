@@ -9,7 +9,8 @@ from rbc2.mcts.mcts_loop.rollout import rollout
 from rbc2.mcts.mcts_loop.selection import selection, Selection
 from rbc2.mcts.mcts import MCTS
 from rbc2.mcts.tree_node import create_root
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_network_entities.network import Network
 
 
@@ -17,7 +18,7 @@ def test_first_rollout():
     network = Network()
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     multi_expander = MultiExpander(expanders, network=network)
-    expansion = Expansion(multi_expander, StartingMaterialEvaluator(), MCTS_Config())
+    expansion = Expansion(multi_expander, DefaultSQLStartingMaterialEvaluator(), MCTS_Config())
     selection = Selection()
     root = create_root('CCCC=O')
     node = selection.select(root, 2)

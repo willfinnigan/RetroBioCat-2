@@ -2,13 +2,15 @@ from functools import lru_cache
 from typing import Optional
 
 from rbc2.configs.data_path import path_to_data_folder
-from rbc2.reaction_evaluation.sqlite_source_mol.connect_sqlitedb import SQLite_Database
-from rbc2.reaction_evaluation.sqlite_source_mol.query_sqlitedb import DB_Query_SQLite
+from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.connect_sqlitedb import SQLite_Database
+from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.query_sqlitedb import DB_Query_SQLite
 from rbc2.configs.source_mol_config import SourceMol_Config
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluatorInterface
 
 data_folder = f'{path_to_data_folder}/buyability'
 
-class StartingMaterialEvaluator():
+class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
     vendor_urls = {'mcule': 'https://mcule.com/[[ID]]',
                    'sigma': 'https://www.sigmaaldrich.com/GB/en/search/[[ID]]?focus=products&page=1&perpage=30&sort=relevance&term=[[ID]]&type=product',
                    'lifechem': 'https://shop.lifechemicals.com/compound/[[ID]]',
@@ -43,35 +45,37 @@ class StartingMaterialEvaluator():
     @lru_cache(maxsize=10000)
     def eval(self, smi):
         if smi in self.blocked_smiles:
-            return 0, {}
+            return False, {}
         if smi in self.custom_smiles:
-            return 1, {}
+            return True, {}
 
         mode, vendors = self.config.get_mode_and_vendors()
 
         if self.is_mol_chiral(smi) and self.config.source_mols_can_be_chiral is False:
-            return 0, {}
+            return False, {}
 
         result = self.query.smiles_lookup(smi, mode, vendors=vendors)
         if result is None:
-            return 0, {}
+            return False, {}
 
         info = self._process_info(result, mode)
 
         if self._is_above_max_price_per_gram(info, vendors) == True:
-            return 0, info
-        return 1, info
+            return False, info
+        return True, info
 
     def is_mol_chiral(self, smi):
         if '@' in smi:
             return True
         return False
 
+    @lru_cache(maxsize=10)
     def column_names(self, mode):
         if mode not in self.cache_column_names:
             self.cache_column_names[mode] = self.query.get_column_names(mode)
         return self.cache_column_names[mode]
 
+    @lru_cache(maxsize=10)
     def vendor_names(self, mode):
         if mode not in self.cache_vendor_names:
             columns = self.column_names(mode)
@@ -135,8 +139,8 @@ class StartingMaterialEvaluator():
 
 
 if __name__ == '__main__':
-    sme = StartingMaterialEvaluator()
-    available, info = sme.eval('C#C[Mg]Br')
+    sme = DefaultSQLStartingMaterialEvaluator()
+    available, info = sme.eval('CCCC=O')
     print(info)
     print(available)
 

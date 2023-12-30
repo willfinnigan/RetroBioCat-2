@@ -9,7 +9,8 @@ from rbc2.utils.add_logger import add_logger
 from rbc2.configs.logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.tree_node import MCTS_Node, create_node_from_option, create_root
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_network_entities.reaction_option import ReactionOption
 from rbc2.pathway_tools.pathway_evaluation import leaf_molecule_availability
 

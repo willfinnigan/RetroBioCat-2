@@ -5,10 +5,11 @@ from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.expansion.default_expander_interface import DefaultExpander
 from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.yaml_rxn_class import YAML_RetroBioCatReactions
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
 from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData
 from rbc2.precedent_identification.data_retrieval.retrobiocat.rank_precedents import get_best_enzymes
 from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluatorInterface
 from rbc2.reaction_network_entities.network import Network
 from rbc2.reaction_network_entities.reaction import Reaction, sort_reactions_by_score
 from rbc2.reaction_network_entities.reaction_option import ReactionOption, sort_options_by_score
@@ -36,7 +37,7 @@ class RetroBioCatExpander(DefaultExpander):
     def __init__(self,
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None,
-                 starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
+                 starting_material_evaluator: Optional[StartingMaterialEvaluatorInterface] = None,
                  rbc_rxn_class: Optional = None,
                  precedent_data: Optional[PrecedentData] = None,
                  include_experimental: bool = False,
@@ -153,7 +154,7 @@ class RetroBioCatExpander(DefaultExpander):
             score = 0
 
         # if a biocatalytic step results in all substrates being available, we want to prioritise this
-        if isinstance(self.starting_material_evaluator, StartingMaterialEvaluator):
+        if isinstance(self.starting_material_evaluator, StartingMaterialEvaluatorInterface):
             if self._are_substrates_all_available(reaction) is True:
                 score = 1.01
 

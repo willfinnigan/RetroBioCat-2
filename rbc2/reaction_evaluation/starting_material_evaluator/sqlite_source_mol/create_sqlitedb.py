@@ -1,7 +1,7 @@
 import pandas as pd
 import csv
 
-from rbc2.reaction_evaluation.sqlite_source_mol.connect_sqlitedb import SQLite_Database
+from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.connect_sqlitedb import SQLite_Database
 
 
 class DB_Creator_SQLite():

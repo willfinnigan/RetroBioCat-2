@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING
 
 from rbc2.pathway_tools.pa_route_conversion import get_pa_route
 
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
-from rbc2.reaction_network_entities.save_load_reaction_options import option_from_dict, option_to_dict
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluatorInterface
 from rbc2.reaction_network_entities.reaction import reactions_to_dicts, reaction_from_dict
 
 if TYPE_CHECKING:
@@ -131,10 +131,41 @@ class Network():
             self.add_option(option)
 
 
-    def get_pa_route(self, start_smi, starting_material_evaluator: StartingMaterialEvaluator):
+    def get_pa_route(self, start_smi, starting_material_evaluator: StartingMaterialEvaluatorInterface):
         def get_smi_produced_by(smi):
             return list(self.smi_produced_by[smi])
         return get_pa_route(start_smi, starting_material_evaluator, get_smi_produced_by)
 
 
+def option_to_dict(option: ReactionOption) -> dict:
+    """
+    Saves the data of a ReactionOption to a dict
+    Use the option_from_dict function to recreate the ReactionOption
+    """
+    opt_dict = {'target_smi': option.target_smi,
+                'name': option.name,
+                'smarts': option.smarts,
+                'metadata': option.metadata,
+                'rxn_type': option.rxn_type,
+                'rxn_domain': option.rxn_domain,
+                'score': option.score,
+                'evaluated': option.evaluated,
+                'precedents_searched': option.precedents_searched,
+                'reaction_ids': [reaction.unique_id for reaction in option.reactions]
+                }
+    return opt_dict
 
+
+def option_from_dict(option_dict: dict, expander: Expander) -> ReactionOption:
+    """
+    Load a previously saved option from a dict - using the expander method
+    """
+
+    if option_dict.get('rxn_type', '') != expander.rxn_type:
+        raise Exception('Expander rxn_type does not match option_dict rxn_type')
+
+    return expander.create_option(smi=option_dict['target_smi'],
+                                  name=option_dict['name'],
+                                  smarts=option_dict['smarts'],
+                                  template_metadata=option_dict['metadata'],
+                                  score=option_dict['score'])

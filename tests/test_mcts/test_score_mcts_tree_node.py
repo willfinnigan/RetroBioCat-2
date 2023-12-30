@@ -1,9 +1,8 @@
-import pytest
-
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.mcts_loop.score_node import score_pathway, score_node, penalty_fomula
 from rbc2.mcts.tree_node import create_node_with_pathway, create_root
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_network_entities.pathway import Pathway
 from rbc2.reaction_network_entities.reaction import Reaction
 
@@ -31,7 +30,7 @@ def test_score_pathway():
     mcts_config = MCTS_Config()
     mcts_config.score_mode = 'basic'
     mcts_config.use_pathway_length_score = False
-    score = score_pathway(pathway, mcts_config, StartingMaterialEvaluator())
+    score = score_pathway(pathway, mcts_config, DefaultSQLStartingMaterialEvaluator())
     assert score == 1
 
 def test_score_node():
@@ -43,5 +42,5 @@ def test_score_node():
     mcts_config = MCTS_Config()
     mcts_config.score_mode = 'basic'
     mcts_config.use_pathway_length_score = False
-    score = score_node(node, mcts_config, StartingMaterialEvaluator())
+    score = score_node(node, mcts_config, DefaultSQLStartingMaterialEvaluator())
     assert score == 1

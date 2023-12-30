@@ -1,8 +1,5 @@
 import pytest
 
-from rbc2.configs.source_mol_config import SourceMol_Config
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
-from rbc2.pathway_tools.pathway_evaluation import cost_pathway, leaf_molecule_availability, rank_pathways
 from rbc2.reaction_network_entities.pathway import Pathway
 from rbc2.reaction_network_entities.reaction import Reaction
 

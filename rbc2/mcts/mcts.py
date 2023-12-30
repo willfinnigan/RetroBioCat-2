@@ -3,6 +3,8 @@ from typing import Optional, List
 
 from rbc2.expansion.multi_expander import MultiExpander
 from rbc2.reaction_evaluation.feasability_filters import Filter, default_filter_repo
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
@@ -14,7 +16,6 @@ from rbc2.mcts.mcts_loop.rollout import rollout
 from rbc2.mcts.mcts_loop.score_node import score_node
 from rbc2.mcts.mcts_loop.selection import Selection
 from rbc2.mcts.tree_node import create_root, MCTS_Node
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
 from rbc2.reaction_network_entities.network import Network
 from rbc2.reaction_network_entities.pathway import Pathway
 
@@ -24,7 +25,7 @@ class MCTS():
                  target_smi: str,
                  expanders: dict[str: Expander],
                  filters: dict[str: Filter] = default_filter_repo,
-                 starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
+                 starting_material_evaluator: Optional[DefaultSQLStartingMaterialEvaluator] = None,
                  network: Optional[Network] = None,
                  mcts_config: Optional[MCTS_Config] = None):
 
@@ -39,7 +40,7 @@ class MCTS():
         # starting material evaluator
         self.starting_material_evaluator = starting_material_evaluator
         if self.starting_material_evaluator is None:
-            self.starting_material_evaluator = StartingMaterialEvaluator()
+            self.starting_material_evaluator = DefaultSQLStartingMaterialEvaluator()
 
         # network - used to save expansions so they are only done once
         self.network = network

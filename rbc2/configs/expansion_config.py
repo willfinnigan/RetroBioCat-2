@@ -18,6 +18,7 @@ class Expansion_Config():
         self.duplicates_require_same_domain = False
         self.duplicates_require_same_name = False
         self.merge_duplicate_metadata = True
+        self.force_rdkit_smis = True
 
         # expanders general
         self.max_reactions = None  # max reactions (not options)

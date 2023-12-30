@@ -6,21 +6,24 @@ from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.tree_node import MCTS_Node
 from rbc2.reaction_evaluation.molecular_descriptors import get_mw
 from rbc2.reaction_evaluation.complexity import get_complexity
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluatorInterface
 from rbc2.reaction_network_entities.pathway import Pathway
 from rbc2.pathway_tools.pathway_evaluation import leaf_molecule_availability
 
 
 def score_node(node: MCTS_Node,
                mcts_config: MCTS_Config,
-               starting_material_evaluator: StartingMaterialEvaluator):
+               starting_material_evaluator: StartingMaterialEvaluatorInterface):
     if node is None:
         return 0
     return score_pathway(node.pathway, mcts_config, starting_material_evaluator)
 
 def score_pathway(pathway: Pathway,
                   mcts_config: MCTS_Config,
-                  starting_material_evaluator: StartingMaterialEvaluator):
+                  starting_material_evaluator: StartingMaterialEvaluatorInterface):
     """ Score a pathway based on the number of available molecules in the pathway, optionally using complexity if not available """
 
     available, not_available = leaf_molecule_availability(pathway, starting_material_evaluator)

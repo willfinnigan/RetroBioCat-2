@@ -4,7 +4,8 @@ from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.expansion.expander_repository import get_expanders
 from rbc2.mcts.mcts_loop.expansion.expand import  get_mcts_steps_since_solved, expand
 from rbc2.mcts.tree_node import create_root, MCTS_Node, create_node_with_pathway
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_network_entities.network import Network
 from rbc2.reaction_network_entities.pathway import Pathway
 from rbc2.reaction_network_entities.reaction import Reaction
@@ -15,7 +16,7 @@ def test_mcts_expansion_returns_unevaluated_mcts_nodes():
     network = Network()
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     multi_expander = MultiExpander(expanders, network=network)
-    starting_material_evaluator = StartingMaterialEvaluator()
+    starting_material_evaluator = DefaultSQLStartingMaterialEvaluator()
     mcts_config = MCTS_Config()
 
     new_nodes = expand(root, multi_expander, starting_material_evaluator, mcts_config)
@@ -59,7 +60,7 @@ def test_0_allowed_moves_beyond_solved_gives_0_new_nodes():
     network = Network()
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     multi_expander = MultiExpander(expanders, network=network)
-    starting_material_evaluator = StartingMaterialEvaluator()
+    starting_material_evaluator = DefaultSQLStartingMaterialEvaluator()
     mcts_config = MCTS_Config()
 
     root = create_root('CCCC=O')
@@ -75,7 +76,7 @@ def test_allow_moves_beyond_solved_1_gives_new_nodes_even_though_node_is_solved(
     network = Network()
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     multi_expander = MultiExpander(expanders, network=network)
-    starting_material_evaluator = StartingMaterialEvaluator()
+    starting_material_evaluator = DefaultSQLStartingMaterialEvaluator()
     mcts_config = MCTS_Config()
     mcts_config.allow_moves_beyond_solved = 1
 

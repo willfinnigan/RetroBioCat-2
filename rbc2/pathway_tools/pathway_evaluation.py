@@ -1,11 +1,14 @@
 from typing import List
-from rbc2.reaction_evaluation.starting_material_evaluator import StartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
+    DefaultSQLStartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluatorInterface
 from rbc2.reaction_network_entities.pathway import Pathway
 from rbc2.reaction_network_entities.reaction import Reaction
 
 
 def leaf_molecule_availability(pathway: Pathway,
-                               starting_material_evaluator: StartingMaterialEvaluator):
+                               starting_material_evaluator: StartingMaterialEvaluatorInterface):
 
     available, not_available = [], []
     target_smi = pathway.target_smi
@@ -17,7 +20,7 @@ def leaf_molecule_availability(pathway: Pathway,
 
     for smi in list_end_smis:
         in_stock, in_stock_info = starting_material_evaluator.eval(smi)
-        if in_stock == 1:
+        if in_stock == True:
             available.append(smi)
         else:
             not_available.append(smi)
@@ -30,7 +33,7 @@ NOT_IN_STOCK_COST = 10
 REACTION_YIELD = 0.8
 REACTION_COST = 1
 
-def cost_pathway(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluator) -> float:
+def cost_pathway(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluatorInterface) -> float:
     node_costs = _get_end_node_costs(pathway, starting_material_evaluator)   # firstly cost the end nodes by in stock or not
     nodes = pathway.end_smis()  # initially nodes is just the leaves
     while pathway.target_smi not in nodes:
@@ -81,7 +84,7 @@ def _are_all_smis_costed(list_smis: List[str], node_costs: dict[str: float]) -> 
     return True
 
 
-def _get_end_node_costs(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluator) -> dict[str: float]:
+def _get_end_node_costs(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluatorInterface) -> dict[str: float]:
     end_node_costs = {}
     buyable, not_buyable = leaf_molecule_availability(pathway, starting_material_evaluator)
     for smi in buyable:
