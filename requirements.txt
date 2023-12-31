@@ -9,3 +9,5 @@ scikit-learn>=1.0.0
 PyYAML
 tensorflow>=2.6.0
 jupyter
+tqdm
+gdown
