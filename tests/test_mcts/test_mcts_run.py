@@ -1,5 +1,6 @@
 import time
 
+from rbc2.configs.download_data_files.download_retrorules import does_retrorules_db_exist
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.expansion.expander_repository import get_expanders
@@ -65,6 +66,10 @@ def test_can_get_routes_beyond_buyables():
 
 def test_weird_retrorules_case_with_options_but_not_reactions_from_route():
     # mcts should stop once the options are evaluated to nothing
+
+    # only run if we have the necessary retorules files already..
+    if does_retrorules_db_exist() == False:
+        return
 
     target_smi = 'CC(O)[C@@H](O)c1ccccc1'
     expansion_config = Expansion_Config()

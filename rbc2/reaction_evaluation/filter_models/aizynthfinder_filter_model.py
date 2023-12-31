@@ -3,6 +3,8 @@ from typing import List
 from rdkit import Chem
 
 from rbc2.configs.data_path import path_to_data_folder
+from rbc2.configs.download_data_files.download_aizynthfinder_filter import does_aizynthfinder_filter_exist, \
+    download_aizynthfinder_filter
 from rbc2.utils import fingerprints, load_keras_models
 
 data_folder = f'{path_to_data_folder}/aizynthfinder'
@@ -11,6 +13,9 @@ class AIZynthFilterModel():
 
     def __init__(self):
         self.filter_model = None
+
+        if does_aizynthfinder_filter_exist() == False:
+            download_aizynthfinder_filter()
 
     def load_model(self):
         if self.filter_model == None:

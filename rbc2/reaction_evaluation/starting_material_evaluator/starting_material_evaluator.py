@@ -2,6 +2,7 @@ from functools import lru_cache
 from typing import Optional
 
 from rbc2.configs.data_path import path_to_data_folder
+from rbc2.configs.download_data_files.download_source_mols import does_source_mols_db_exist, download_source_mols_db
 from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.connect_sqlitedb import SQLite_Database
 from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.query_sqlitedb import DB_Query_SQLite
 from rbc2.configs.source_mol_config import SourceMol_Config
@@ -24,6 +25,9 @@ class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
     available_modes = ['building_blocks', 'metabolites']
 
     def __init__(self, config: Optional[SourceMol_Config] = None, custom_smiles=None, blocked_smiles=None):
+
+        if does_source_mols_db_exist() == False:
+            download_source_mols_db()
 
         db_path = data_folder + '/source_mols.db'
         self.database = SQLite_Database(db_path)

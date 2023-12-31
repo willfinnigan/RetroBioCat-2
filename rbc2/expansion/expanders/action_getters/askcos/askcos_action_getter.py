@@ -7,6 +7,7 @@ from rdkit.Chem import AllChem
 from tensorflow import keras
 from scipy.special import softmax
 
+from rbc2.configs.download_data_files.download_askcos import does_askcos_exist, download_askcos_model
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.configs.data_path import path_to_data_folder
@@ -37,12 +38,15 @@ class Askcos_Action_Getter():
         self.policy_model = None
         self.templates = None
 
+        if does_askcos_exist() == False:
+            download_askcos_model()
+
     def load_model(self):
         if self.policy_model is None:
             policy_path = data_folder + '/reaxys'
             self.policy_model = keras.models.load_model(policy_path)
         if self.templates is None:
-            templates_path = data_folder + '/retro.templates.json'
+            templates_path = data_folder + '/reaxys/retro.templates.json.gz'
             self.templates = pd.read_json(templates_path)
 
     def _does_template_have_multiple_products(self, smarts):

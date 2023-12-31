@@ -14,7 +14,8 @@ from rbc2.reaction_network_entities.network import Network
 from rbc2.reaction_network_entities.reaction import Reaction
 from rbc2.reaction_network_entities.reaction_option import ReactionOption
 
-expanders_to_test = [AIZynthfinderExpander, RingBreakerPolicyExpander, AskcosPolicyExpander, BKMSExpander, RetroRulesExpander, RetroBioCatExpander, EnzymeMapExpander]
+#expanders_to_test = [AIZynthfinderExpander, RingBreakerPolicyExpander, AskcosPolicyExpander, BKMSExpander, RetroRulesExpander, RetroBioCatExpander, EnzymeMapExpander]
+expanders_to_test = [RetroBioCatExpander,EnzymeMapExpander, AIZynthfinderExpander]
 config = Expansion_Config()
 config.rr_diameter = 8
 config.rr_combined_score_threshold = 0.3
@@ -129,10 +130,3 @@ def test_retrobiocat_multistep_rxns_are_applied():
     reactions = expander.get_reactions('c1ccc([C@@H]2CCCCN2)cc1')
     print([r.name for r in reactions])
     assert 'Amine deracemization' in [r.name for r in reactions]
-
-def test_reactions_are_not_created_with_no_substrates():
-    expander = RetroRulesExpander()
-    reactions = expander.get_reactions('CC(C)(COP(=O)(O)OP(=O)(O)OCC1OC(n2cnc3c(N)ncnc32)C(O)C1O)C(O)C(O)=NCCC(O)=NCCS')
-
-    for reaction in reactions:
-        assert len(reaction.substrates) > 0

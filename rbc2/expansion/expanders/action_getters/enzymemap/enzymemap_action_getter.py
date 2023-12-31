@@ -7,6 +7,7 @@ from rdkit.Chem import AllChem
 from tensorflow import keras
 from scipy.special import softmax
 
+from rbc2.configs.download_data_files.download_enzymemap import does_enzymemap_exist, download_enzymemap
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.configs.data_path import path_to_data_folder
@@ -76,13 +77,15 @@ def relevance(**kwargs):
 
 class EnzymeMap_Action_Getter():
 
-
     def __init__(self,
                  cutoff_cumulative=0.995,
                  cutoff_number=50,
                  allow_multi_product_templates=False,
                  log_level='WARNING'):
         self.logger = add_logger('EnzymeMapActionGetter', level=log_level)
+
+        if does_enzymemap_exist() == False:
+            download_enzymemap()
 
         self.fp_length = 2048
         self.fp_radius = 2

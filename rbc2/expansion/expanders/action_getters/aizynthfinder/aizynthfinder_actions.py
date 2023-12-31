@@ -4,6 +4,8 @@ from rdkit import Chem
 import numpy as np
 import pandas as pd
 
+from rbc2.configs.download_data_files.download_aizynthfinder import does_aizynthfinder_exist, \
+    download_aizynthfinder_model
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.data_path import path_to_data_folder
 
@@ -27,6 +29,9 @@ class AizynthfinderActionGetter():
         self.template_column = template_column
         self.cutoff_cumulative = cutoff_cumulative
         self.cutoff_number = cutoff_number
+
+        if does_aizynthfinder_exist() == False:
+            download_aizynthfinder_model()
 
     def load_model(self):
         if self.policy_model == None:

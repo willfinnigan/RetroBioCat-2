@@ -7,6 +7,7 @@ from rdkit.Chem import AllChem
 from tensorflow import keras
 from scipy.special import softmax
 
+from rbc2.configs.download_data_files.download_bkms import does_bkms_exist, download_bkms_model
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.configs.data_path import path_to_data_folder
@@ -28,6 +29,10 @@ class BKMS_Action_Getter():
                  cutoff_number=50,
                  allow_multi_product_templates=False,
                  log_level='WARNING'):
+
+        if does_bkms_exist() == False:
+            download_bkms_model()
+
         self.logger = add_logger('BKMSActionGetter', level=log_level)
         self.policy_model = None
         self.templates = None

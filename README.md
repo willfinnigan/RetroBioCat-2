@@ -13,6 +13,7 @@ Please see the documentation for more information.
 (Coming soon)
 
 ## To do
+- [ ] Get CI working
 - [ ] Add documentation
 - [ ] Improve and document the interface for the starting material evaluator
 

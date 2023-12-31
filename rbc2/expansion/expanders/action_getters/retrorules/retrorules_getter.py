@@ -5,6 +5,7 @@ import pandas as pd
 from rdkit import DataStructs, Chem
 from rdkit.Chem import rdChemReactions, rdFingerprintGenerator
 
+from rbc2.configs.download_data_files.download_retrorules import does_retrorules_db_exist, download_retrorules_db
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.data_path import path_to_data_folder
 
@@ -22,6 +23,9 @@ class RetroRules_Getter():
                  combined_score_threshold=0.2,
                  max_reactions=100,
                  log_level='WARNING'):
+
+        if does_retrorules_db_exist() == False:
+            download_retrorules_db()
 
         self.logger = add_logger('RetroRulesGetter', level=log_level)
 

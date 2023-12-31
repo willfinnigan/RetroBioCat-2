@@ -11,6 +11,7 @@ from rdkit.DataStructs import cDataStructs
 
 from sklearn.preprocessing import LabelEncoder
 
+from rbc2.configs.download_data_files.download_ringbreaker import does_ringbreaker_exist, download_ringbreaker_model
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.configs.data_path import path_to_data_folder
@@ -33,6 +34,9 @@ class RingBreaker_ActionGetter():
         self.policy_model = None
         self.templates = None
         self.lib = None
+
+        if does_ringbreaker_exist() == False:
+            download_ringbreaker_model()
 
     def init_template_library(self):
         # Initalise template library

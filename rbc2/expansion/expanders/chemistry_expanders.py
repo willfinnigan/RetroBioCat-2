@@ -63,9 +63,9 @@ class AskcosPolicyExpander(DefaultExpander):
 
 
 if __name__ == '__main__':
-    expander = AIZynthfinderExpander()
-    reactions = expander.get_reactions('CCCO')
-    print(reactions)
+    #expander = AIZynthfinderExpander()
+    #reactions = expander.get_reactions('CCCO')
+    #print(reactions)
 
     expander = AskcosPolicyExpander()
     reactions = expander.get_reactions('CCCCO')
