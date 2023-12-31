@@ -13,6 +13,11 @@ def download_retrorules_db():
     directory = f"{path_to_data_folder}/retrorules"
     os.makedirs(directory, exist_ok=True)
 
+    file_id = "1CbTQZk-m-VKImMFseXz6kECuDjDXKNew"
+    filename = "rr_smi.h5"
+    filepath = f"{directory}/{filename}"
+    download_gdrive_file(file_id, filepath)
+
     file_id = "1C7Eb7tiFB1lfDPlqpen8rp6r0pPRf84a"
     filename = "retrorules.db"
     filepath = f"{directory}/{filename}"

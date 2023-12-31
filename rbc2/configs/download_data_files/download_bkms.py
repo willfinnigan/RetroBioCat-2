@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 from rbc2.configs.data_path import path_to_data_folder
-from rbc2.configs.download_data_files.download_file import download_file
+from rbc2.configs.download_data_files.download_file import download_file, download_gdrive_file
 
 
 def does_bkms_exist() -> bool:
@@ -22,6 +22,19 @@ def download_bkms_model():
     filename = "variables.data-00000-of-00001"
     filepath = f"{directory}/{filename}"
     download_file(bkms_model, filepath)
+
+    directory = f"{path_to_data_folder}/bkms/"
+    file_id = "1Cgufom9YA3ElYO7v9jy6Vi2qWiWOMvHX"
+    filename = "bkms_metadata.hdf"
+    filepath = f"{directory}/{filename}"
+    download_gdrive_file(file_id, filepath)
+
+    file_id = "1CdHaaqfWzM70e-csxiZA6cdWEwpY9HA5"
+    filename = "bkms_templates_only.hdf"
+    filepath = f"{directory}/{filename}"
+    download_gdrive_file(file_id, filepath)
+
+
 
 
 
