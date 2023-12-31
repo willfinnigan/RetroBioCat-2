@@ -3,6 +3,7 @@ from typing import Sequence, List
 import pandas as pd
 
 from rbc2.configs.data_path import path_to_data_folder
+from rbc2.configs.download_data_files.download_bkms import does_bkms_exist, download_bkms_model
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.similarity_tools import get_fingerprints
 
@@ -17,6 +18,9 @@ class BKMS_Data(PrecedentData):
         self.substrate_columns: List[str] = []
         self.enzyme_column: str = 'EC_Number'
         self.id_column: str = 'ID'
+
+        if does_bkms_exist() == False:
+            download_bkms_model()
 
     @classmethod
     def load_df(cls):

@@ -3,6 +3,7 @@ from typing import Optional
 import pandas as pd
 
 from rbc2.configs.data_path import path_to_data_folder
+from rbc2.configs.download_data_files.download_enzymemap import does_enzymemap_exist, download_enzymemap
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.similarity_tools import get_fingerprints
 
@@ -20,6 +21,9 @@ class EnzymeMap_Data(PrecedentData):
         self.substrate_columns = ['reac_smiles']
         self.enzyme_column = 'ec_num'
         self.id_column = None
+
+        if does_enzymemap_exist() == False:
+            download_enzymemap()
 
     @classmethod
     def load_df(cls):
