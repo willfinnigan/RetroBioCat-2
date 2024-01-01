@@ -1,5 +1,5 @@
 # RetroBioCat 2.0
-![build_test workflow](https://github.com/willfinnigan/retrobiocat_2/actions/workflows/tests.yml/badge.svg)
+![build_test workflow](https://github.com/willfinnigan/retrobiocat_2/actions/workflows/build_and_test.yml/badge.svg)
 
 RetroBioCat 2.0 (rbc2) is a python package for computer-aided synthesis planning
 in biocatalysis.  Version 2 builds on the original RetroBioCat package, creating
