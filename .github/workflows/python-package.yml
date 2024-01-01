@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+concurrency:
+  group: ${{ github.matrix }}
+  cancel-in-progress: true
+
 jobs:
   build:
 
