@@ -9,9 +9,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-concurrency:
-  group: ${{ matrix.os }}
-  cancel-in-progress: true
 
 jobs:
   build:
@@ -19,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: ubuntu-latest
         python-version: ["3.9", "3.10", "3.11"]
 
     steps:
