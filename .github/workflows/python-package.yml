@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 concurrency:
-  group: ${{ github.matrix }}
+  group: ${{ matrix.os }}
   cancel-in-progress: true
 
 jobs:
