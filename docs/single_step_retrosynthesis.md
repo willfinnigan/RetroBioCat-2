@@ -86,7 +86,7 @@ askcos = AskCosExpander(cutoff_cumulative=0.995,
 
 ## RetroBioCat expander - example usage
 
-For stand-alone usage, all expanders have a .get_reactions(smi) method which takes a target SMILES does a single 
+For stand-alone usage, all expanders have a .get_reactions(smi) method which takes a target SMILES and does a single 
 retrosynthesis step, producing [Reactions](data_model.md#reaction).
 
 ```python
