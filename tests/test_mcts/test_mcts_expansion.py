@@ -6,9 +6,9 @@ from rbc2.mcts.mcts_loop.expansion.expand import  get_mcts_steps_since_solved, e
 from rbc2.mcts.tree_node import create_root, MCTS_Node, create_node_with_pathway
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.network import Network
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def test_mcts_expansion_returns_unevaluated_mcts_nodes():

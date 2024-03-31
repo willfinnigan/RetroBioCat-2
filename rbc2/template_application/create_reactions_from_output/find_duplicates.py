@@ -1,7 +1,7 @@
 from typing import List
 
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
 
 def remove_duplicates(reactions: List[Reaction],
                       network: Network,

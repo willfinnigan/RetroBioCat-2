@@ -8,7 +8,7 @@ from rbc2.mcts.mcts_loop.evaluate_node import resolve_unevaluated_mcts_node
 from rbc2.mcts.mcts_loop.expansion.expand import Expansion
 from rbc2.mcts.mcts_loop.selection import Selection
 from rbc2.mcts.tree_node import MCTS_Node
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 
 rollout_logger = add_logger('Rollout', level=logging_config.mcts_rollout)
 

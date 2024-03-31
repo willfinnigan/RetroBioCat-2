@@ -4,7 +4,7 @@ from rdkit.DataStructs import ExplicitBitVect
 
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.similarity_tools import get_single_fp, bulk_similarity
-from rbc2.reaction_network_entities.precedents import make_precedents
+from rbc2.data_model.precedents import make_precedents
 
 Smi = str
 DataQueryFunction = Callable[..., pd.DataFrame]

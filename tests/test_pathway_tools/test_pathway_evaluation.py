@@ -2,8 +2,8 @@ from rbc2.configs.source_mol_config import SourceMol_Config
 from rbc2.pathway_tools.pathway_evaluation import leaf_molecule_availability, cost_pathway, rank_pathways
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def test_pathway_with_only_target_returns_target_as_leaf():

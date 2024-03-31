@@ -3,8 +3,8 @@ from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.pathway_tools.pathway_context_checking import number_of_chemistry_reactions, \
     is_previous_reaction_chemistry, count_continuous_previous_chemistry_reactions, \
     count_continous_reactions
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction_option import ReactionOption
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction_option import ReactionOption
 
 
 def filter_by_max_chemistry_nodes(options: List[ReactionOption],

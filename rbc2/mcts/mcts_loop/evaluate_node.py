@@ -4,9 +4,9 @@ from rbc2.utils.add_logger import add_logger
 from rbc2.configs.logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.tree_node import MCTS_Node, create_node_with_pathway
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
-from rbc2.reaction_network_entities.pathway import Pathway
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
 
 node_evaluation_logger = add_logger('MCTS_Node_Evaluation', level=logging_config.mcts_node_evaluation)
 

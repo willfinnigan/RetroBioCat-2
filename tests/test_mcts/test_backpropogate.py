@@ -1,7 +1,7 @@
 from rbc2.mcts.mcts_loop.backpropogate import backpropogate
 from rbc2.mcts.tree_node import create_node_with_pathway, create_root
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def test_score_is_backpropogated_to_the_root():

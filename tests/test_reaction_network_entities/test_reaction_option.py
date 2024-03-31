@@ -1,8 +1,8 @@
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.template_application.apply_template.rule_applicator import RuleApplicator
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
-from rbc2.reaction_network_entities.reaction_option import create_evaluate_option_method, ReactionOption
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
+from rbc2.data_model.reaction_option import create_evaluate_option_method, ReactionOption
 
 
 def get_test_evaluation_func(network=None):

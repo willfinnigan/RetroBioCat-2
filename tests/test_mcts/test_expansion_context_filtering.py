@@ -1,8 +1,8 @@
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.mcts_loop.expansion.expansion_context_filtering import filter_by_max_chemistry_nodes, apply_beginning_and_end_chemistry_filter
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
-from rbc2.reaction_network_entities.reaction_option import ReactionOption
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
+from rbc2.data_model.reaction_option import ReactionOption
 
 
 def test_three_chemistry_steps_allows_anything():

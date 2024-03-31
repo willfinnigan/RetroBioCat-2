@@ -1,5 +1,5 @@
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def is_enzyme_reaction(reaction: Reaction) -> bool:

@@ -1,7 +1,7 @@
 import uuid
 from typing import List, Optional
 
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.reaction import Reaction
 
 # outcomes_dict will = {'Imine reduction': [['c1ccc(C2=NCCCC2)cc1'], ['C1=N[C@H](c2ccccc2)CCC1']]}
 

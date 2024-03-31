@@ -14,8 +14,8 @@ from rbc2.precedent_identification.data_retrieval.bkms.bkms_precedent_data impor
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.data_retrieval.enzymemap.enzymemap_precedent_data import EnzymeMap_Data
 from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
 
 
 class RetroRulesExpander(DefaultExpander):

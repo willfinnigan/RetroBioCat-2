@@ -1,5 +1,5 @@
 
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.reaction import Reaction
 from rbc2.template_application.create_reactions_from_output.create_reactions import create_reactions
 
 

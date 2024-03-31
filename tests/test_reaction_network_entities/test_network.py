@@ -1,5 +1,5 @@
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
 from tests.test_reaction_network_entities.test_reaction_option import get_test_evaluation_func, get_test_option
 
 

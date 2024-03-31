@@ -7,7 +7,7 @@ from rbc2.expansion.expanders.biosynthesis_expanders import RetroRulesExpander, 
 from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, AskcosPolicyExpander, \
     RingBreakerPolicyExpander
 from rbc2.expansion.expanders.retrobiocat_expander import RetroBioCatExpander
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 
 RETROBIOCAT = 'retrobiocat'
 AIZYNTHFINDER = 'aizynthfinder'

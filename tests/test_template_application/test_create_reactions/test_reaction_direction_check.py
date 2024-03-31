@@ -1,5 +1,5 @@
 from rbc2.template_application.create_reactions_from_output.check_reaction_direction import does_reaction_go_backwards
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 from rbc2.template_application.create_reactions_from_output.create_reactions import create_reactions
 
 

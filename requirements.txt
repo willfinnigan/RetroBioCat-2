@@ -1,13 +1,14 @@
 rdkit>=2021.03.5
+scikit-learn>=1.0.0
+tensorflow>=2.6.0,<=2.13.0
 pytest
 sqlalchemy
 six
 pandas
 openpyxl
 tables
-scikit-learn>=1.0.0
 PyYAML
-tensorflow>=2.6.0
 jupyter
 tqdm
 gdown
+mkdocs

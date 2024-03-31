@@ -16,8 +16,8 @@ from rbc2.mcts.mcts_loop.rollout import rollout
 from rbc2.mcts.mcts_loop.score_node import score_node
 from rbc2.mcts.mcts_loop.selection import Selection
 from rbc2.mcts.tree_node import create_root, MCTS_Node
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.pathway import Pathway
+from rbc2.data_model.network import Network
+from rbc2.data_model.pathway import Pathway
 
 class MCTS():
 

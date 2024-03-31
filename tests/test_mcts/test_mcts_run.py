@@ -12,7 +12,7 @@ from rbc2.mcts.mcts import MCTS
 from rbc2.mcts.tree_node import create_root
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 
 
 def test_first_rollout():

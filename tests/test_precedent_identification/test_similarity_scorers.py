@@ -4,7 +4,7 @@ from rbc2.precedent_identification.data_retrieval.bkms.bkms_precedent_data impor
 from rbc2.precedent_identification.data_retrieval.enzymemap.enzymemap_precedent_data import EnzymeMap_Data
 from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData
 from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
-from rbc2.reaction_network_entities.precedents import Precedent
+from rbc2.data_model.precedents import Precedent
 
 
 def test_enzymemap_similarity_scorer_returns_result_with_similarity_to_target_product():

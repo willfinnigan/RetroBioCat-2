@@ -3,8 +3,8 @@ from typing import List
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from rbc2.reaction_network_entities.network import Network
-    from rbc2.reaction_network_entities.reaction import Reaction
+    from rbc2.data_model.network import Network
+    from rbc2.data_model.reaction import Reaction
 
 
 def does_reaction_go_backwards(reaction: Reaction, network: Network) -> bool:

@@ -1,7 +1,7 @@
 import pytest
 
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def test_creation_of_one_step_pathway():

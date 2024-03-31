@@ -1,6 +1,6 @@
 from dataclasses import asdict
 
-from rbc2.reaction_network_entities.precedents import Precedent
+from rbc2.data_model.precedents import Precedent
 
 
 def test_save_and_load_precedent():

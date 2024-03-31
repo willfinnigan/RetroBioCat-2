@@ -5,8 +5,8 @@ from copy import copy
 from dataclasses import dataclass, field
 from typing import Optional
 
-from rbc2.reaction_network_entities.reaction_option import ReactionOption
-from rbc2.reaction_network_entities.pathway import Pathway
+from rbc2.data_model.reaction_option import ReactionOption
+from rbc2.data_model.pathway import Pathway
 
 
 @dataclass

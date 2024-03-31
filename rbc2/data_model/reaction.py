@@ -2,7 +2,7 @@ import uuid
 from dataclasses import dataclass, field, asdict
 from typing import List, Optional
 from rbc2.reaction_evaluation.complexity import get_complexity
-from rbc2.reaction_network_entities.precedents import Precedent
+from rbc2.data_model.precedents import Precedent
 
 
 @dataclass

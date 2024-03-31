@@ -1,7 +1,7 @@
 from rbc2.mcts.tree_node import create_root, MCTS_Node, create_node_from_option, \
     create_node_with_pathway
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 from tests.test_reaction_network_entities.test_reaction_option import get_test_option
 
 

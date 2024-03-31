@@ -1,7 +1,7 @@
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.pathway_tools.pathway_context_checking import is_previous_reaction_enzyme
 from rbc2.mcts.tree_node import MCTS_Node
-from rbc2.reaction_network_entities.pathway import Pathway
+from rbc2.data_model.pathway import Pathway
 
 
 def apply_enzyme_cascade_score_boost(child_node: MCTS_Node, pathway: Pathway, mcts_config: MCTS_Config):

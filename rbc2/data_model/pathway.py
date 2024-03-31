@@ -3,11 +3,9 @@ from dataclasses import asdict
 from typing import List, Optional
 
 from rbc2.pathway_tools.pa_route_conversion import get_pa_route
-from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
-    DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
     StartingMaterialEvaluatorInterface
-from rbc2.reaction_network_entities.reaction import Reaction, reaction_from_dict
+from rbc2.data_model.reaction import Reaction, reaction_from_dict
 from rbc2.utils.add_logger import add_logger
 
 pathway_logger = add_logger('Pathway')
@@ -61,22 +59,17 @@ class Pathway:
 
         return tree
 
-    def get_pa_route(self, starting_material_evaluator: StartingMaterialEvaluatorInterface):
+    def get_pa_route(self, starting_material_evaluator: StartingMaterialEvaluatorInterface) -> dict:
         def get_smi_produced_by(smi):
             return list(self.smi_produced_by[smi])
 
         return get_pa_route(self.target_smi, starting_material_evaluator, get_smi_produced_by)
 
-    def get_smi_producted_by(self, smi: str) -> Reaction:
-        reactions = self.smi_produced_by[smi]
-        if len(reactions) != 1:
-            raise Exception(f'smi {smi} produced by multiple reactions')
-        return list(reactions)[0]
 
-    def end_smis(self):
+    def end_smis(self) -> List[str]:
         return list(self.end_smi_depths.keys())
 
-    def save(self):
+    def save(self) -> List[dict]:
         """Returns a list of dicts containing the reactions in the pathway"""
         return [asdict(reaction) for reaction in self.reactions]
 
@@ -100,7 +93,6 @@ class Pathway:
             pathway_logger.warning(f'smi {smi} substrate of multiple reactions')
 
         return list(reactions)[0]
-
 
 
 def load_pathway(reaction_dict_list: List[dict]):

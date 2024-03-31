@@ -4,9 +4,9 @@ from typing import Optional, List, Callable
 from rbc2.expansion.default_expander_interface import Expander
 from rbc2.expansion.expander_repository import get_expanders
 from rbc2.reaction_evaluation.molecular_descriptors import get_mw
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
-from rbc2.reaction_network_entities.reaction_option import ReactionOption, sort_options_by_score
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
+from rbc2.data_model.reaction_option import ReactionOption, sort_options_by_score
 
 combination_method = Callable[[List[List[ReactionOption]]], List[ReactionOption]]
 

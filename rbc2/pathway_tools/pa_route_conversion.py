@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
     StartingMaterialEvaluatorInterface
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.reaction import Reaction
 from rbc2.utils.rdkit_utils import rdkit_smile
 
 """ Functions for converting pa_routes to and from other formats. """

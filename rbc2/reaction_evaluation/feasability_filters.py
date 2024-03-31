@@ -1,7 +1,7 @@
 from collections.abc import Callable
 
 from rbc2.reaction_evaluation.filter_models.aizynthfinder_filter_model import AIZynthFilterModel
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.reaction import Reaction
 
 
 """

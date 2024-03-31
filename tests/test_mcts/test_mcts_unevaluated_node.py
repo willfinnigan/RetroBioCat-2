@@ -1,7 +1,7 @@
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.mcts_loop.evaluate_node import resolve_unevaluated_mcts_node
 from rbc2.mcts.tree_node import create_root, MCTS_Node
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 from tests.test_reaction_network_entities.test_reaction_option import get_test_evaluation_func, get_test_option
 
 

@@ -10,9 +10,9 @@ from rbc2.precedent_identification.data_retrieval.retrobiocat.rank_precedents im
 from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
     StartingMaterialEvaluatorInterface
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction, sort_reactions_by_score
-from rbc2.reaction_network_entities.reaction_option import ReactionOption, sort_options_by_score
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction, sort_reactions_by_score
+from rbc2.data_model.reaction_option import ReactionOption, sort_options_by_score
 from rbc2.template_application.create_reactions_from_output.create_reactions import create_reactions
 from rbc2.template_application.create_reactions_from_output.process_reactions import reaction_sanity_check, \
     process_reactions

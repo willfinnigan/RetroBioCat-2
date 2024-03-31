@@ -3,8 +3,8 @@ from rbc2.mcts.mcts_loop.score_node import score_pathway, score_node, penalty_fo
 from rbc2.mcts.tree_node import create_node_with_pathway, create_root
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def test_calc_complexity_penalty_stays_within_bounds():

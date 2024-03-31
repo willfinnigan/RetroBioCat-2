@@ -3,8 +3,8 @@ from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_eval
     DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
     StartingMaterialEvaluatorInterface
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def leaf_molecule_availability(pathway: Pathway,

@@ -2,11 +2,11 @@ from typing import List
 
 from rbc2.configs.expansion_config import Expansion_Config
 
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.reaction import Reaction
 from rbc2.template_application.create_reactions_from_output.check_reaction_direction import \
     remove_backwards_reactions
 from rbc2.template_application.create_reactions_from_output.find_duplicates import remove_duplicates
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 
 
 

@@ -1,7 +1,7 @@
 from rbc2.pathway_tools.pathway_context_checking import is_previous_reaction_enzyme, \
     count_continuous_previous_chemistry_reactions
-from rbc2.reaction_network_entities.pathway import Pathway
-from rbc2.reaction_network_entities.reaction import Reaction
+from rbc2.data_model.pathway import Pathway
+from rbc2.data_model.reaction import Reaction
 
 
 def test_previous_reaction_is_enzyme():

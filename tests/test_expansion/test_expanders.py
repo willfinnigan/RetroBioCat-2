@@ -10,9 +10,9 @@ from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, 
     RingBreakerPolicyExpander
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
-from rbc2.reaction_network_entities.network import Network
-from rbc2.reaction_network_entities.reaction import Reaction
-from rbc2.reaction_network_entities.reaction_option import ReactionOption
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
+from rbc2.data_model.reaction_option import ReactionOption
 
 #expanders_to_test = [AIZynthfinderExpander, RingBreakerPolicyExpander, AskcosPolicyExpander, BKMSExpander, RetroRulesExpander, RetroBioCatExpander, EnzymeMapExpander]
 expanders_to_test = [RetroBioCatExpander,EnzymeMapExpander, AIZynthfinderExpander]
