@@ -12,7 +12,8 @@ and is instead designed to be used as soley a python package.  This allows for m
 flexibility in how the package is used.  
 
 Please see the documentation for more information.
-(Coming soon)
+
+[Documentation - work in progress](https://retrobiocat-2.readthedocs.io/en/latest/) 
 
 ## To do
 - [x] Get CI working
