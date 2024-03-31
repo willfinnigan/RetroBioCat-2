@@ -1,7 +1,7 @@
 site_name: RetroBioCat 2
 nav:
   - Home: index.md
-  - Single step retrosynthesis: single_step_retrosynthesis.md
+  - Expanders - single step retrosynthesis: single_step_retrosynthesis.md
   - The Data Model: data_model.md
   - Multi step retrosynthesis: multi_step_retrosynthesis.md
 theme: readthedocs

@@ -18,19 +18,6 @@ from rbc2.template_application.create_reactions_from_output.process_reactions im
     process_reactions
 
 
-@dataclass
-class RetroBioCatExpanderConfig():
-    enable_precedent_search = True
-    search_literature_precedent = True
-
-    include_experimental = False
-    include_two_step = True
-    include_requires_absence_of_water = False
-
-    score_similarity_before_option_creation = True
-    only_active_literature_precedent = True
-    similarity_cutoff = 0.55
-
 
 class RetroBioCatExpander(DefaultExpander):
 
@@ -46,7 +33,7 @@ class RetroBioCatExpander(DefaultExpander):
                  score_similarity_before_option_creation: bool = True,
                  search_literature_precedent: bool = True,
                  only_active_literature_precedent: bool = True,
-                 similarity_cutoff: bool = 0.55):
+                 similarity_cutoff: float = 0.55):
 
         super().__init__(network=network, config=config)
 

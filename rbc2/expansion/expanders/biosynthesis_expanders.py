@@ -128,9 +128,9 @@ class EnzymeMapExpander(DefaultExpander):
     cofactor_smis = None
 
     def __init__(self,
-                 network: Optional[Network] = None,
-                 config: Optional[Expansion_Config] = None,
-                 precedent_data: Optional[PrecedentData] = None,
+                 network: Network = None,
+                 config: Expansion_Config = None,
+                 precedent_data: PrecedentData = None,
                  cutoff_cumulative=0.995,
                  cutoff_number=50,
                  enable_precedent_search=True,

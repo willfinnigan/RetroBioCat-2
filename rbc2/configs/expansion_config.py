@@ -1,5 +1,4 @@
 
-
 class Expansion_Config():
 
     def __init__(self):
@@ -26,7 +25,6 @@ class Expansion_Config():
         # reaction filtering and blocking
         self.use_max_mw_for_enzymes = False
         self.max_mw_to_use_enzymes = 300
-
 
 
     def update_from_dict(self, attr_dict):
