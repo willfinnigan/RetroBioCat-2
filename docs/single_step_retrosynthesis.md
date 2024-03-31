@@ -97,11 +97,7 @@ reactions = expander.get_reactions('CCCC=O')
 
 # print the reaction smiles for the proposed reactions
 for rxn in reactions:
-    print(rxn.reaction_smiles())
-    # CCCCO>>CCCC=O
-    # CCCC(=O)O>>CCCC=O
-    # CC=CC=O>>CCCC=O 
-    # ect..
+    print(rxn.reaction_smiles())  # eg CCCCO>>CCCC=O
 
 # Print all the precedents associated with the proposed reactions
 for rxn in reactions:
