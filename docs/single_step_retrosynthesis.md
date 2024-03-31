@@ -38,7 +38,9 @@ This expander prioritises templates by scoring them using a combination of produ
 `Coley, C. W. et al. A robotic platform for flow synthesis of organic compounds informed by AI planning. Science 365, eaax1566 (2019).`
 
 ## Usage
-Expanders follow a standard interface, and can be imported and initialised as follows:
+Expanders follow a standard interface, and can be imported and initialised as follows:  
+
+(Please note, initialising an expander for the first time will automatically downloaded additional required files)  
 ```python
 from rbc2 import RetroBioCatExpander, EnzymeMapExpander, BKMSExpander, RetroRulesExpander, AizynthFinderExpander, RingBreakerExpander, AskCosExpander
 
