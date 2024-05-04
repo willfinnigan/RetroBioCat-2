@@ -1,12 +1,12 @@
+from rbc2.configs import Expansion_Config
+from rbc2.data_model.network import Network
+from rbc2.data_model.reaction import Reaction
+from rbc2.data_model.reaction_option import ReactionOption, sort_options_by_score, create_evaluate_option_method
 from rbc2.expansion.expander_interface import Expander
-from rbc2.reaction_network_entities.reaction_option import create_evaluate_option_method, sort_options_by_score
 from rbc2.template_application.apply_template.rule_applicator import RuleApplicator
 
 from typing import Optional, List
-from rbc2.reaction_network_entities.network import Network
-from rbc2.configs.expansion_config import Expansion_Config
-from rbc2.reaction_network_entities.reaction_option import ReactionOption
-from rbc2.reaction_network_entities.reaction import Reaction
+
 
 
 class DefaultExpander(Expander):

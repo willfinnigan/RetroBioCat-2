@@ -7,7 +7,7 @@ from rbc2.expansion.expanders.policy_models.askcos.askcos_action_getter import A
 from rbc2.expansion.expanders.policy_models.ring_breaker.ringbreaker_actions import \
     RingBreaker_ActionGetter
 from rbc2.expansion.default_expander import DefaultExpander
-from rbc2.reaction_network_entities.network import Network
+from rbc2.data_model.network import Network
 
 
 class AIZynthfinderExpander(DefaultExpander):
