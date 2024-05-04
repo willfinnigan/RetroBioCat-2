@@ -18,7 +18,7 @@ class Reaction():
     template_metadata: dict[str: dict] = field(default_factory=dict)
     precedents: List[Precedent] = field(default_factory=list)
     feasability_filter_scores: dict[str: float] = field(default_factory=dict)
-    _complexity_change: Optional[float] = None
+    complexity_change: Optional[float] = None
 
     def __post_init__(self):
         if self.unique_id == '':
@@ -31,10 +31,10 @@ class Reaction():
         return f'Reaction ({self.rxn_type}): {self.reaction_smiles()}'
 
     def get_complexity_change(self) -> float:
-        if self._complexity_change is None:  # eg if product=4 and substrates=3, complexity_change=1
-            self._complexity_change = round(
+        if self.complexity_change is None:  # eg if product=4 and substrates=3, complexity_change=1
+            self.complexity_change = round(
                 get_complexity(self.product) - max([get_complexity(smi) for smi in self.substrates]), 3)
-        return self._complexity_change
+        return self.complexity_change
 
     def get_similarity_score(self) -> float:
         if len(self.precedents) == 0:
