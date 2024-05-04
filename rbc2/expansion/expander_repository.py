@@ -1,7 +1,7 @@
 from typing import Optional, Sequence
 
 from rbc2.configs.expansion_config import Expansion_Config
-from rbc2.expansion.default_expander_interface import Expander
+from rbc2.expansion.expander_interface import Expander
 from rbc2.expansion.expanders.biosynthesis_expanders import RetroRulesExpander, BKMSExpander, \
     EnzymeMapExpander
 from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, AskcosPolicyExpander, \

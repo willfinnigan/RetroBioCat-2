@@ -14,15 +14,19 @@ flexibility in how the package is used.
 Installation
 ------------
 It is highly recommended to install this package in its own environment, for example a conda environment.
-Python >= 3.9 is required.
+
+Python >=3.9 and <=3.11 is required.
 
 ::
 
     pip install rbc2
 
 
-**A note on M1 Macs:**  There seems to be an issue installing tables on M1 macs, to do with location HDF5.
-Assuming you have installed the necessary files using homebrew, inside your environment run the following before installation:
+**A note on M1 Macs:**
+I've had an issue installing the tables package on my M1 mac,
+with an error to do with the location of HDF5.
+Assuming you have installed the necessary files using homebrew,
+inside your environment run the following before installation:
 
 ::
 
@@ -32,6 +36,11 @@ Assuming you have installed the necessary files using homebrew, inside your envi
 
 Testing
 -------
+
+::
+
+    pytest tests
+
 
 
 Usage

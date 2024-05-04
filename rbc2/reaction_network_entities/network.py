@@ -14,7 +14,7 @@ from rbc2.reaction_network_entities.reaction import reactions_to_dicts, reaction
 if TYPE_CHECKING:
     from rbc2.reaction_network_entities.reaction import Reaction
     from rbc2.reaction_network_entities.reaction_option import ReactionOption
-    from rbc2.expansion.default_expander_interface import Expander
+    from rbc2.expansion.expander_interface import Expander
 
 ReactionID = str
 OptionID = str

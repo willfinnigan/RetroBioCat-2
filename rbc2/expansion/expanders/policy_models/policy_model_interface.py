@@ -5,7 +5,7 @@ smarts_dict = dict[str: List[str]]
 metadata_dict = dict[str: dict]
 
 
-class ActionGetter(ABC):
+class PolicyModel(ABC):
 
     @abstractmethod
     def get_rxns(self, smi: str) -> Tuple[smarts_dict, metadata_dict]:

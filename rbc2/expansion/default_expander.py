@@ -1,46 +1,12 @@
+from rbc2.expansion.expander_interface import Expander
 from rbc2.reaction_network_entities.reaction_option import create_evaluate_option_method, sort_options_by_score
 from rbc2.template_application.apply_template.rule_applicator import RuleApplicator
 
-from abc import ABC, abstractmethod
 from typing import Optional, List
 from rbc2.reaction_network_entities.network import Network
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.reaction_network_entities.reaction_option import ReactionOption
 from rbc2.reaction_network_entities.reaction import Reaction
-
-
-class Expander(ABC):
-    """The expander interface, which defines the methods that an expander must implement"""
-
-    @abstractmethod
-    def __init__(self,
-                 network: Optional[Network] = None,
-                 config: Optional[Expansion_Config] = None):
-        self.network = network
-        self.rxn_type = ''
-        self.rxn_domain = ''
-        self.config = config
-
-    @abstractmethod
-    def get_options(self, smi: str) -> List[ReactionOption]:
-        pass
-
-    @abstractmethod
-    def create_option(self, smi: str, name: str, smarts: List[str],
-                      template_metadata: dict, score: float) -> ReactionOption:
-        pass
-
-    @abstractmethod
-    def get_reactions(self, smi: str) -> List[Reaction]:
-        pass
-
-    @abstractmethod
-    def number_of_rule_applications(self) -> int:
-        pass
-
-    @abstractmethod
-    def number_of_calls(self) -> int:
-        pass
 
 
 class DefaultExpander(Expander):
@@ -66,7 +32,7 @@ class DefaultExpander(Expander):
         self.calls = 0
 
         # these should change
-        self.action_getter = None
+        self.policy_model = None
         self.rxn_type = ''
         self.rxn_domain = ''
         self.score_key = ''
@@ -131,7 +97,7 @@ class DefaultExpander(Expander):
 
     def _create_new_options(self, smi: str):
         self.calls += 1
-        smarts_dict, metadata_dict = self.action_getter.get_rxns(smi)
+        smarts_dict, metadata_dict = self.policy_model.get_rxns(smi)
         options = []
         for i, name in enumerate(smarts_dict):
             score = metadata_dict[name][self.score_key]

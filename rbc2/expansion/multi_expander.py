@@ -1,7 +1,7 @@
 import itertools
 from typing import Optional, List, Callable
 
-from rbc2.expansion.default_expander_interface import Expander
+from rbc2.expansion.expander_interface import Expander
 from rbc2.expansion.expander_repository import get_expanders
 from rbc2.reaction_evaluation.molecular_descriptors import get_mw
 from rbc2.reaction_network_entities.network import Network

@@ -5,11 +5,11 @@ from rdkit import Chem
 
 from rbc2.configs.data_path import path_to_data_folder
 from rbc2.configs.expansion_config import Expansion_Config
-from rbc2.expansion.expanders.action_getters.bkms.bkms_action_getter import BKMS_Action_Getter
-from rbc2.expansion.expanders.action_getters.enzymemap.enzymemap_action_getter import \
+from rbc2.expansion.expanders.policy_models.bkms.bkms_action_getter import BKMS_Action_Getter
+from rbc2.expansion.expanders.policy_models.enzymemap.enzymemap_action_getter import \
     EnzymeMap_Action_Getter
-from rbc2.expansion.expanders.action_getters.retrorules.retrorules_getter import RetroRules_Getter
-from rbc2.expansion.default_expander_interface import DefaultExpander
+from rbc2.expansion.expanders.policy_models.retrorules.retrorules_getter import RetroRules_Getter
+from rbc2.expansion.default_expander import DefaultExpander
 from rbc2.precedent_identification.data_retrieval.bkms.bkms_precedent_data import BKMS_Data
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.data_retrieval.enzymemap.enzymemap_precedent_data import EnzymeMap_Data
@@ -35,7 +35,7 @@ class RetroRulesExpander(DefaultExpander):
 
         super().__init__(network=network, config=config)
 
-        self.action_getter = RetroRules_Getter(diameter=diameter,
+        self.policy_model = RetroRules_Getter(diameter=diameter,
                                                similarity_threshold=similarity_threshold,
                                                score_threshold=score_threshold,
                                                combined_score_threshold=combined_score_threshold,
@@ -96,7 +96,7 @@ class BKMSExpander(DefaultExpander):
         super().__init__(network=network, config=config)
         self.similarity_cutoff = similarity_cutoff
         self.enable_precedent_search = enable_precedent_search
-        self.action_getter = BKMS_Action_Getter(cutoff_number=cutoff_number,
+        self.policy_model = BKMS_Action_Getter(cutoff_number=cutoff_number,
                                                 cutoff_cumulative=cutoff_cumulative,
                                                 allow_multi_product_templates=allow_multi_product_templates)
         self.rxn_type = 'bkms'
@@ -139,7 +139,7 @@ class EnzymeMapExpander(DefaultExpander):
         super().__init__(network=network, config=config)
         self.similarity_cutoff = similarity_cutoff
         self.enable_precedent_search = enable_precedent_search
-        self.action_getter = EnzymeMap_Action_Getter(cutoff_cumulative=cutoff_cumulative,
+        self.policy_model = EnzymeMap_Action_Getter(cutoff_cumulative=cutoff_cumulative,
                                                      cutoff_number=cutoff_number)
         self.rxn_type = 'enzymemap'
         self.rxn_domain = 'biosynthesis'

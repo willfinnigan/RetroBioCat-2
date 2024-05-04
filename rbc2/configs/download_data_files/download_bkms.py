@@ -9,6 +9,12 @@ def does_bkms_exist() -> bool:
     if not os.path.exists(f"{path_to_data_folder}/bkms/policy_model/variables/variables.data-00000-of-00001"):
         return False
 
+    if not os.path.exists(f"{path_to_data_folder}/bkms/bkms_metadata.hdf"):
+        return False
+
+    if not os.path.exists(f"{path_to_data_folder}/bkms/bkms_templates_only.hdf"):
+        return False
+
     return True
 
 def download_bkms_model():

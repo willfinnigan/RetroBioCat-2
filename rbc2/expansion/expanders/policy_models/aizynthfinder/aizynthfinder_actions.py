@@ -9,7 +9,6 @@ from rbc2.configs.download_data_files.download_aizynthfinder import does_aizynth
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.data_path import path_to_data_folder
 
-from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.utils import load_keras_models, fingerprints
 
 data_folder = f'{path_to_data_folder}/aizynthfinder'
