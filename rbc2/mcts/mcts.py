@@ -9,7 +9,7 @@ from rbc2.utils.add_logger import add_logger
 from rbc2.configs.logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.expansion.expander_repository import get_expanders
-from rbc2.expansion.default_expander_interface import Expander
+from rbc2.expansion.expander_interface import Expander
 from rbc2.mcts.mcts_loop.backpropogate import backpropogate
 from rbc2.mcts.mcts_loop.expansion.expand import Expansion
 from rbc2.mcts.mcts_loop.rollout import rollout

@@ -9,12 +9,12 @@ from rbc2.pathway_tools.pa_route_conversion import get_pa_route
 
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
     StartingMaterialEvaluatorInterface
-from rbc2.data_model.reaction import reactions_to_dicts, reaction_from_dict
+from rbc2.reaction_network_entities.reaction import reactions_to_dicts, reaction_from_dict
 
 if TYPE_CHECKING:
-    from rbc2.data_model.reaction import Reaction
-    from rbc2.data_model.reaction_option import ReactionOption
-    from rbc2.expansion.default_expander_interface import Expander
+    from rbc2.reaction_network_entities.reaction import Reaction
+    from rbc2.reaction_network_entities.reaction_option import ReactionOption
+    from rbc2.expansion.expander_interface import Expander
 
 ReactionID = str
 OptionID = str

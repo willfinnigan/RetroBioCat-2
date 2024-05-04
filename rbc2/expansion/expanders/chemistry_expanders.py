@@ -1,13 +1,13 @@
 from typing import Optional
 
 from rbc2.configs.expansion_config import Expansion_Config
-from rbc2.expansion.expanders.action_getters.aizynthfinder.aizynthfinder_actions import \
+from rbc2.expansion.expanders.policy_models.aizynthfinder.aizynthfinder_actions import \
     AizynthfinderActionGetter
-from rbc2.expansion.expanders.action_getters.askcos.askcos_action_getter import Askcos_Action_Getter
-from rbc2.expansion.expanders.action_getters.ring_breaker.ringbreaker_actions import \
+from rbc2.expansion.expanders.policy_models.askcos.askcos_action_getter import Askcos_Action_Getter
+from rbc2.expansion.expanders.policy_models.ring_breaker.ringbreaker_actions import \
     RingBreaker_ActionGetter
-from rbc2.expansion.default_expander_interface import DefaultExpander
-from rbc2.data_model.network import Network
+from rbc2.expansion.default_expander import DefaultExpander
+from rbc2.reaction_network_entities.network import Network
 
 
 class AIZynthfinderExpander(DefaultExpander):
@@ -19,7 +19,7 @@ class AIZynthfinderExpander(DefaultExpander):
                  cutoff_cumulative=0.995,
                  cutoff_number=50):
         super().__init__(network=network, config=config)
-        self.action_getter = AizynthfinderActionGetter(template_column=template_column,
+        self.policy_model = AizynthfinderActionGetter(template_column=template_column,
                                                        cutoff_cumulative=cutoff_cumulative,
                                                        cutoff_number=cutoff_number)
         self.rxn_type = 'aizynthfinder'
@@ -36,7 +36,7 @@ class RingBreakerPolicyExpander(DefaultExpander):
                  cutoff_number=10):
         super().__init__(network=network, config=config)
 
-        self.action_getter = RingBreaker_ActionGetter(cutoff_number=cutoff_number,
+        self.policy_model = RingBreaker_ActionGetter(cutoff_number=cutoff_number,
                                                       cutoff_cumulative=cutoff_cumulative,
                                                       log_level='WARNING')
         self.rxn_type = 'ringbreaker'
@@ -54,7 +54,7 @@ class AskcosPolicyExpander(DefaultExpander):
                  allow_multi_product_templates=False):
 
         super().__init__(network=network, config=config)
-        self.action_getter = Askcos_Action_Getter(cutoff_number=cutoff_number,
+        self.policy_model = Askcos_Action_Getter(cutoff_number=cutoff_number,
                                                   cutoff_cumulative=cutoff_cumulative,
                                                   allow_multi_product_templates=allow_multi_product_templates)
         self.rxn_type = 'askcos'

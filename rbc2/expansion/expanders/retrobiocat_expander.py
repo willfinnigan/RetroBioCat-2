@@ -2,7 +2,7 @@ from dataclasses import asdict, dataclass
 from typing import List, Optional
 
 from rbc2.configs.expansion_config import Expansion_Config
-from rbc2.expansion.default_expander_interface import DefaultExpander
+from rbc2.expansion.default_expander import DefaultExpander
 from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.yaml_rxn_class import YAML_RetroBioCatReactions
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData

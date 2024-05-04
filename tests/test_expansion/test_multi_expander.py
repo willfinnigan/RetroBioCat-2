@@ -1,4 +1,4 @@
-from rbc2.expansion.default_expander_interface import Expander
+from rbc2.expansion.expander_interface import Expander
 from rbc2.expansion.multi_expander import MultiExpander
 from rbc2.expansion.expander_repository import get_expanders
 from rbc2.data_model.reaction_option import ReactionOption

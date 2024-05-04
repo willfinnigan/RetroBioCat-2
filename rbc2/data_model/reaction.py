@@ -27,6 +27,9 @@ class Reaction():
     def __hash__(self):
         return hash(self.unique_id)
 
+    def __str__(self):
+        return f'Reaction ({self.rxn_type}): {self.reaction_smiles()}'
+
     def get_complexity_change(self) -> float:
         if self.complexity_change is None:  # eg if product=4 and substrates=3, complexity_change=1
             self.complexity_change = round(

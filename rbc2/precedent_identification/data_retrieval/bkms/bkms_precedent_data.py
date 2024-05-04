@@ -22,6 +22,7 @@ class BKMS_Data(PrecedentData):
         if does_bkms_exist() == False:
             download_bkms_model()
 
+
     @classmethod
     def load_df(cls):
         if cls.df is None:
