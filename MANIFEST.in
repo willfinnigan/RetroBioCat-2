@@ -1,2 +1,2 @@
-recursive-include rbc2/*
+recursive-include rbc2 *
 
