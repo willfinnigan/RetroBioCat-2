@@ -1,4 +1,4 @@
-from rbc2.reaction_evaluation.feasability_filters import AIZYNTHFINDER_FILTER
+from rbc2.reaction_evaluation.feasability import AIZYNTHFINDER_FILTER
 
 
 class MCTS_Config():

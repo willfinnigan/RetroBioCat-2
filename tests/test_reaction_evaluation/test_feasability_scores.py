@@ -1,6 +1,6 @@
 import pytest
 
-from rbc2.reaction_evaluation.feasability_filters import default_filter_repo, AIZYNTHFINDER_FILTER
+from rbc2.reaction_evaluation.feasability import default_filter_repo, AIZYNTHFINDER_FILTER
 from rbc2.data_model.reaction import Reaction
 
 

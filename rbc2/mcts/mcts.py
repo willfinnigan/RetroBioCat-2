@@ -2,7 +2,7 @@ import time
 from typing import Optional, List
 
 from rbc2.expansion.multi_expander import MultiExpander
-from rbc2.reaction_evaluation.feasability_filters import Filter, default_filter_repo
+from rbc2.reaction_evaluation.feasability import Filter, default_filter_repo
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
 from rbc2.utils.add_logger import add_logger

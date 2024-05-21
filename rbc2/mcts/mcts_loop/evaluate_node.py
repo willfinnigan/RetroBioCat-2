@@ -1,4 +1,4 @@
-from rbc2.reaction_evaluation.feasability_filters import Filter
+from rbc2.reaction_evaluation.feasability import Filter
 from rbc2.template_application.create_reactions_from_output.find_duplicates import remove_duplicates
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.logging_config import logging_config

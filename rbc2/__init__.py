@@ -8,3 +8,5 @@ from rbc2.data_model.pathway import Pathway
 from rbc2.data_model.reaction import Reaction
 from rbc2.data_model.reaction_option import ReactionOption
 
+from rbc2.reaction_evaluation import feasability
+

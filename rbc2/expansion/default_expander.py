@@ -3,6 +3,7 @@ from rbc2.data_model.network import Network
 from rbc2.data_model.reaction import Reaction
 from rbc2.data_model.reaction_option import ReactionOption, sort_options_by_score, create_evaluate_option_method
 from rbc2.expansion.expander_interface import Expander
+from rbc2.expansion.expanders.policy_models.policy_model_interface import PolicyModel
 from rbc2.template_application.apply_template.rule_applicator import RuleApplicator
 
 from typing import Optional, List
@@ -32,18 +33,20 @@ class DefaultExpander(Expander):
         self.calls = 0
 
         # these should change
-        self.policy_model = None
+        self.policy_model: Optional[PolicyModel] = None  # update this with a policy model for selecting reactions
         self.rxn_type = ''
         self.rxn_domain = ''
         self.score_key = ''
 
-    def precedent_evaluation_function(self, reaction: Reaction) -> bool:
-        """ Overwrite this function to evaluate precedents for a reaction"""
-        return True
-
     def reaction_processing_function(self, reactions: List[Reaction]) -> List[Reaction]:
         """ Overwrite this function to apply processing once reactions have been constructed.  Eg to remove cofactors"""
         return reactions
+
+    def precedent_evaluation_function(self, reaction: Reaction):
+        """ Overwrite this function to evaluate precedents for a reaction.
+        Should update the reaction.precedents with new precedents"""
+        return True
+
 
     def get_options(self, smi: str) -> List[ReactionOption]:
         if self.network is None:

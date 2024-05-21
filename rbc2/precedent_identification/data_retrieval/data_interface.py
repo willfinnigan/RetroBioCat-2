@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
-
 import pandas as pd
 
 
