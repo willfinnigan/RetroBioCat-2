@@ -111,7 +111,8 @@ As well as the specific keyword arguments available for each expander,
 all expanders have a `config` argument which can be used to pass in a configuration object for expanders in general.  
 
 ```python
-from rbc2.config import Expansion_Config
+from rbc2.configs import Expansion_Config
+from rbc2 import RetroBioCatExpander
 
 config = Expansion_Config()
 config.max_reactions = 10   # for example, change the maximum number of reactions returned by any expander
