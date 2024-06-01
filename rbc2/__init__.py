@@ -1,6 +1,6 @@
 from rbc2.expansion.expanders.retrobiocat_expander import RetroBioCatExpander
 from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, RingBreakerPolicyExpander, AskcosPolicyExpander
-from rbc2.expansion.expanders.biosynthesis_expanders import BKMSExpander, EnzymeMapExpander
+from rbc2.expansion.expanders.biosynthesis_expanders import BKMSExpander, EnzymeMapExpander, RetroRulesExpander
 
 # data model
 from rbc2.data_model.network import Network

@@ -6,8 +6,7 @@ import pytest
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.expansion.expanders.biosynthesis_expanders import BKMSExpander, RetroRulesExpander, EnzymeMapExpander
 from rbc2.expansion.expanders.retrobiocat_expander import RetroBioCatExpander
-from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, AskcosPolicyExpander, \
-    RingBreakerPolicyExpander
+from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, AskcosPolicyExpander, RingBreakerPolicyExpander
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
     DefaultSQLStartingMaterialEvaluator
 from rbc2.data_model.network import Network
@@ -15,7 +14,7 @@ from rbc2.data_model.reaction import Reaction
 from rbc2.data_model.reaction_option import ReactionOption
 
 #expanders_to_test = [AIZynthfinderExpander, RingBreakerPolicyExpander, AskcosPolicyExpander, BKMSExpander, RetroRulesExpander, RetroBioCatExpander, EnzymeMapExpander]
-expanders_to_test = [RetroBioCatExpander,EnzymeMapExpander, AIZynthfinderExpander]
+expanders_to_test = [RetroBioCatExpander, EnzymeMapExpander, AIZynthfinderExpander]
 config = Expansion_Config()
 config.rr_diameter = 8
 config.rr_combined_score_threshold = 0.3

@@ -44,7 +44,7 @@ Default keyword arguments are shown. These can be excluded to use the default va
 
 (Please note, initialising an expander for the first time will automatically downloaded additional required files)  
 ```python
-from rbc2 import RetroBioCatExpander, EnzymeMapExpander, BKMSExpander, RetroRulesExpander, AizynthFinderExpander, RingBreakerExpander, AskCosExpander
+from rbc2 import RetroBioCatExpander, EnzymeMapExpander, BKMSExpander, RetroRulesExpander, AIZynthfinderExpander, RingBreakerPolicyExpander, AskcosPolicyExpander
 
 retrobiocat = RetroBioCatExpander(include_experimental = False,
                                   include_two_step = True,
@@ -74,13 +74,13 @@ retrorules = RetroRulesExpander(rank_by='combined_score',  # options are: simila
                                 max_reactions=100) # max number of similar substrates to consider reactions for)
 
 
-aizynthfinder = AizynthFinderExpander(cutoff_cumulative=0.995,
+aizynthfinder = AIZynthfinderExpander(cutoff_cumulative=0.995,
                                       cutoff_number=50)
 
-ringbreaker = RingBreakerExpander(cutoff_cumulative=0.995,
+ringbreaker = RingBreakerPolicyExpander(cutoff_cumulative=0.995,
                                   cutoff_number=10)
 
-askcos = AskCosExpander(cutoff_cumulative=0.995,
+askcos = AskcosPolicyExpander(cutoff_cumulative=0.995,
                         cutoff_number=50)
 ```
 
