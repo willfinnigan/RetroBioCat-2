@@ -16,7 +16,7 @@ It is highly recommended to install this package in its own environment, for exa
 Python >= 3.9 is required.
 
 ```bash
-pip install rbc2
+pip install git+https://github.com/willfinnigan/RetroBioCat-2.git
 ```
 
 **A note on ARM Macs:**  There seems to be an issue installing tables on ARM macs, to do with location HDF5.
