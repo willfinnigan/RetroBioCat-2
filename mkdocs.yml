@@ -3,6 +3,7 @@ nav:
   - Home: index.md
   - Expanders - single step retrosynthesis: single_step_retrosynthesis.md
   - The Data Model: data_model.md
+  - Starting Material Evaluator: starting_material_evaluator.md
   - Multi step retrosynthesis: multi_step_retrosynthesis.md
 theme: readthedocs
 
