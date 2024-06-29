@@ -7,7 +7,7 @@ from rbc2.data_model.reaction_option import ReactionOption
 def test_mcts_expander_initialises_with_expanders():
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     multi_expander = MultiExpander(expanders)
-    first_expander = list(multi_expander.expanders.values())[0]
+    first_expander = list(multi_expander.expanders)[0]
     assert isinstance(first_expander, Expander)
 
 def test_multi_expander_can_get_options_for_a_pathway_ordered_by_score():
