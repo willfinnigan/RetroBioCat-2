@@ -7,8 +7,8 @@ from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.expansion.expanders.biosynthesis_expanders import BKMSExpander, RetroRulesExpander, EnzymeMapExpander
 from rbc2.expansion.expanders.retrobiocat_expander import RetroBioCatExpander
 from rbc2.expansion.expanders.chemistry_expanders import AIZynthfinderExpander, AskcosPolicyExpander, RingBreakerPolicyExpander
-from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
-    DefaultSQLStartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.commercial_starting_material_evaluator import \
+    CommercialSME
 from rbc2.data_model.network import Network
 from rbc2.data_model.reaction import Reaction
 from rbc2.data_model.reaction_option import ReactionOption
@@ -111,7 +111,7 @@ def test_can_get_dicts_of_reactions(Expander):
     assert len(reaction_dicts) > 0
 
 def test_retrobiocat_expander_can_score_based_on_molecule_availability():
-    starting_material_evaluator = DefaultSQLStartingMaterialEvaluator()
+    starting_material_evaluator = CommercialSME()
     starting_material_evaluator.custom_smiles = ['C#CC(O)(CO)CO']
     expander = RetroBioCatExpander(starting_material_evaluator=starting_material_evaluator)
     options = expander.get_options('C#C[C@](O)(C=O)CO')

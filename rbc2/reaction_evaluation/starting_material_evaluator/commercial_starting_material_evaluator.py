@@ -1,17 +1,16 @@
 from functools import lru_cache
-from typing import Optional
+from typing import Optional, List
 
 from rbc2.configs.data_path import path_to_data_folder
 from rbc2.configs.download_data_files.download_source_mols import does_source_mols_db_exist, download_source_mols_db
 from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.connect_sqlitedb import SQLite_Database
 from rbc2.reaction_evaluation.starting_material_evaluator.sqlite_source_mol.query_sqlitedb import DB_Query_SQLite
-from rbc2.configs.source_mol_config import SourceMol_Config
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
-    StartingMaterialEvaluatorInterface
+    StartingMaterialEvaluator
 
 data_folder = f'{path_to_data_folder}/buyability'
 
-class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
+class CommercialSME(StartingMaterialEvaluator):
     vendor_urls = {'mcule': 'https://mcule.com/[[ID]]',
                    'sigma': 'https://www.sigmaaldrich.com/GB/en/search/[[ID]]?focus=products&page=1&perpage=30&sort=relevance&term=[[ID]]&type=product',
                    'lifechem': 'https://shop.lifechemicals.com/compound/[[ID]]',
@@ -22,29 +21,33 @@ class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
                    'molport': 'https://www.molport.com/shop/molecule-link/[[ID]]',
                    'ecmdb': 'https://ecmdb.ca/compounds/[[ID]]'}
 
-    available_modes = ['building_blocks', 'metabolites']
+    def __init__(self,
+                 custom_smiles: List = None,
+                 blocked_smiles: List = None,
+                 target_always_not_buyable: bool = True,
+                 max_price_per_gram: int = 250,
+                 block_if_price_over_max: bool = True,
+                 source_mols_can_be_chiral: bool = True):
 
-    def __init__(self, config: Optional[SourceMol_Config] = None, custom_smiles=None, blocked_smiles=None):
+        self.target_always_not_buyable = target_always_not_buyable
+        self.source_mol_commercial_vendors = ['sigma', 'apollo', 'flurochem', 'alfa', 'lifechem', 'molport']
+        self.max_price_per_gram = max_price_per_gram
+        self.block_if_price_over_max = block_if_price_over_max
+        self.source_mols_can_be_chiral = source_mols_can_be_chiral
+
+        self.custom_smiles = custom_smiles or []
+        self.blocked_smiles = blocked_smiles or []
+
+        assert isinstance(self.custom_smiles, list), 'custom_smiles must be a list'
+        assert isinstance(self.blocked_smiles, list), 'blocked_smiles must be a list'
 
         if does_source_mols_db_exist() == False:
             download_source_mols_db()
-
         db_path = data_folder + '/source_mols.db'
         self.database = SQLite_Database(db_path)
         self.query = DB_Query_SQLite(self.database)
         self.cache_column_names = {}
         self.cache_vendor_names = {}
-        self.config = config
-        if self.config is None:
-            self.config = SourceMol_Config()
-
-        self.custom_smiles = custom_smiles
-        if self.custom_smiles is None:
-            self.custom_smiles = []
-
-        self.blocked_smiles = blocked_smiles
-        if self.blocked_smiles is None:
-            self.blocked_smiles = []
 
     @lru_cache(maxsize=10000)
     def eval(self, smi):
@@ -53,9 +56,10 @@ class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
         if smi in self.custom_smiles:
             return True, {}
 
-        mode, vendors = self.config.get_mode_and_vendors()
+        vendors = self.source_mol_commercial_vendors
+        mode = 'building_blocks'
 
-        if self.is_mol_chiral(smi) and self.config.source_mols_can_be_chiral is False:
+        if self.is_mol_chiral(smi) and self.source_mols_can_be_chiral is False:
             return False, {}
 
         result = self.query.smiles_lookup(smi, mode, vendors=vendors)
@@ -120,7 +124,7 @@ class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
                 if 'ppg' in info[vendor]:
                     if info[vendor]['ppg'] is None:
                         price_too_high.append(False)
-                    elif float(info[vendor]['ppg']) > self.config.max_price_per_gram:
+                    elif float(info[vendor]['ppg']) > self.max_price_per_gram:
                         price_too_high.append(True)
                     else:
                         price_too_high.append(False)
@@ -132,8 +136,8 @@ class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
         if len(price_too_high) == sum(price_too_high):
             return True
 
-        # if config.block_if_price_over_max is True, then return True if any of the prices are too high
-        if self.config.block_if_price_over_max is True:
+        # if block_if_price_over_max is True, then return True if any of the prices are too high
+        if self.block_if_price_over_max is True:
             if True in price_too_high:
                 return True
 
@@ -141,9 +145,8 @@ class DefaultSQLStartingMaterialEvaluator(StartingMaterialEvaluatorInterface):
         return False
 
 
-
 if __name__ == '__main__':
-    sme = DefaultSQLStartingMaterialEvaluator()
+    sme = CommercialSME()
     available, info = sme.eval('CCCC=O')
     print(info)
     print(available)

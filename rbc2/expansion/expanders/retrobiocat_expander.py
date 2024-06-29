@@ -9,7 +9,7 @@ from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query i
 from rbc2.precedent_identification.data_retrieval.retrobiocat.rank_precedents import get_best_enzymes
 from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
-    StartingMaterialEvaluatorInterface
+    StartingMaterialEvaluator
 from rbc2.data_model.network import Network
 from rbc2.data_model.reaction import Reaction, sort_reactions_by_score
 from rbc2.data_model.reaction_option import ReactionOption, sort_options_by_score
@@ -24,7 +24,7 @@ class RetroBioCatExpander(DefaultExpander):
     def __init__(self,
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None,
-                 starting_material_evaluator: Optional[StartingMaterialEvaluatorInterface] = None,
+                 starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
                  rbc_rxn_class: Optional = None,
                  precedent_data: Optional[PrecedentData] = None,
                  include_experimental: bool = False,
@@ -141,7 +141,7 @@ class RetroBioCatExpander(DefaultExpander):
             score = 0
 
         # if a biocatalytic step results in all substrates being available, we want to prioritise this
-        if isinstance(self.starting_material_evaluator, StartingMaterialEvaluatorInterface):
+        if isinstance(self.starting_material_evaluator, StartingMaterialEvaluator):
             if self._are_substrates_all_available(reaction) is True:
                 score = 1.01
 

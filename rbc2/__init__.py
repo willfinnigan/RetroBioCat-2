@@ -9,7 +9,9 @@ from rbc2.data_model.reaction import Reaction
 from rbc2.data_model.reaction_option import ReactionOption
 
 from rbc2.reaction_evaluation import feasability
-from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import DefaultSQLStartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.commercial_starting_material_evaluator import CommercialSME
+from rbc2.reaction_evaluation.starting_material_evaluator.ecoli_metabolism_starting_material_evaluator import EcoliSME
+
 
 
 

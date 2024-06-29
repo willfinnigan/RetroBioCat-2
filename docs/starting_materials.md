@@ -1,18 +1,30 @@
 # Starting Material Evaluator
 
 
-## Default Starting Material Evaluator
+## Commercial Starting Material Evaluator (default)
 RetroBioCat 2 has a default starting material evaluator, which utilises a database of commercially available molecules.
 
 Initialising this evaluator for the first time will download the necessary sqlite database file.
 
 ```python
-from rbc2 import DefaultSQLStartingMaterialEvaluator
+from rbc2 import CommercialSME
 
-sme = DefaultSQLStartingMaterialEvaluator()
+sme = CommercialSME()
 available, info = sme.eval('CC(=O)Oc1ccccc1C(=O)O')
 print(available, info)
 ```
+
+## E coli metabolism Starting Material Evaluator
+RetroBioCat 2 also has a starting material evaluator for E coli metabolism.
+
+```python
+from rbc2 import EcoliSME
+
+sme = EcoliSME()
+available, info = sme.eval('CC(=O)Oc1ccccc1C(=O)O')
+print(available, info)
+```
+
 
 
 ## Starting Material Evaluator Interface
@@ -24,8 +36,8 @@ A custom evaluator can therefore be created by subclassing this interface, and u
 ```
 class StartingMaterialEvaluatorInterface(ABC):
 
-    def __init__(self, config: SourceMol_Config):
-        self.config = config
+    def __init__(self):
+        self.target_always_not_buyable = True
 
     @abstractmethod
     def eval(self, smi: str) -> Tuple[bool, dict]:
@@ -39,5 +51,4 @@ class StartingMaterialEvaluatorInterface(ABC):
     def is_mol_chiral(self, smi: str) -> bool:
         """Return True if the molecule is chiral"""
         pass
-
 ```

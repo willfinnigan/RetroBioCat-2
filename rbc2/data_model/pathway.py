@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from rbc2.pathway_tools.pa_route_conversion import get_pa_route
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
-    StartingMaterialEvaluatorInterface
+    StartingMaterialEvaluator
 from rbc2.data_model.reaction import Reaction, reaction_from_dict
 from rbc2.utils.add_logger import add_logger
 
@@ -59,7 +59,7 @@ class Pathway:
 
         return tree
 
-    def get_pa_route(self, starting_material_evaluator: StartingMaterialEvaluatorInterface) -> dict:
+    def get_pa_route(self, starting_material_evaluator: StartingMaterialEvaluator) -> dict:
         def get_smi_produced_by(smi):
             return list(self.smi_produced_by[smi])
 

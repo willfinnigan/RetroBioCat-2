@@ -1,20 +1,18 @@
 from typing import List
-from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
-    DefaultSQLStartingMaterialEvaluator
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
-    StartingMaterialEvaluatorInterface
+    StartingMaterialEvaluator
 from rbc2.data_model.pathway import Pathway
 from rbc2.data_model.reaction import Reaction
 
 
 def leaf_molecule_availability(pathway: Pathway,
-                               starting_material_evaluator: StartingMaterialEvaluatorInterface):
+                               starting_material_evaluator: StartingMaterialEvaluator):
 
     available, not_available = [], []
     target_smi = pathway.target_smi
     list_end_smis = list(pathway.end_smi_depths.keys())
 
-    if target_smi in list_end_smis and starting_material_evaluator.config.target_always_not_buyable is True:
+    if target_smi in list_end_smis and starting_material_evaluator.target_always_not_buyable is True:
         list_end_smis.remove(target_smi)
         not_available.append(target_smi)
 
@@ -33,7 +31,7 @@ NOT_IN_STOCK_COST = 10
 REACTION_YIELD = 0.8
 REACTION_COST = 1
 
-def cost_pathway(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluatorInterface) -> float:
+def cost_pathway(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluator) -> float:
     node_costs = _get_end_node_costs(pathway, starting_material_evaluator)   # firstly cost the end nodes by in stock or not
     nodes = pathway.end_smis()  # initially nodes is just the leaves
     while pathway.target_smi not in nodes:
@@ -84,7 +82,7 @@ def _are_all_smis_costed(list_smis: List[str], node_costs: dict[str: float]) -> 
     return True
 
 
-def _get_end_node_costs(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluatorInterface) -> dict[str: float]:
+def _get_end_node_costs(pathway: Pathway, starting_material_evaluator: StartingMaterialEvaluator) -> dict[str: float]:
     end_node_costs = {}
     buyable, not_buyable = leaf_molecule_availability(pathway, starting_material_evaluator)
     for smi in buyable:

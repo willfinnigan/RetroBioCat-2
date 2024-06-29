@@ -2,14 +2,14 @@ from collections.abc import Callable
 from typing import List, Optional
 
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
-    StartingMaterialEvaluatorInterface
+    StartingMaterialEvaluator
 from rbc2.data_model.reaction import Reaction
 from rbc2.utils.rdkit_utils import rdkit_smile
 
 """ Functions for converting pa_routes to and from other formats. """
 
 def get_pa_route(smi: str,
-                 starting_material_evaluator: StartingMaterialEvaluatorInterface,
+                 starting_material_evaluator: StartingMaterialEvaluator,
                  get_smi_produced_by: Callable[[str], List[Reaction]]) -> dict:
     """
     Recursive function which will generate a 'pa_route' - format commonly used by AIZynthfinder associated tools.

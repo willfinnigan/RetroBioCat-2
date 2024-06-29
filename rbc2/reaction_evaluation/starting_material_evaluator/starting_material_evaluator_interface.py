@@ -1,13 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Tuple
 
-from rbc2.configs.source_mol_config import SourceMol_Config
+class StartingMaterialEvaluator(ABC):
 
-
-class StartingMaterialEvaluatorInterface(ABC):
-
-    def __init__(self, config: SourceMol_Config):
-        self.config = config
+    def __init__(self):
+        self.target_always_not_buyable = True
 
     @abstractmethod
     def eval(self, smi: str) -> Tuple[bool, dict]:

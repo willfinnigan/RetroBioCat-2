@@ -3,8 +3,10 @@ from typing import Optional, List
 
 from rbc2.expansion.multi_expander import MultiExpander
 from rbc2.reaction_evaluation.feasability import Filter, default_filter_repo
-from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator import \
-    DefaultSQLStartingMaterialEvaluator
+from rbc2.reaction_evaluation.starting_material_evaluator.commercial_starting_material_evaluator import \
+    CommercialSME
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluator
 from rbc2.utils.add_logger import add_logger
 from rbc2.configs.logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
@@ -25,7 +27,7 @@ class MCTS():
                  target_smi: str,
                  expanders: dict[str: Expander],
                  filters: dict[str: Filter] = default_filter_repo,
-                 starting_material_evaluator: Optional[DefaultSQLStartingMaterialEvaluator] = None,
+                 starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
                  network: Optional[Network] = None,
                  mcts_config: Optional[MCTS_Config] = None):
 
@@ -40,7 +42,7 @@ class MCTS():
         # starting material evaluator
         self.starting_material_evaluator = starting_material_evaluator
         if self.starting_material_evaluator is None:
-            self.starting_material_evaluator = DefaultSQLStartingMaterialEvaluator()
+            self.starting_material_evaluator = CommercialSME()
 
         # network - used to save expansions so they are only done once
         self.network = network
