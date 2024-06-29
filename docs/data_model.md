@@ -46,6 +46,8 @@ Each reaction has a `precedents` attribute which is a list of `Precedent` object
 A `Pathway` is a list of `Reaction` objects, representing a series of reactions to get from a starting material to a target product.
 
 ```python
+from rbc2 import Pathway
+
 pathway = Pathway([reaction1, 
                    reaction2, 
                    reaction3])
@@ -65,7 +67,7 @@ pathway = Pathway([reaction1,
 
 #### Methods
 `get_pa_route(starting_material_evaluator) -> dict` - Output the pathway in the format used by PARoutes. 
-Needs a starting_material_evaluator to be passed in to evaluate what molecules are available.  
+Needs a [starting_material_evaluator](starting_materials.md) to be passed in to evaluate what molecules are available.  
 `end_smis() -> List[str]` - Return a list of the SMILES which are substrates of the initial reaction(s) in the pathway  
 `save() -> List[dict]` - Save the pathway to a json file.  Returns the reactions in the pathway as a list of dictionaries.  
 `get_reaction_with_product(smi: str) -> Reaction:` - Return the first reaction which produces the SMILES.  
