@@ -37,8 +37,8 @@ def draw_mcts(mcts):
 if __name__ == '__main__':
     target_smi = '[C@H]1(C2=CC=CC=C2)NCCCC1'
     mcts = MCTS(target_smi, ('aizynthfinder',))
-    mcts.mcts_config.max_length = 5
-    mcts.mcts_config.chemistry_filter = None
-    mcts.mcts_config.callback_iterations=50
-    mcts.mcts_config.max_search_time = 120
+    mcts.config.max_length = 5
+    mcts.config.chemistry_filter = None
+    mcts.config.callback_iterations=50
+    mcts.config.max_search_time = 120
     mcts.run(callback=draw_mcts)

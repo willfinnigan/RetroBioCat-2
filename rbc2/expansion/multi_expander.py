@@ -24,7 +24,7 @@ combination_methods: dict[str: combination_method] = {'interleave': interleave,
 class MultiExpander:
 
     def __init__(self,
-                 expanders: dict[str: Expander],
+                 expanders: List[Expander],
                  network: Optional[Network] = None):
 
         if len(expanders) == 0:
@@ -33,21 +33,21 @@ class MultiExpander:
         self.expanders = expanders
 
         # check that all expanders have the same config
-        expander_configs = [expander.config for expander in expanders.values()]
+        expander_configs = [expander.config for expander in expanders]
         if len(set(expander_configs)) != 1:
             raise ValueError("All expanders must have the same config instance")
 
         # all expanders should have the same config, so just use the first one
-        self.expander_config = list(self.expanders.values())[0].config
+        self.expander_config = list(self.expanders)[0].config
 
         # give all expanders the same network
-        for expander in self.expanders.values():
+        for expander in self.expanders:
             expander.network = network
 
     def get_options(self, smis_to_expand: List[str], combination_by: str = 'order_by_score') -> List[ReactionOption]:
         """ For multiple smiles, get the options from each expander and combine them using the combination method """
         per_expander_options = []
-        for name, expander in self.expanders.items():
+        for expander in self.expanders:
             options = []
             for smi in smis_to_expand:
                 if self.is_expander_blocked(smi, expander):
@@ -72,16 +72,16 @@ class MultiExpander:
     def template_application_counts(self) -> dict:
         """ Return a dictionary of the number of times a template has been applied for each expander """
         counts = {}
-        for expander_name, expander in self.expanders.items():
-            counts[expander_name] = expander.number_of_rule_applications()
+        for expander in self.expanders:
+            counts[expander.rxn_type] = expander.number_of_rule_applications()
         counts['total'] = sum([x for x in counts.values()])
         return counts
 
     def expander_calls(self) -> dict:
         """ Return a dictionary of the number of times each expander has been called """
         counts = {}
-        for expander_name, expander in self.expanders.items():
-            counts[expander_name] = expander.number_of_calls()
+        for expander in self.expanders:
+            counts[expander.rxn_type] = expander.number_of_calls()
         counts['total'] = sum([x for x in counts.values()])
         return counts
 

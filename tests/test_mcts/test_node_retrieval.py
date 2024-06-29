@@ -6,8 +6,8 @@ def test_all_returned_nodes_are_evaluated():
     target_smi = '[C@H]1(C2=CC=CC=C2)NCCCC1'
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     mcts = MCTS(target_smi, expanders)  #
-    mcts.mcts_config.max_length = 3
-    mcts.mcts_config.max_search_time = 5
+    mcts.config.max_length = 3
+    mcts.config.max_search_time = 5
     mcts.run()
 
     nodes = mcts.get_all_nodes()

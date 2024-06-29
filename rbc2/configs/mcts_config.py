@@ -8,7 +8,7 @@ class MCTS_Config():
         # mcts setting
         self.max_length = 4
         self.exploration = 1.414  # optimal exploration value for UCB1 is sqrt(2)=1.414 if score [0-1]
-        self.max_search_time = 120
+        self.max_search_time = 60
         self.max_iterations = None
         self.callback_iterations = 20  # number of iterations before the mcts callback function is called (if set)
 

@@ -1,5 +1,7 @@
 # Starting Material Evaluator
-
+During synthesis planning it can be important to know whether a molecule is commercially available,
+(or is the metabolism of a host organism).  RetroBioCat 2 uses a starting material evaluator module to 
+determine this.
 
 ## Commercial Starting Material Evaluator (default)
 RetroBioCat 2 has a default starting material evaluator, which utilises a database of commercially available molecules.
@@ -14,7 +16,7 @@ available, info = sme.eval('CC(=O)Oc1ccccc1C(=O)O')
 print(available, info)
 ```
 
-## E coli metabolism Starting Material Evaluator
+## _E coli_ Starting Material Evaluator
 RetroBioCat 2 also has a starting material evaluator for E coli metabolism.
 
 ```python
@@ -31,7 +33,9 @@ print(available, info)
 
 An abstract base class exists for starting material evaluators, which defines the expected methods.
 
-A custom evaluator can therefore be created by subclassing this interface, and utilised in the same way as the default evaluator.
+A custom evaluator can therefore be created by subclassing this interface, and utilised in the same way as the default evaluator.  
+
+For example a custom evaluator could be passed into the MCTS.
 
 ```
 class StartingMaterialEvaluatorInterface(ABC):

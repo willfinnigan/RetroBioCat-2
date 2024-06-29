@@ -1,7 +1,7 @@
 class LoggingConfig():
 
     def __init__(self):
-        self.mcts = 'INFO'
+        self.mcts = 'WARNING'
         self.mcts_log_every_n_loops = 20
         self.mcts_selection = 'WARNING'
         self.mcts_backpropagate = 'WARNING'
@@ -41,7 +41,7 @@ class LoggingConfig():
 
 
 logging_config = LoggingConfig()
-logging_config.set_global_mode('DEBUG')
+logging_config.set_global_mode('WARNING')
 #logging_config.mcts_expander = 'DEBUG'
 #logging_config.mcts_selection = 'DEBUG'
 #logging_config.mcts_rollout = 'DEBUG'

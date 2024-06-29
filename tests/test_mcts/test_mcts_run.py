@@ -45,7 +45,7 @@ def test_run_mcts():
     target_smi = 'CCCC=O'
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     mcts = MCTS(target_smi, expanders)
-    mcts.mcts_config.max_search_time = 5
+    mcts.config.max_search_time = 5
     mcts.run()
     assert len(mcts.get_solved_nodes()) > 0
 
@@ -54,9 +54,9 @@ def test_can_get_routes_beyond_buyables():
     target_smi = "Oc1ccc(C=C)cc1F"
     expanders = get_expanders(('retrobiocat',))
     mcts = MCTS(target_smi, expanders)
-    mcts.mcts_config.max_length = 2
-    mcts.mcts_config.max_search_time = 5
-    mcts.mcts_config.allow_moves_beyond_solved = 2
+    mcts.config.max_length = 2
+    mcts.config.max_search_time = 5
+    mcts.config.allow_moves_beyond_solved = 2
     mcts.run()
 
     pathways = mcts.get_solved_pathways()
@@ -78,8 +78,8 @@ def test_weird_retrorules_case_with_options_but_not_reactions_from_route():
     expansion_config.rr_max_reactions = 100
     expanders = get_expanders(('retrorules',))
     mcts = MCTS(target_smi, expanders)
-    mcts.mcts_config.max_length = 4
-    mcts.mcts_config.max_search_time = 20
+    mcts.config.max_length = 4
+    mcts.config.max_search_time = 20
 
     t0 = time.time()
     mcts.run()  # this should be quick because retrorules options evaluate to nothing, so root becomes terminal
