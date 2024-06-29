@@ -7,9 +7,14 @@ Minimal quick start example
 from rbc2 import MCTS
 from rbc2 import get_expanders
 
-target_smi = 'CCCC=O'
-expanders = get_expanders(['retrobiocat', 'aizynthfinder'])
+ # Target SMILES - this is what we want to make
+target_smi = 'CCCC=O' 
 
+# Get the expanders with a convenience function
+expanders = get_expanders(['retrobiocat', 
+                           'aizynthfinder'])  
+
+# Initialise and run the MCTS
 mcts = MCTS(target_smi, expanders)
 mcts.config.max_search_time = 15  # only search for 15 seconds
 mcts.run()  
