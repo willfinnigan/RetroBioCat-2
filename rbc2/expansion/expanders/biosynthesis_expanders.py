@@ -91,7 +91,8 @@ class BKMSExpander(DefaultExpander):
                  cutoff_number=50,
                  allow_multi_product_templates=False,
                  enable_precedent_search=True,
-                 similarity_cutoff=0.1
+                 similarity_cutoff=0.1,
+                 require_precedent=False
                  ):
         super().__init__(network=network, config=config)
         self.similarity_cutoff = similarity_cutoff
@@ -106,6 +107,8 @@ class BKMSExpander(DefaultExpander):
         if precedent_data is None:
             precedent_data = BKMS_Data()
         self.precedent_scorer = SimilarityScorer(precedent_data)
+
+        self.require_precedent = require_precedent
 
     def precedent_evaluation_function(self, reaction: Reaction):
         if self.enable_precedent_search == False:
@@ -122,6 +125,11 @@ class BKMSExpander(DefaultExpander):
                                                                    cutoff=self.similarity_cutoff,
                                                                    query_ids=query_ids)
 
+    def final_processing_function(self, reactions):
+        if self.require_precedent == True:
+            reactions = [reaction for reaction in reactions if len(reaction.precedents) > 0]
+        return reactions
+
 
 class EnzymeMapExpander(DefaultExpander):
     cofactor_names = None
@@ -134,11 +142,14 @@ class EnzymeMapExpander(DefaultExpander):
                  cutoff_cumulative=0.995,
                  cutoff_number=50,
                  enable_precedent_search=True,
-                 similarity_cutoff=0.1):
+                 similarity_cutoff=0.1,
+                 require_precedent=False):
 
         super().__init__(network=network, config=config)
         self.similarity_cutoff = similarity_cutoff
+        self.require_precedent = require_precedent
         self.enable_precedent_search = enable_precedent_search
+        print(enable_precedent_search)
         self.policy_model = EnzymeMap_Action_Getter(cutoff_cumulative=cutoff_cumulative,
                                                      cutoff_number=cutoff_number)
         self.rxn_type = 'enzymemap'
@@ -177,6 +188,8 @@ class EnzymeMapExpander(DefaultExpander):
                                                                template_id=t_id)
         reaction.precedents = precedents
 
+
+
     def reaction_processing_function(self, reactions: List[Reaction]) -> List[Reaction]:
         """
         This function will be applied when a ReactionOption is evaluated.
@@ -192,6 +205,11 @@ class EnzymeMapExpander(DefaultExpander):
             # save matches to template metadata
             reaction.template_metadata[reaction.name]['cofactors'] = [self.cofactor_names[smi] for smi in matches]
 
+        return reactions
+
+    def final_processing_function(self, reactions):
+        if self.require_precedent == True:
+            reactions = [reaction for reaction in reactions if len(reaction.precedents) > 0]
         return reactions
 
 

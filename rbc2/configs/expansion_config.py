@@ -4,9 +4,9 @@ class Expansion_Config():
     def __init__(self):
 
         # rule application
-        self.allow_chiral_symmetry = False
-        self.check_chiral_products = True
-        self.combine_enantiomers = True
+        self.allow_chiral_symmetry = False  # rdchiral setting
+        self.check_chiral_products = True  # rdchiral setting
+        self.combine_enantiomers = True  # rdchiral setting
         self.allow_cyclic_reaction_outcomes = False
         self.clean_brackets = True
 

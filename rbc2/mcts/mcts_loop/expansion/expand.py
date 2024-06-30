@@ -6,7 +6,7 @@ from rbc2.expansion.multi_expander import MultiExpander
 from rbc2.mcts.mcts_loop.expansion.expansion_context_filtering import apply_criteria_based_filtering
 from rbc2.mcts.mcts_loop.expansion.expansion_score_boost import apply_enzyme_cascade_score_boost
 from rbc2.utils.add_logger import add_logger
-from rbc2.configs.logging_config import logging_config
+from rbc2.mcts.mcts_logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.mcts.tree_node import MCTS_Node, create_node_from_option, create_root
 from rbc2.data_model.reaction_option import ReactionOption

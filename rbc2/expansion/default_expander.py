@@ -47,6 +47,10 @@ class DefaultExpander(Expander):
         Should update the reaction.precedents with new precedents"""
         return True
 
+    def final_processing_function(self, reactions: List[Reaction]) -> List[Reaction]:
+        """ Overwrite this function to apply processing to the final list of reactions before returning"""
+        return reactions
+
 
     def get_options(self, smi: str) -> List[ReactionOption]:
         if self.network is None:
@@ -89,6 +93,8 @@ class DefaultExpander(Expander):
 
         if self.config.max_reactions is not None:
             reactions = reactions[:self.config.max_reactions]
+
+        reactions = self.final_processing_function(reactions)
 
         return reactions
 

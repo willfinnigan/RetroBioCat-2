@@ -33,7 +33,8 @@ class RetroBioCatExpander(DefaultExpander):
                  score_similarity_before_option_creation: bool = True,
                  search_literature_precedent: bool = True,
                  only_active_literature_precedent: bool = True,
-                 similarity_cutoff: float = 0.55):
+                 similarity_cutoff: float = 0.55,
+                 require_precedent=False):
 
         super().__init__(network=network, config=config)
 
@@ -58,6 +59,7 @@ class RetroBioCatExpander(DefaultExpander):
         self.search_literature_precedent = search_literature_precedent
         self.only_active_literature_precedent = only_active_literature_precedent
         self.similarity_cutoff = similarity_cutoff
+        self.require_precedent = require_precedent
 
     def precedent_evaluation_function(self, reaction: Reaction):
         if self.search_literature_precedent is False:
@@ -67,6 +69,11 @@ class RetroBioCatExpander(DefaultExpander):
                                                                    topn=1,
                                                                    cutoff=self.similarity_cutoff,
                                                                    reaction_name=reaction.name)
+
+    def final_processing_function(self, reactions):
+        if self.require_precedent == True:
+            reactions = [reaction for reaction in reactions if len(reaction.precedents) > 0]
+        return reactions
 
     def create_option(self, smi: str, name: str, smarts: List,
                       template_metadata: dict, score: float) -> ReactionOption:

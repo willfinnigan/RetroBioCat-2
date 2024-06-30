@@ -2,7 +2,7 @@ from typing import Optional
 
 import numpy as np
 from rbc2.utils.add_logger import add_logger
-from rbc2.configs.logging_config import logging_config
+from rbc2.mcts.mcts_logging_config import logging_config
 from rbc2.mcts.tree_node import  MCTS_Node
 
 selection_logger = add_logger('Selection', level=logging_config.mcts_selection)

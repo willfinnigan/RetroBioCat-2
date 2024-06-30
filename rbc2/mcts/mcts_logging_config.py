@@ -1,4 +1,4 @@
-class LoggingConfig():
+class MCTSLoggingConfig():
 
     def __init__(self):
         self.mcts = 'WARNING'
@@ -40,7 +40,7 @@ class LoggingConfig():
         #self.mcts_feasability_filter = 'DEBUG'
 
 
-logging_config = LoggingConfig()
+logging_config = MCTSLoggingConfig()
 logging_config.set_global_mode('WARNING')
 #logging_config.mcts_expander = 'DEBUG'
 #logging_config.mcts_selection = 'DEBUG'
