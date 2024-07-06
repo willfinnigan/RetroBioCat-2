@@ -5,7 +5,9 @@ from rbc2.data_model.reaction import Reaction
 
 
 def test_previous_reaction_is_enzyme():
-    reaction1 = Reaction('CCCCO', ['CCCC=O'], rxn_domain='biocatalysis')
+    reaction1 = Reaction('CCCCO', ['CCCC=O'],
+                         rxn_domain='biocatalysis',
+                         template_metadata={'template1': {'is_enzyme': True}})
     pathway = Pathway([reaction1])
     assert is_previous_reaction_enzyme(pathway, 'CCCC=O') == True
 
