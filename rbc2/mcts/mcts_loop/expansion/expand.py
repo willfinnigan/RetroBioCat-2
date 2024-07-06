@@ -5,6 +5,8 @@ from typing import List
 from rbc2.expansion.multi_expander import MultiExpander
 from rbc2.mcts.mcts_loop.expansion.expansion_context_filtering import apply_criteria_based_filtering
 from rbc2.mcts.mcts_loop.expansion.expansion_score_boost import apply_enzyme_cascade_score_boost
+from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
+    StartingMaterialEvaluator
 from rbc2.utils.add_logger import add_logger
 from rbc2.mcts.mcts_logging_config import logging_config
 from rbc2.configs.mcts_config import MCTS_Config
@@ -18,6 +20,7 @@ expansion_logger = add_logger('Expansion', level=logging_config.mcts_selection)
 class Expansion():
 
     def __init__(self,
+                 tree_node_store: dict,
                  multi_expander: MultiExpander,
                  starting_material_evaluator: StartingMaterialEvaluator,
                  mcts_config: MCTS_Config
@@ -25,12 +28,14 @@ class Expansion():
         self.multi_expander = multi_expander
         self.starting_material_evaluator = starting_material_evaluator
         self.mcts_config = mcts_config
+        self.tree_node_store = tree_node_store
 
     def expand(self, node: MCTS_Node) -> List[MCTS_Node]:
-        return expand(node, self.multi_expander, self.starting_material_evaluator, self.mcts_config)
+        return expand(node, self.tree_node_store, self.multi_expander, self.starting_material_evaluator, self.mcts_config)
 
 
 def expand(node: MCTS_Node,
+           tree_node_store: dict,
            multi_expander: MultiExpander,
            starting_material_evaluator: StartingMaterialEvaluator,
            mcts_config: MCTS_Config) -> List[MCTS_Node]:
@@ -38,7 +43,15 @@ def expand(node: MCTS_Node,
     expansion_logger.debug(f"Expanding node at depth {node.depth} with {len(multi_expander.expanders)} expanders")
     node.expanded = True
     options = get_options(node, multi_expander, starting_material_evaluator, mcts_config)
-    node.children = [create_node_from_option(node, option) for option in options]
+
+    new_nodes = [create_node_from_option(node, option) for option in options]
+
+    # if any nodes already exist, use those instead of the new ones
+    for i, new_node in enumerate(new_nodes):
+        if hash(new_node) in tree_node_store:
+            new_nodes[i] = tree_node_store[hash(new_node)]
+
+    node.children = new_nodes
 
     # if no children available from expansion, set node to terminal
     if len(node.children) == 0:

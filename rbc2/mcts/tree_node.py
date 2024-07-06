@@ -30,7 +30,7 @@ class MCTS_Node():
         self.id = str(uuid.uuid4())
 
     def __hash__(self):
-        return hash(self.id)
+        return hash(self.pathway)
 
     def is_evaluated(self):
         if self.pathway is None and self.option is None:

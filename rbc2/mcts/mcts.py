@@ -44,17 +44,21 @@ class MCTS():
         # filters
         self.filters = filters
 
-        # mcts steps
-        self.selection = Selection()
-        self.expansion = Expansion(self.multi_expander,
-                                   self.starting_material_evaluator,
-                                   self.config)
-
 
         self.root: MCTS_Node = create_root(target_smi)  # root node
         self.solved = []  # the solved nodes, updated during the backpropagation step
 
         self.search_complete = False  # used to stop the search either on max iterations or max run time
+
+        self.tree_node_store = {hash(self.root): self.root}
+
+        # mcts steps
+        self.selection = Selection()
+        self.expansion = Expansion(self.tree_node_store,
+                                   self.multi_expander,
+                                   self.starting_material_evaluator,
+                                   self.config)
+
 
         # stats
         self.iterations = 0

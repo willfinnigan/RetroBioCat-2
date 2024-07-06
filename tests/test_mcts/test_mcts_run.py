@@ -19,7 +19,7 @@ def test_first_rollout():
     network = Network()
     expanders = get_expanders(('retrobiocat', 'aizynthfinder'))
     multi_expander = MultiExpander(expanders, network=network)
-    expansion = Expansion(multi_expander, CommercialSME(), MCTS_Config())
+    expansion = Expansion({}, multi_expander, CommercialSME(), MCTS_Config())
     selection = Selection()
     root = create_root('CCCC=O')
     node = selection.select(root, 2)

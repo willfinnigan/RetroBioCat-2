@@ -19,7 +19,7 @@ def test_mcts_expansion_returns_unevaluated_mcts_nodes():
     starting_material_evaluator = CommercialSME()
     mcts_config = MCTS_Config()
 
-    new_nodes = expand(root, multi_expander, starting_material_evaluator, mcts_config)
+    new_nodes = expand(root, {}, multi_expander, starting_material_evaluator, mcts_config)
     assert isinstance(new_nodes[0], MCTS_Node)
 
 
@@ -68,7 +68,7 @@ def test_0_allowed_moves_beyond_solved_gives_0_new_nodes():
     pathway = Pathway([reaction1])
     node_1 = create_node_with_pathway(root, pathway, 1)
 
-    new_nodes = expand(node_1, multi_expander, starting_material_evaluator, mcts_config)
+    new_nodes = expand(node_1, {}, multi_expander, starting_material_evaluator, mcts_config)
 
     assert len(new_nodes) == 0
 
@@ -85,5 +85,5 @@ def test_allow_moves_beyond_solved_1_gives_new_nodes_even_though_node_is_solved(
     pathway = Pathway([reaction1])
     node_1 = create_node_with_pathway(root, pathway, 1)
 
-    new_nodes = expand(node_1, multi_expander, starting_material_evaluator, mcts_config)
+    new_nodes = expand(node_1, {}, multi_expander, starting_material_evaluator, mcts_config)
     assert len(new_nodes) > 0

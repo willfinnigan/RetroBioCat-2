@@ -35,4 +35,6 @@ def test_scoring_of_pathway():
     assert pathway.scores['num_enzyme_steps_with_precedent'] == 3
     assert pathway.scores['fraction_starting_material_available'] == 1.0
 
+    print(pathway.__hash__())
+
 

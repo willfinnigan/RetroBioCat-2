@@ -39,6 +39,10 @@ class Pathway:
 
         self.scores = {}
 
+    def __hash__(self):
+        reaction_hashes = sorted([hash(reaction) for reaction in self.reactions])
+        return hash(tuple(reaction_hashes + [hash(self.target_smi)]))
+
     def _get_target_smi(self):
         target_smis = [smi for smi in self.product_smis if smi not in self.substrate_smis]
         if len(target_smis) > 1:
@@ -100,3 +104,7 @@ class Pathway:
 def load_pathway(reaction_dict_list: List[dict]):
     """Loads a list of dicts containing the reactions in the pathway"""
     return Pathway([reaction_from_dict(reaction_dict) for reaction_dict in reaction_dict_list])
+
+if __name__ == '__main__':
+    pathway = Pathway([], target_smi='CCCO')
+    print(hash(pathway))
