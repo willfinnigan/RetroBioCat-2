@@ -3,8 +3,8 @@ from functools import lru_cache
 
 from rbc2.reaction_evaluation.scscore.standalone_model_numpy import sc_scorer
 
-@lru_cache(maxsize=10000)
-def get_complexity(smi, round_to=4):
+@lru_cache(maxsize=50000)
+def get_complexity(smi: str, round_to: int = 4) -> float:
     (smile, score) = sc_scorer.get_score_from_smi(smi)
     return round(score, round_to)
 

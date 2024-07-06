@@ -3,7 +3,12 @@ from rbc2.data_model.reaction import Reaction
 
 
 def is_enzyme_reaction(reaction: Reaction) -> bool:
-    return reaction.rxn_domain in ['biosynthesis', 'biocatalysis']
+    if reaction.rxn_domain == 'biosynthesis':
+        return True
+    elif reaction.rxn_domain == 'biocatalysis':
+        if reaction.template_metadata[list(reaction.template_metadata.keys())[0]]['is_enzyme'] == True:
+            return True
+    return False
 
 def is_chemistry_reaction(reaction: Reaction) -> bool:
     return reaction.rxn_domain == 'chemistry'

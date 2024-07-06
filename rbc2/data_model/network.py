@@ -131,7 +131,6 @@ class Network():
 
             self.add_option(option)
 
-
     def get_pa_route(self, start_smi, starting_material_evaluator: StartingMaterialEvaluator):
         def get_smi_produced_by(smi):
             return list(self.smi_produced_by[smi])

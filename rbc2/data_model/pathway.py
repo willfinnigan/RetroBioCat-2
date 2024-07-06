@@ -37,6 +37,8 @@ class Pathway:
         self.end_smi_depths: dict[str: int] = {}
         self.tree = self._make_tree(self.target_smi)
 
+        self.scores = {}
+
     def _get_target_smi(self):
         target_smis = [smi for smi in self.product_smis if smi not in self.substrate_smis]
         if len(target_smis) > 1:
