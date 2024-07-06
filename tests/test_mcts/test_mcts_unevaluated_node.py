@@ -18,7 +18,7 @@ def test_evaluate_node():
     root.children = [child_1]
 
     filters = {}
-    new_child = resolve_unevaluated_mcts_node(child_1, network, filters, MCTS_Config())
+    new_child = resolve_unevaluated_mcts_node(child_1, network, {}, filters, MCTS_Config())
 
     assert new_child != child_1
     assert root.children == [new_child]

@@ -44,7 +44,6 @@ class MCTS():
         # filters
         self.filters = filters
 
-
         self.root: MCTS_Node = create_root(target_smi)  # root node
         self.solved = []  # the solved nodes, updated during the backpropagation step
 
@@ -54,8 +53,7 @@ class MCTS():
 
         # mcts steps
         self.selection = Selection()
-        self.expansion = Expansion(self.tree_node_store,
-                                   self.multi_expander,
+        self.expansion = Expansion(self.multi_expander,
                                    self.starting_material_evaluator,
                                    self.config)
 
@@ -78,7 +76,7 @@ class MCTS():
     def do_a_loop(self):
         self.logger.debug(f'---- ITERATION {self.iterations} ----')
         node = self.selection.select(self.root, self.config.exploration)
-        new_node = rollout(node, self.expansion, self.selection, self.network, self.filters, self.config)
+        new_node = rollout(node, self.expansion, self.selection, self.network, self.tree_node_store, self.filters, self.config)
         if new_node is None:
             self.logger.debug(f'Search complete - fully explored')
             self.search_complete = True

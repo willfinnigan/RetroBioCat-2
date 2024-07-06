@@ -10,7 +10,7 @@ from rbc2.data_model.pathway import Pathway
 
 node_evaluation_logger = add_logger('MCTS_Node_Evaluation', level=logging_config.mcts_node_evaluation)
 
-def resolve_unevaluated_mcts_node(node: MCTS_Node, network: Network, filters: dict[str: Filter], mcts_config: MCTS_Config):
+def resolve_unevaluated_mcts_node(node: MCTS_Node, network: Network, tree_node_store: dict, filters: dict[str: Filter], mcts_config: MCTS_Config):
     """
     Run option to get evaluated MCTS Node(s)
     Remove unavaluated node from parents children
@@ -24,6 +24,14 @@ def resolve_unevaluated_mcts_node(node: MCTS_Node, network: Network, filters: di
         new_pathway = Pathway(parent.pathway.reactions + [reaction])
         new_node = create_node_with_pathway(parent, new_pathway, node.value)
         new_mcts_nodes.append(new_node)
+
+    # use existing mcts nodes if they already exist
+    for i, new_node in enumerate(new_mcts_nodes):
+        new_node_hash = hash(new_node)
+        if new_node_hash in tree_node_store:
+            new_mcts_nodes[i] = tree_node_store[new_node_hash]
+        else:
+            tree_node_store[new_node_hash] = new_node
 
     if len(new_mcts_nodes) == 0:  # if evaluates to nothing, return parent
         if len(node.parent.children) == 0:  # if the parent has no children left, it is now terminal

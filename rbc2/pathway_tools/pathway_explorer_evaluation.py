@@ -1,3 +1,5 @@
+from typing import List
+
 from rbc2 import Pathway
 from rbc2.pathway_tools.pathway_context_checking import is_enzyme_reaction
 from rbc2.reaction_evaluation.complexity import get_complexity
@@ -23,4 +25,14 @@ def get_pathway_explorer_scores(pathway: Pathway, sme: StartingMaterialEvaluator
     # a 'simple score' available in the original pathway_explorer code
     pathway.scores['pathway_explorer_simple_score'] = ((pathway.scores['change_in_complexity']/pathway.scores['num_steps'])
                                                         + (pathway.scores['change_in_complexity']*pathway.scores['num_enzyme_steps_with_precedent'])) / 2
+
+
+def pathway_explorer_evaluation(pathways: List[Pathway]):
+    weights = {'Normalised num enzyme steps': 1,
+               'Normalised change in complexity': 1,
+               'starting_material': 1,
+               'postitive_enzyme_steps_score': 1}
+    diversity_weight = 1
+
+
 

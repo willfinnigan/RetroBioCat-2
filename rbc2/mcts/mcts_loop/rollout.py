@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Dict
 
 from rbc2.reaction_evaluation.feasability import Filter
 from rbc2.utils.add_logger import add_logger
@@ -17,7 +17,8 @@ def rollout(node: MCTS_Node,
             expansion: Expansion,
             selection: Selection,
             network: Network,
-            filters: dict[str: Filter],
+            tree_node_store: Dict[int, MCTS_Node],
+            filters: Dict[str, Filter],
             mcts_config: MCTS_Config) -> Optional[MCTS_Node]:
     """
         1. is node terminal
@@ -36,7 +37,7 @@ def rollout(node: MCTS_Node,
     while node.terminal is False and node.fully_searched is False:
         if node.is_evaluated() is False:
             rollout_logger.debug(f'Evaluating node at depth {node.depth}')
-            node = resolve_unevaluated_mcts_node(node, network, filters, mcts_config)
+            node = resolve_unevaluated_mcts_node(node, network, tree_node_store, filters, mcts_config)
 
         if node.expanded is False:
             expansion.expand(node)
