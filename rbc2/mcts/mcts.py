@@ -2,6 +2,7 @@ import time
 from typing import Optional, List
 
 from rbc2.expansion.multi_expander import MultiExpander
+from rbc2.pathway_tools.pathway_explorer.scoring import pathway_explorer_evaluation
 from rbc2.reaction_evaluation.feasability import Filter, default_filter_repo
 from rbc2.reaction_evaluation.starting_material_evaluator.commercial_starting_material_evaluator import \
     CommercialSME
@@ -163,13 +164,27 @@ class MCTS():
 
 
 if __name__ == '__main__':
-    target_smi = 'CCCO'
-    expanders = get_expanders(['retrobiocat', 'aizynthfinder'])
+    target_smi = 'c1ccc([C@@H]2CCCCN2)cc1'
+    expanders = get_expanders(['retrobiocat'])
     mcts = MCTS(target_smi, expanders)
-    mcts.config.max_length = 5
-    mcts.config.max_search_time = 10
+
+    mcts.config.max_length = 4
+    mcts.config.max_search_time = 20
     mcts.config.max_iterations = 1250
     mcts.config.chemistry_filter = 'None'
-    mcts.multi_expander.expander_config.precedent_search = False
+
     mcts.run()
+
+    pathways = mcts.get_all_pathways()
+
+    pathways = pathway_explorer_evaluation(pathways, mcts.starting_material_evaluator)
+
+    print(len(pathways))
+
+    print(len(mcts.network.all_reactions()))
+
+    for pathway in pathways[:5]:
+        print(pathway)
+        print(pathway.scores)
+        print('----------------------')
 

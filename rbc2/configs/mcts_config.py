@@ -14,11 +14,11 @@ class MCTS_Config():
 
         # mcts scoring
         self.use_reaction_scores_for_mcts_initial_values = True  # recommended this is True, otherwise first round will be random
-        self.score_mode = 'basic'  # 'basic', 'complexity_penalty', 'mass_percent', ('number_of_atoms'-not implemented yet)
+        self.score_mode = 'complexity_penalty'  # 'basic', 'complexity_penalty', 'mass_percent', ('number_of_atoms'-not implemented yet)
         self.use_pathway_length_score = True  # also use a pathway length score (like aizynthfinder)
 
         # values for complexity penalty (if used)
-        self.non_buyable_score = 0.2  # the default score for a non buyable compound
+        self.non_buyable_score = 0  # the default score for a non buyable compound
         self.max_complexity_penalty = -0.2  # the maximum penalty for a *complex* non buyable compound
         self.rel_complexity_no_penalty = 0  # complexity above this has no penalty
         self.rel_complexity_max_penalty = -1  # complexity below this has max penalty
@@ -28,11 +28,9 @@ class MCTS_Config():
 
         # expansion option scoring
         self.allow_moves_beyond_solved = 0  # number of moves beyond a solved node that are allowed, normally 0
-        self.stop_expansion_if_nonbuyable_at_max_length = False  # dont expand a mcts_node if a non buyable is found at max length (its impossible to solve)
+        self.stop_expansion_if_nonbuyable_at_max_length = True  # dont expand a mcts_node if a non buyable is found at max length (its impossible to solve)
         self.boost_enzyme_score_if_in_cascade = False
         self.boost_enzyme_in_cascade_score_by = 0.2
-
-
 
         self.max_chemistry_nodes = None
 
