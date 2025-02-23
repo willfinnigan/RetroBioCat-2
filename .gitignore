@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/cache/
+project.egg-info/
+*.egg-info/
+.installed.cfg
+*.pth
+MANIFEST
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+environment/
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+# IDE/Editor specific
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Jupyter Notebook
+.ipynb_checkpoints/

@@ -1,0 +1,283 @@
+{
+    "Lipase": [
+        "Alcoholysis",
+        "Amidation",
+        "Aminolysis",
+        "Ester hydrolysis (COOH)",
+        "Ester hydrolysis (OH)",
+        "Esterification",
+        "Lactone hydrolysis",
+        "Thioesterification",
+        "Transamidation"
+    ],
+    "AmDH": [
+        "Aldehyde amination",
+        "Ketone amination",
+        "Primary amine deamination",
+        "Secondary amine deamination"
+    ],
+    "TA": [
+        "Aldehyde amination",
+        "Ketone amination",
+        "Primary amine deamination",
+        "Secondary amine deamination"
+    ],
+    "IRED": [
+        "Aldehyde amination",
+        "Amine oxidation",
+        "Conjugate reduction eneimine",
+        "Imine reduction",
+        "Iminium reduction",
+        "Ketone amination"
+    ],
+    "ADC": [
+        "Aldehyde decarbonylation"
+    ],
+    "AlOx": [
+        "Aldehyde nitrilation",
+        "Aldehyde oxidation",
+        "Primary alcohol oxidation",
+        "Secondary alcohol deracemization",
+        "Secondary alcohol oxidation"
+    ],
+    "AlDH": [
+        "Aldehyde oxidation"
+    ],
+    "XOR": [
+        "Aldehyde oxidation",
+        "Imine oxidation"
+    ],
+    "ADH": [
+        "Aldehyde oxidation",
+        "Aldehyde reduction",
+        "Ketone reduction",
+        "Oxidative lactamization",
+        "Primary alcohol oxidation",
+        "Secondary alcohol oxidation"
+    ],
+    "KRED": [
+        "Aldehyde reduction",
+        "Ketone reduction",
+        "Primary alcohol oxidation",
+        "Secondary alcohol oxidation"
+    ],
+    "Aldolase": [
+        "Aldol reaction (1,3-dihydroxyacetone (OH))",
+        "Aldol reaction (1,3-dihydroxyacetone)",
+        "Aldol reaction (DERA)",
+        "Aldol reaction (pyruvate)",
+        "Aldol reaction (threonine aldolase)"
+    ],
+    "Oxd": [
+        "Aldoxime dehydration"
+    ],
+    "P450": [
+        "Alkene oxidation",
+        "Carbene N\u2013H insertion",
+        "Ethylbenzene oxidation"
+    ],
+    "SMO": [
+        "Alkene oxidation"
+    ],
+    "CAR": [
+        "Amidation",
+        "Carboxylic acid reduction",
+        "Thioesterification"
+    ],
+    "ANL-AS": [
+        "Amidation",
+        "Thioesterification"
+    ],
+    "PGA": [
+        "Amidation",
+        "Amide hydrolysis (COOH)",
+        "Amide hydrolysis (NH)",
+        "Aminolysis",
+        "Thioesterification",
+        "Transamidation"
+    ],
+    "Amidase": [
+        "Amidation",
+        "Amide hydrolysis (COOH)",
+        "Amide hydrolysis (NH)",
+        "Lactam hydrolysis",
+        "Thioesterification"
+    ],
+    "ATase": [
+        "Amidation",
+        "Aminolysis",
+        "C-acylation",
+        "Fries rearrangement"
+    ],
+    "TPL": [
+        "Amination (TPL)"
+    ],
+    "AmOx": [
+        "Amine oxidation"
+    ],
+    "AAD": [
+        "Amino acid oxidation"
+    ],
+    "AAO": [
+        "Amino acid oxidation"
+    ],
+    "AADH": [
+        "Amino acid oxidation",
+        "Keto acid reduction"
+    ],
+    "Chemical": [
+        "Aza micheal addition",
+        "Conjugate addition amine to enone",
+        "Conjugate addition amine to enone 6 ring closure",
+        "Hemiacetal closure",
+        "Hemiacetal opening",
+        "Imine Hydrolysis",
+        "Imine formation",
+        "Imine-enaminetautomerisation Fwd",
+        "Imine-enaminetautomerisation Rev",
+        "Iminium formation",
+        "Intramolecular imine formation",
+        "Intramolecular imine hydrolysis",
+        "Intramolecular iminium formation",
+        "Intramolecular iminium hydrolysis",
+        "Keto\u2013enol tautomerism fwd",
+        "Keto\u2013enol tautomerism rev",
+        "Lactam closure",
+        "Lactone closure",
+        "Spontaneous ring close"
+    ],
+    "CMT": [
+        "C-methylation"
+    ],
+    "DC": [
+        "Carboxylation",
+        "Decarboxylation",
+        "Decarboxylation (arylmalonate)"
+    ],
+    "CoAL": [
+        "CoA ligation"
+    ],
+    "HNL": [
+        "Cyanohydrin cleavage",
+        "Hydrocyanation",
+        "Nitroaldol reaction"
+    ],
+    "EDDS lyase": [
+        "Ene amination (fumaric acid)"
+    ],
+    "Hydratase": [
+        "Ene hydrolysis"
+    ],
+    "ERED": [
+        "Ene reduction",
+        "Reductive Carbocyclization"
+    ],
+    "NTR": [
+        "Ene reduction",
+        "Hydroxylamine reduction",
+        "Nitro reduction"
+    ],
+    "MBHase": [
+        "Enzymatic Morita\u2013Baylis\u2013Hillman reaction"
+    ],
+    "EH": [
+        "Epoxide hydrolysis"
+    ],
+    "Esterase": [
+        "Ester hydrolysis (COOH)",
+        "Ester hydrolysis (OH)",
+        "Esterification",
+        "Lactone hydrolysis"
+    ],
+    "EBDH": [
+        "Ethylbenzene oxidation"
+    ],
+    "Hydantoinase": [
+        "Hydantoinase ring close",
+        "Hydantoinase ring open"
+    ],
+    "BVMO": [
+        "Ketone oxidation (BVMO)",
+        "Sulfide oxidation (BVMO)"
+    ],
+    "Limonene Hydratase": [
+        "Limonene hydrolysis"
+    ],
+    "NMT": [
+        "N-methylation"
+    ],
+    "NHase": [
+        "Nitrile hydrolysis (CONH)",
+        "Nitrile hydrolysis (COOH)"
+    ],
+    "NIT": [
+        "Nitrile hydrolysis (COOH)"
+    ],
+    "NIR": [
+        "Nitrile reduction"
+    ],
+    "4-OT": [
+        "Nitrostyrene michael-type addition"
+    ],
+    "BBE": [
+        "Oxidative Ring Closure"
+    ],
+    "FMO": [
+        "Oxidative de-aromatisation"
+    ],
+    "PNP": [
+        "PNP"
+    ],
+    "Phosphatase": [
+        "Phosphate hydrolysis"
+    ],
+    "PPM": [
+        "Phosphate transfer"
+    ],
+    "Kinase": [
+        "Phosphorylation"
+    ],
+    "PSase": [
+        "Pictet Spengler"
+    ],
+    "ADH(FAD)": [
+        "Primary alcohol oxidation",
+        "Secondary alcohol oxidation"
+    ],
+    "Laccase": [
+        "Primary alcohol oxidation",
+        "Secondary alcohol oxidation"
+    ],
+    "SOI": [
+        "Styrene oxide isomerisation"
+    ],
+    "TDL": [
+        "TDL 1,4-addition",
+        "TDL Carboligation (Ar Acceptor)",
+        "TDL Carboligation (Ar Acceptor) CO2",
+        "TDL Carboligation (Ar Donor)",
+        "TDL Hydroxymethylation"
+    ],
+    "TK": [
+        "Transketolase"
+    ],
+    "TrpS": [
+        "Tryptophan Synthase"
+    ],
+    "AL": [
+        "\u03b1-amino amination",
+        "\u03b1-amino deamination"
+    ],
+    "MAL": [
+        "\u03b1-amino amination (MAL)",
+        "\u03b1-amino deamination (MAL)"
+    ],
+    "PAM": [
+        "\u03b2-amino amination",
+        "\u03b2-amino deamination"
+    ],
+    "TAM": [
+        "\u03b2-amino amination",
+        "\u03b2-amino deamination"
+    ]
+}
