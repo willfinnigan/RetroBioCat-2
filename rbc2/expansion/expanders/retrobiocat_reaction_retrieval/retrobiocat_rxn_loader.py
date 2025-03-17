@@ -1,17 +1,14 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Callable, Dict
 
 import yaml
 from rdkit.Chem import rdChemReactions
 
 from rbc2.configs.data_path import path_to_data_folder
-from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.rxn_class_interface import RetroBioCatReactions, \
-    rxns_dict, multi_rxns_dict
 from rbc2.template_application.apply_template.rdchiral.initialization import rdchiralReaction
 from rbc2.utils.add_logger import add_logger
 
 data_folder = f'{path_to_data_folder}/retrobiocat'
-
 
 def reverse_smarts(smarts: str) -> str:
     m = smarts.find('>>')
@@ -19,7 +16,6 @@ def reverse_smarts(smarts: str) -> str:
     end = smarts[:m]
     new_smarts = start + '>>' + end
     return new_smarts
-
 
 @dataclass
 class RetroBioCatReaction:
@@ -43,6 +39,7 @@ class RetroBioCatReaction:
     steps: List[List[str]] = field(default_factory=list)
 
 
+LoadRBCReactionsFunc = Callable[[], List[RetroBioCatReaction]]
 def load_reactions_from_yaml() -> List[RetroBioCatReaction]:
     with open(f"{data_folder}/rxns_yaml.yaml") as stream:
         data_loaded = yaml.safe_load(stream)
@@ -56,15 +53,17 @@ def load_reactions_from_yaml() -> List[RetroBioCatReaction]:
     return reactions
 
 
-class YAML_RetroBioCatReactions(RetroBioCatReactions):
+class RetroBioCat_Reaction_Interface():
 
     def __init__(self,
+                 load_function: LoadRBCReactionsFunc=load_reactions_from_yaml,
                  include_experimental=False,
                  include_two_step=True,
                  include_requires_absence_of_water=False,
                  reverse=False,
                  use_rdchiral=True):
 
+        self.load_function = load_function
         self.include_experimental = include_experimental
         self.include_two_step = include_two_step
         self.include_requires_absence_of_water = include_requires_absence_of_water
@@ -79,12 +78,12 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
         self.rxns_strings = {}
         self.rules_by_type = {}
 
-    def get_rxns(self) -> rxns_dict:
+    def get_rxns(self) -> Dict[str, List]:
         if self.rxns == {}:
             self._load_rxns()
         return self.rxns
 
-    def get_multistep_rxns(self) -> multi_rxns_dict:
+    def get_multistep_rxns(self) -> Dict[str, List[List[List]]]:
         if self.multi_rxns == {}:
             self._load_rxns()
         return self.multi_rxns
@@ -102,7 +101,7 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
         if self.rxns != {}:
             return
 
-        reactions = load_reactions_from_yaml()
+        reactions = self.load_function()
 
         # filter by options
         if self.include_experimental == False:
@@ -142,10 +141,10 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
         for reaction in reactions:
             if reaction.two_step == True and len(reaction.steps) != 0:
                 # this will become a list of lists of lists: [[[r1a, r1b], [r2a, r2b]], [[r1a, r1b], [r2a, r2b]]]
-                self.multi_rxns[reaction.name] = self._get_multi_smarts_from_named_steps(self.rxns,
-                                                                                         reaction.steps)
+                self.multi_rxns[reaction.name] = self.get_multi_smarts_from_named_steps(self.rxns,
+                                                                                        reaction.steps,)
 
-    def _get_multi_smarts_from_named_steps(self, rxns, steps) -> List[List[List]]:
+    def get_multi_smarts_from_named_steps(self, rxns, steps) -> List[List[List]]:
         processed_steps = []
         for group_steps in steps:
             group_smas = []
@@ -169,7 +168,7 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
 
 if __name__ == '__main__':
 
-    rxn_class = YAML_RetroBioCatReactions()
+    rxn_class = RetroBioCat_Reaction_Interface()
     smi = 'CC(C)(C)OC(=O)N1CCC(CC1)N(C)C(=O)C1=CC=C(C=C1)C1=CC=CC=C1'
     rxns = rxn_class.get_rxns()
     multi_step_rxns = rxn_class.get_multistep_rxns()

@@ -3,8 +3,8 @@ from typing import List, Optional
 
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.expansion.default_expander import DefaultExpander
-from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.rxn_class_interface import RetroBioCatReactions
-from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.yaml_rxn_class import YAML_RetroBioCatReactions
+from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.retrobiocat_rxn_loader import RetroBioCat_Reaction_Interface, \
+    load_reactions_from_yaml, LoadRBCReactionsFunc
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData
 from rbc2.precedent_identification.data_retrieval.retrobiocat.rank_precedents import get_best_enzymes
@@ -26,7 +26,7 @@ class RetroBioCatExpander(DefaultExpander):
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None,
                  starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
-                 rbc_rxn_class: Optional[RetroBioCatReactions] = None,
+                 rxn_loader_function: LoadRBCReactionsFunc = load_reactions_from_yaml,
                  precedent_data: Optional[PrecedentData] = None,
                  include_experimental: bool = False,
                  include_two_step: bool = True,
@@ -45,13 +45,12 @@ class RetroBioCatExpander(DefaultExpander):
         self.rxn_domain = 'biocatalysis'
         self.score_key = ''
 
-        self.rxn_class = rbc_rxn_class
-        if self.rxn_class is None:
-            self.rxn_class = YAML_RetroBioCatReactions(include_experimental=include_experimental,
-                                                       include_two_step=include_two_step,
-                                                       include_requires_absence_of_water=include_requires_absence_of_water,
-                                                       reverse=reverse_rules,
-                                                       use_rdchiral=self.config.use_rdchiral)
+        self.rxn_class = RetroBioCat_Reaction_Interface(load_function=rxn_loader_function,
+                                                        include_experimental=include_experimental,
+                                                        include_two_step=include_two_step,
+                                                        include_requires_absence_of_water=include_requires_absence_of_water,
+                                                        reverse=reverse_rules,
+                                                        use_rdchiral=self.config.use_rdchiral)
 
         if precedent_data is None:
             precedent_data = RetroBioCatLocalPrecedentData()
