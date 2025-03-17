@@ -15,18 +15,33 @@ def create_reactions(target_smi: str,
                      score: float = 0,
                      metadata: Optional[dict] = None,
                      rxn_type: str = '',
-                     rxn_domain: str = '') -> List[Reaction]:
+                     rxn_domain: str = '',
+                     fwd_rxn=False) -> List[Reaction]:
 
     if metadata is None:
         metadata = {}
 
+
     new_reactions = []
     for rxn_name, outcome_list in outcomes_dict.items():
+
+
         rxn_metadata = metadata.get(rxn_name, {})
         for rxn_outcome in outcome_list:
             unique_id = make_unique_id(rxn_name)
-            reaction = Reaction(product=target_smi,
-                                substrates=rxn_outcome,
+
+            if fwd_rxn == True:
+                # then the target smi is the substrate(s), and the outcomes are products.  Flip these for creation.
+                if len(rxn_outcome) > 1:
+                    raise Exception("Fwd reaction application should only have one product")
+                product = rxn_outcome[0]  # only one product is expected
+                substrates = [target_smi]  # list of substrates is expected
+            else:
+                product = target_smi
+                substrates = rxn_outcome
+
+            reaction = Reaction(product=product,
+                                substrates=substrates,
                                 unique_id=unique_id,
                                 name=rxn_name,
                                 rxn_type=rxn_type,
@@ -36,4 +51,7 @@ def create_reactions(target_smi: str,
             new_reactions.append(reaction)
 
     return new_reactions
+
+
+
 

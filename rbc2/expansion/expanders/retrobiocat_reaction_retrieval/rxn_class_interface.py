@@ -13,11 +13,16 @@ class RetroBioCatReactions(ABC):
     def __init(self,
                include_experimental=False,
                include_two_step=True,
-               include_requires_absence_of_water=False):
+               include_requires_absence_of_water=False,
+               reverse=False,
+               use_rdchiral=True
+               ):
 
         self.include_experimental = include_experimental
         self.include_two_step = include_two_step
         self.include_requires_absence_of_water = include_requires_absence_of_water
+        self.reverse = reverse
+        self.use_rdchiral = use_rdchiral
 
     @abstractmethod
     def get_rxns(self) -> rxns_dict:

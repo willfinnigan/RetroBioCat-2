@@ -1,6 +1,8 @@
 from collections import defaultdict
 from typing import Optional, List
 
+from rdkit.Chem import rdChemReactions
+
 from rbc2.template_application.apply_template.components.multi_step_applicator import Multi_step_applicator
 from rbc2.template_application.apply_template.components.rdchiral_applicator import RdChiral_Applicator
 from rbc2.template_application.apply_template.components.rdkit_applicator import RdKit_Applicator
@@ -24,34 +26,55 @@ class RuleApplicator():
         self.logger = add_logger('RuleApplicator', level=log_level)
         self.rule_applications = 0
 
-    def apply_rdkit(self, smi: str, rxns: dict[str: List[str]],
-                    multistep_rxns=None, template_flags: Optional[dict] = None):
+    def apply(self, smi: str, rxns: dict[str: List],
+              multistep_rxns=None, template_flags: Optional[dict] = None):
 
         self.rule_applications += sum([len(v) for v in rxns.values()])
-        product_dict = self.rdkit_applicator.apply_rules(smi, rxns)
 
+        if self.config.use_rdchiral == True:
+            applicator = self.rdchiral_applicator
+        else:
+            applicator = self.rdkit_applicator
+
+        product_dict = applicator.apply_rules(smi, rxns)
         if multistep_rxns is not None:
-            multi_product_dict = self.multi_step_applicator.apply_multi_step_rules(self.rdkit_applicator, smi, multistep_rxns)
-            product_dict.update(multi_product_dict)
-
-        product_dict = self._apply_template_flag_checks(smi, product_dict, template_flags)
-
-        return product_dict
-
-    def apply_rdchiral(self, smi: str, rxns: dict[str: List[rdchiralReaction]],
-                       multistep_rxns=None, template_flags: Optional[dict] = None):
-
-        self.rule_applications += sum([len(v) for v in rxns.values()])
-        product_dict = self.rdchiral_applicator.apply_rules(smi, rxns)
-
-        if multistep_rxns is not None:
-            multi_product_dict = self.multi_step_applicator.apply_multi_step_rules(self.rdchiral_applicator, smi,
+            multi_product_dict = self.multi_step_applicator.apply_multi_step_rules(applicator,
+                                                                                   smi,
                                                                                    multistep_rxns)
             product_dict.update(multi_product_dict)
 
         product_dict = self._apply_template_flag_checks(smi, product_dict, template_flags)
 
         return product_dict
+
+    # def _get_correct_format_rxns(self, rxns: List):
+    #     """
+    #     look at the first rxn - if its correct assume all are. If not, convert all to correct format
+    #     rxns could be smarts, could be rdchiral reactions, or rdkit reactions."""
+    #
+    #     first_rxn = rxns[0]
+    #     if isinstance(first_rxn, str):
+    #         if self.config.use_rdchiral == True:
+    #             self.logger.debug('Converting smarts to rdchiral')
+    #             rxns = self.smarts_to_rdchiral(rxns)
+    #         else:
+    #             self.logger.debug('Converting smarts to rdkit')
+    #             rxns = self.smarts_to_rdkit(rxns)
+    #
+    #     elif isinstance(first_rxn, rdchiralReaction):
+    #         if self.config.use_rdchiral == False:
+    #             self.logger.debug('Converting rdchiral to rdkit')
+    #             rxns = [rxn.rxn for rxn in rxns]  # extracts the rdkit reaction from rdchiral
+    #
+    #     elif isinstance(first_rxn, rdChemReactions.ChemicalReaction):
+    #         if self.config.use_rdchiral == True:
+    #             self.logger.debug('Converting rdkit to rdchiral')
+    #             smarts = [rxn.ToSmarts() for rxn in rxns]
+    #             rxns = self.smarts_to_rdchiral(smarts)
+    #
+    #     return rxns
+
+
 
     def _apply_template_flag_checks(self, target_smi: str, product_dict: dict[str: list], template_flags: Optional[dict]):
         checked_product_dict = defaultdict(list)

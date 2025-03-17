@@ -44,7 +44,7 @@ def test_rule_applicator_counts():
     rxns = {'test_1': applicator.smarts_to_rdchiral(["[#6:1]=[O:2]>>[#6:1]-[OH:2]"]),
             'test_2': applicator.smarts_to_rdchiral(["[Cl:1]>>[Cl:1]-C"])}
     smi = 'C=O'
-    products = applicator.apply_rdchiral(smi, rxns)
+    products = applicator.apply(smi, rxns)
     assert applicator.rule_applications == 2
 
 def test_multi_reactant_rule():

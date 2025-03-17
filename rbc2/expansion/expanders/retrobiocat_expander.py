@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.expansion.default_expander import DefaultExpander
+from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.rxn_class_interface import RetroBioCatReactions
 from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.yaml_rxn_class import YAML_RetroBioCatReactions
 from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
 from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData
@@ -25,7 +26,7 @@ class RetroBioCatExpander(DefaultExpander):
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None,
                  starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
-                 rbc_rxn_class: Optional = None,
+                 rbc_rxn_class: Optional[RetroBioCatReactions] = None,
                  precedent_data: Optional[PrecedentData] = None,
                  include_experimental: bool = False,
                  include_two_step: bool = True,
@@ -34,7 +35,9 @@ class RetroBioCatExpander(DefaultExpander):
                  search_literature_precedent: bool = True,
                  only_active_literature_precedent: bool = True,
                  similarity_cutoff: float = 0.55,
-                 require_precedent=False):
+                 require_precedent=False,
+                 reverse_rules=False,
+                 only_named_reactions: List[str] = None):
 
         super().__init__(network=network, config=config)
 
@@ -46,7 +49,9 @@ class RetroBioCatExpander(DefaultExpander):
         if self.rxn_class is None:
             self.rxn_class = YAML_RetroBioCatReactions(include_experimental=include_experimental,
                                                        include_two_step=include_two_step,
-                                                       include_requires_absence_of_water=include_requires_absence_of_water)
+                                                       include_requires_absence_of_water=include_requires_absence_of_water,
+                                                       reverse=reverse_rules,
+                                                       use_rdchiral=self.config.use_rdchiral)
 
         if precedent_data is None:
             precedent_data = RetroBioCatLocalPrecedentData()
@@ -60,6 +65,8 @@ class RetroBioCatExpander(DefaultExpander):
         self.only_active_literature_precedent = only_active_literature_precedent
         self.similarity_cutoff = similarity_cutoff
         self.require_precedent = require_precedent
+        self.reverse_rules = reverse_rules
+        self.only_named_reactions = only_named_reactions
 
     def precedent_evaluation_function(self, reaction: Reaction):
         if self.search_literature_precedent is False:
@@ -164,13 +171,22 @@ class RetroBioCatExpander(DefaultExpander):
         return all_available
 
     def _get_reactions(self, target_smi):
-        outcomes = self.rule_applicator.apply_rdchiral(target_smi, self.rxn_class.get_rxns(), multistep_rxns=self.rxn_class.get_multistep_rxns())
+        single_step_rxns = self.rxn_class.get_rxns()
+        multi_step_rxns = self.rxn_class.get_multistep_rxns()
+
+        if self.only_named_reactions is not None:
+            single_step_rxns = {name: rxns for name, rxns in single_step_rxns.items() if name in self.only_named_reactions}
+            multi_step_rxns = {name: rxns for name, rxns in multi_step_rxns.items() if name in self.only_named_reactions}
+
+        outcomes = self.rule_applicator.apply(target_smi, single_step_rxns, multistep_rxns=multi_step_rxns)
+
         metadata = self._get_metadata(list(outcomes.keys()))
         reactions = create_reactions(target_smi,
                                      outcomes,
                                      metadata=metadata,
                                      rxn_type=self.rxn_type,
-                                     rxn_domain=self.rxn_domain)
+                                     rxn_domain=self.rxn_domain,
+                                     fwd_rxn=self.reverse_rules)
 
         reactions = reaction_sanity_check(reactions)
 

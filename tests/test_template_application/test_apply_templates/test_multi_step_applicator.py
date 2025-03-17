@@ -27,4 +27,3 @@ class Test_multi_step_applicator():
         assert result['test_1'] == [['O=CO']]
 
 
-

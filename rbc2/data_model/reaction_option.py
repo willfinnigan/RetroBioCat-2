@@ -65,7 +65,7 @@ def create_evaluate_option_method(rule_applicator: RuleApplicator,
 
         rdchiral_rxns = rule_applicator.smarts_to_rdchiral(option.smarts)
         rxn = {option.name: rdchiral_rxns}
-        outcomes = rule_applicator.apply_rdchiral(option.target_smi, rxn)
+        outcomes = rule_applicator.apply(option.target_smi, rxn)
         reactions = create_reactions(option.target_smi,
                                      outcomes,
                                      score=option.score,

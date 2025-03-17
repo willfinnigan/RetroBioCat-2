@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from typing import List
 
 import yaml
+from rdkit.Chem import rdChemReactions
 
 from rbc2.configs.data_path import path_to_data_folder
 from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.rxn_class_interface import RetroBioCatReactions, \
@@ -10,6 +11,14 @@ from rbc2.template_application.apply_template.rdchiral.initialization import rdc
 from rbc2.utils.add_logger import add_logger
 
 data_folder = f'{path_to_data_folder}/retrobiocat'
+
+
+def reverse_smarts(smarts: str) -> str:
+    m = smarts.find('>>')
+    start = smarts[m + 2:]
+    end = smarts[:m]
+    new_smarts = start + '>>' + end
+    return new_smarts
 
 
 @dataclass
@@ -50,13 +59,17 @@ def load_reactions_from_yaml() -> List[RetroBioCatReaction]:
 class YAML_RetroBioCatReactions(RetroBioCatReactions):
 
     def __init__(self,
-               include_experimental=False,
-               include_two_step=True,
-               include_requires_absence_of_water=False):
+                 include_experimental=False,
+                 include_two_step=True,
+                 include_requires_absence_of_water=False,
+                 reverse=False,
+                 use_rdchiral=True):
 
         self.include_experimental = include_experimental
         self.include_two_step = include_two_step
         self.include_requires_absence_of_water = include_requires_absence_of_water
+        self.reverse = reverse
+        self.use_rdchiral = use_rdchiral
 
         self.logger = add_logger('YAMLRetroBioCat', level='WARNING')
         self.rxns = {}
@@ -85,7 +98,6 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
     def get_enzyme_full_name(self, enzyme) -> str:
         return enzyme
 
-
     def _load_rxns(self):
         if self.rxns != {}:
             return
@@ -108,7 +120,14 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
             if reaction.two_step == True:
                 continue
 
-            self.rxns[reaction.name] = [rdchiralReaction(smarts) for smarts in reaction.smarts]
+            rxn_smarts = reaction.smarts
+            if self.reverse == True:
+                rxn_smarts = [reverse_smarts(s) for s in rxn_smarts]
+
+            if self.use_rdchiral == True:
+                self.rxns[reaction.name] = [rdchiralReaction(smarts) for smarts in rxn_smarts]
+            else:
+                self.rxns[reaction.name] = [rdChemReactions.ReactionFromSmarts(smarts) for smarts in rxn_smarts]
             reaction_names.add(reaction.name)
 
             for enzyme in reaction.enzymes:
@@ -123,11 +142,10 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
         for reaction in reactions:
             if reaction.two_step == True and len(reaction.steps) != 0:
                 # this will become a list of lists of lists: [[[r1a, r1b], [r2a, r2b]], [[r1a, r1b], [r2a, r2b]]]
-                self.multi_rxns[reaction.name] = self._get_multi_smarts_from_named_steps(self.rxns, reaction.steps)
+                self.multi_rxns[reaction.name] = self._get_multi_smarts_from_named_steps(self.rxns,
+                                                                                         reaction.steps)
 
-
-    @staticmethod
-    def _get_multi_smarts_from_named_steps(rxns, steps):
+    def _get_multi_smarts_from_named_steps(self, rxns, steps) -> List[List[List]]:
         processed_steps = []
         for group_steps in steps:
             group_smas = []
@@ -136,8 +154,14 @@ class YAML_RetroBioCatReactions(RetroBioCatReactions):
                 step_rdchiral_rxns = rxns[step_rxn]
                 for rdchiral_rxn in step_rdchiral_rxns:
                     step.append(rdchiral_rxn)
+
+                if self.reverse == True:
+                    step.reverse()
+
                 group_smas.append(step)
 
+            if self.reverse == True:
+                group_smas.reverse()
             processed_steps.append(group_smas)
 
         return processed_steps

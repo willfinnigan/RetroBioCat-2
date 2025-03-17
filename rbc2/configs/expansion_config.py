@@ -9,6 +9,7 @@ class Expansion_Config():
         self.combine_enantiomers = True  # rdchiral setting
         self.allow_cyclic_reaction_outcomes = False
         self.clean_brackets = True
+        self.use_rdchiral = True
 
         # reaction parsing
         self.allow_backwards = False
