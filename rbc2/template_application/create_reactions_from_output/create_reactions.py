@@ -35,7 +35,7 @@ def create_reactions(target_smi: str,
                 if len(rxn_outcome) > 1:
                     raise Exception("Fwd reaction application should only have one product")
                 product = rxn_outcome[0]  # only one product is expected
-                substrates = [target_smi]  # list of substrates is expected
+                substrates = target_smi.split('.')  # list of substrates is expected
             else:
                 product = target_smi
                 substrates = rxn_outcome

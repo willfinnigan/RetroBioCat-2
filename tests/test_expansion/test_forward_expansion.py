@@ -15,7 +15,9 @@ def test_can_apply_reductive_amination_forwards():
     smi = 'CCC=O.NC'
 
     outcomes = rbc_expander.get_reactions(smi)
+    print(outcomes)
 
     assert outcomes[0].product == 'CCCNC'
 
+    outcomes = rbc_expander.get_reactions("O=C1CCCCC1.NC")
     print(outcomes)
