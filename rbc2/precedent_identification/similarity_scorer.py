@@ -1,26 +1,52 @@
 from typing import List, Optional, Callable, Tuple
+from abc import ABC, abstractmethod
 import pandas as pd
 from rdkit.DataStructs import ExplicitBitVect
 
-from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
+from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentDataQuery
 from rbc2.precedent_identification.similarity_tools import get_single_fp, bulk_similarity
-from rbc2.data_model.precedents import make_precedents
+from rbc2.data_model.precedents import make_precedents, Precedent
 
 Smi = str
 DataQueryFunction = Callable[..., pd.DataFrame]
 FpQueryFunction = Callable[[List[Smi]], Tuple[List[ExplicitBitVect], List[Smi]]]
 RankingFunction = Callable[[pd.DataFrame, int], pd.DataFrame]
 
-class SimilarityScorer():
+
+class SimilarityScorerInterface(ABC):
+
+    @abstractmethod
+    def score_data(self, target_smi: Smi, topn: int, cutoff: float, **key_atts) -> pd.DataFrame:
+        """
+        Finds similar data to target smi and returns it as a dataframe
+        :param target_smi: the smiles to compare with
+        :param topn: the number of top enzymes to return per similar molecule
+        :param cutoff: the similarity cutoff
+        """
+        pass
+
+    @abstractmethod
+    def get_precedents(self, target_smi: Smi, cutoff: float, topn: int = 1, **key_atts) -> List[Precedent]:
+        """
+        Get precedents for a target smi
+        :param target_smi: the smiles to compare with
+        :param cutoff: the similarity cutoff
+        :param topn: the number of top enzymes to return per similar molecule
+        """
+        pass
+
+
+class PandasSimilarityScorer(SimilarityScorerInterface):
+    """Get similar precedents leveraging pandas and rdkit"""
 
     def __init__(self,
-                 precedent_data: PrecedentData,
+                 precedent_data: PrecedentDataQuery,
                  ranking_function: Optional[RankingFunction] = None):
 
         self.precedent_data = precedent_data
         self.ranking_function = ranking_function  # optionally ranks results
 
-    def score_data(self, target_smi: Smi, topn: int, cutoff: float, **key_atts):
+    def score_data(self, target_smi: Smi, topn: int, cutoff: float, **key_atts) -> pd.DataFrame:
         """
         Finds similar data to target smi and returns it as a dataframe
         :param target_smi: the smiles to compare with
@@ -42,7 +68,7 @@ class SimilarityScorer():
 
         return result_df
 
-    def get_precedents(self, target_smi: str, cutoff: float, topn: int = 1, **key_atts):
+    def get_precedents(self, target_smi: Smi, cutoff: float, topn: int = 1, **key_atts) -> List[Precedent]:
         result_df = self.score_data(target_smi, topn, cutoff, **key_atts)
         precedents = make_precedents(result_df,
                                      self.precedent_data.enzyme_column,

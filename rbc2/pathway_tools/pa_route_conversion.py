@@ -76,7 +76,7 @@ def get_route_intermediates(pa_route: dict) -> List[str]:
     return intermediates
 
 
-def reactions_from_pa_route(pa_route: dict, reactions: Optional[List[Reaction]] = None, force_rdkit=True, rxn_name='test_set') -> List[Reaction]:
+def reactions_from_pa_route(pa_route: dict, reactions: Optional[List[Reaction]] = None, force_rdkit=True, rxn_name='rxn') -> List[Reaction]:
     """Return a list of reactions from a pa_route"""
     if reactions is None: reactions = []
 
@@ -84,6 +84,8 @@ def reactions_from_pa_route(pa_route: dict, reactions: Optional[List[Reaction]] 
         rxn_smi = pa_route['smiles']
         substrates = rxn_smi.split('>>')[0].split('.')
         product = rxn_smi.split('>>')[1]
+        data = pa_route.get('data', {})   # if reaction has data, add this\
+        unique_id = pa_route.get('unique_id', '')  # empty string will be converted to a uuid in Reaction.__post_init__
 
         if force_rdkit == True:
             substrates = [rdkit_smile(smi) for smi in substrates]
@@ -93,7 +95,9 @@ def reactions_from_pa_route(pa_route: dict, reactions: Optional[List[Reaction]] 
                        product=product,
                        name=rxn_name,
                        rxn_type=rxn_name,
-                       rxn_domain=rxn_name)
+                       rxn_domain=rxn_name,
+                       data=data,
+                       unique_id=unique_id)
         reactions.append(rxn)
 
     for child in pa_route.get('children', []):

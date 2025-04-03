@@ -17,7 +17,7 @@ Please see the documentation for more information.
 
 ## To do
 - [x] Get CI working
-- [ ] Add documentation
+- [x] Add documentation
 - [ ] Improve and document the interface for the starting material evaluator
 
 

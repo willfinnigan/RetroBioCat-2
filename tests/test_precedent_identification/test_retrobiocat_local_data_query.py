@@ -1,19 +1,19 @@
-from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData
+from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentDataQuery
 from rbc2.precedent_identification.similarity_tools import get_single_fp, bulk_similarity
 
 
 def test_local_data_query_object_can_load_data():
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
     local_data.load_df()
     assert local_data.df.shape[0] > 0
 
 def test_local_data_query_object_can_load_fps():
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
     fp_df = local_data.get_fp_df()
     assert fp_df.shape[0] > 0
 
 def test_can_query_local_data():
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
 
     df = local_data.query_data(reaction_name='Carboxylic acid reduction')
     assert list(df['reaction'].unique()) == ['Carboxylic acid reduction']
@@ -25,20 +25,20 @@ def test_can_query_local_data():
     assert list(df['enzyme_type'].unique()) == ['CAR']
 
 def test_local_data_query_can_get_fp():
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
     smi = 'OC1CCC(=CBr)CC1'
     fp = local_data.get_single_fp(smi)
     test_fp = get_single_fp(smi)
     assert fp == test_fp
 
 def test_local_data_query_returns_none_if_not_present():
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
     smi = 'C(N)C(N)C(N)C(N)'
     fp = local_data.get_single_fp(smi)
     assert fp == None
 
 def test_local_data_query_can_return_multiple_fps():
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
     smis = ['CCC=O', 'CCCCC=O']
     fps, fp_smis = local_data.get_fps(smis)
     assert len(fps) == len(fp_smis)
@@ -52,7 +52,7 @@ def test_sims():
     target_smi = 'CCCCCCCCC=O'
     target_fp = get_single_fp(target_smi)
 
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
 
     sims = bulk_similarity(target_fp, smis, local_data.get_fps)
     print(sims)

@@ -27,6 +27,9 @@ class Expansion_Config():
         self.use_max_mw_for_enzymes = False
         self.max_mw_to_use_enzymes = 300
 
+        # logging
+        self.rule_applicator_log_level = 'WARNING'
+
 
     def update_from_dict(self, attr_dict):
         current_dict = self.to_dict()

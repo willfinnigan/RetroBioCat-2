@@ -23,7 +23,6 @@ def load_test_pathway():
     return pathway
 
 
-
 def test_scoring_of_pathway():
     pathway = load_test_pathway()
 

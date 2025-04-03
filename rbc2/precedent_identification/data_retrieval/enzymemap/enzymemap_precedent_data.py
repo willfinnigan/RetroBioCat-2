@@ -4,7 +4,7 @@ import pandas as pd
 
 from rbc2.configs.data_path import path_to_data_folder
 from rbc2.configs.download_data_files.download_enzymemap import does_enzymemap_exist, download_enzymemap
-from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
+from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentDataQuery, get_rxn_smi_vectorized
 from rbc2.precedent_identification.similarity_tools import get_fingerprints
 
 data_folder = f'{path_to_data_folder}/enzymemap/brenda'
@@ -12,7 +12,7 @@ data_folder = f'{path_to_data_folder}/enzymemap/brenda'
 TEMPLATE_ID_COL_NAME = 'corrected_template_default_id'
 METADATA_HDF = 'enzymemap_brenda_metadata.hdf'
 
-class EnzymeMap_Data(PrecedentData):
+class EnzymeMap_DataQuery(PrecedentDataQuery):
     df = None
     fp_df = None
 
@@ -36,7 +36,10 @@ class EnzymeMap_Data(PrecedentData):
 
         self.load_df()
         template_df = self.df[self.df[TEMPLATE_ID_COL_NAME] == str(template_id)].copy()
-        template_df['rxn_smi'] = list(template_df.apply(self.get_rxn_smi, axis=1))
+        #template_df['rxn_smi'] = list(template_df.apply(self.get_rxn_smi, axis=1))
+        template_df.loc[:, 'rxn_smi'] = get_rxn_smi_vectorized(template_df,
+                                                               product_column=self.product_column,
+                                                               substrate_columns=self.substrate_columns)
 
         return template_df
 
@@ -44,7 +47,7 @@ class EnzymeMap_Data(PrecedentData):
         return get_fingerprints(smis)
 
 if __name__ == '__main__':
-    em_data = EnzymeMap_Data()
+    em_data = EnzymeMap_DataQuery()
     em_data.load_df()
     result = em_data.query_data(1)
     #print(result)

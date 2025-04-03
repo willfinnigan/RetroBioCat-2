@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
+from typing import List
+
 import pandas as pd
 
 
@@ -14,7 +16,7 @@ class Precedent:
     similarity: float = 0
 
 
-def make_precedents(df: pd.DataFrame, name_col: str, id_col: str):
+def make_precedents(df: pd.DataFrame, name_col: str, id_col: str) -> List[Precedent]:
     """ Take a dataframe of precedents and create precedent dataclass per row """
     precedents = []
     for i, row in df.iterrows():
@@ -37,7 +39,7 @@ def parse_row_to_dict(row: pd.Series) -> dict:
             data[key] = str(value)
     return data
 
-def make_single_precedent(row: pd.Series | dict, name_col: str, id_col: str):
+def make_single_precedent(row: pd.Series | dict, name_col: str, id_col: str) -> Precedent:
     data = parse_row_to_dict(row)
 
     precedent_id = data.get(id_col, uuid.uuid4())

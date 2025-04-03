@@ -3,12 +3,12 @@ from typing import List
 import pandas as pd
 
 from rbc2.configs.data_path import path_to_data_folder
-from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
+from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentDataQuery, get_rxn_smi_vectorized
 from rbc2.precedent_identification.similarity_tools import make_fp_df, get_fingerprints_from_fpdf
 
 data_folder = f'{path_to_data_folder}/retrobiocat'
 
-class RetroBioCatLocalPrecedentData(PrecedentData):
+class RetroBioCatLocalPrecedentDataQuery(PrecedentDataQuery):
     df = None
     fp_df = None
 
@@ -31,7 +31,12 @@ class RetroBioCatLocalPrecedentData(PrecedentData):
 
     def add_rxn_smis(self):
         if 'rxn_smi' not in self.df.columns:
-            self.df.loc[:, 'rxn_smi'] = self.df.apply(self.get_rxn_smi, axis=1)
+            # self.df.loc[:, 'rxn_smi'] = self.df.apply(self.get_rxn_smi, axis=1)
+            self.df.loc[:, 'rxn_smi'] = get_rxn_smi_vectorized(self.df,
+                                                               product_column=self.product_column,
+                                                               substrate_columns=self.substrate_columns)
+
+
 
     def get_fp_df(self):
         self.load_fp_df()
@@ -70,7 +75,7 @@ class RetroBioCatLocalPrecedentData(PrecedentData):
 
 
 if __name__ == '__main__':
-    local_data = RetroBioCatLocalPrecedentData()
+    local_data = RetroBioCatLocalPrecedentDataQuery()
     #df = local_data.query_data([], [])
     #print(df.head())
     fps, smis = local_data.get_fps(['CCC=O', 'CCCCC=O'])

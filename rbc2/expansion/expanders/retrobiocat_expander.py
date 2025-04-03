@@ -5,10 +5,10 @@ from rbc2.configs.expansion_config import Expansion_Config
 from rbc2.expansion.default_expander import DefaultExpander
 from rbc2.expansion.expanders.retrobiocat_reaction_retrieval.retrobiocat_rxn_loader import RetroBioCat_Reaction_Interface, \
     load_reactions_from_yaml, LoadRBCReactionsFunc
-from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
-from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentData
+from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentDataQuery
+from rbc2.precedent_identification.data_retrieval.retrobiocat.local_data_query import RetroBioCatLocalPrecedentDataQuery
 from rbc2.precedent_identification.data_retrieval.retrobiocat.rank_precedents import get_best_enzymes
-from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
+from rbc2.precedent_identification.similarity_scorer import PandasSimilarityScorer, SimilarityScorerInterface
 from rbc2.reaction_evaluation.starting_material_evaluator.starting_material_evaluator_interface import \
     StartingMaterialEvaluator
 from rbc2.data_model.network import Network
@@ -27,7 +27,7 @@ class RetroBioCatExpander(DefaultExpander):
                  config: Optional[Expansion_Config] = None,
                  starting_material_evaluator: Optional[StartingMaterialEvaluator] = None,
                  rxn_loader_function: LoadRBCReactionsFunc = load_reactions_from_yaml,
-                 precedent_data: Optional[PrecedentData] = None,
+                 similarity_scorer: Optional[SimilarityScorerInterface] = None,
                  include_experimental: bool = False,
                  include_two_step: bool = True,
                  include_requires_absence_of_water: bool = False,
@@ -51,12 +51,12 @@ class RetroBioCatExpander(DefaultExpander):
                                                         include_requires_absence_of_water=include_requires_absence_of_water,
                                                         reverse=reverse_rules,
                                                         use_rdchiral=self.config.use_rdchiral)
+        self.similarity_scorer = similarity_scorer
+        if self.similarity_scorer is None:
+            precedent_data = RetroBioCatLocalPrecedentDataQuery()
+            self.similarity_scorer = PandasSimilarityScorer(precedent_data,
+                                                            ranking_function=get_best_enzymes)
 
-        if precedent_data is None:
-            precedent_data = RetroBioCatLocalPrecedentData()
-
-        self.precedent_scorer = SimilarityScorer(precedent_data,
-                                                 ranking_function=get_best_enzymes)
         self.starting_material_evaluator = starting_material_evaluator   # if not None, will use substrate availability as part of the option score
 
         self.score_similarity_before_option_creation = score_similarity_before_option_creation
@@ -70,11 +70,10 @@ class RetroBioCatExpander(DefaultExpander):
     def precedent_evaluation_function(self, reaction: Reaction):
         if self.search_literature_precedent is False:
             return None
-
-        reaction.precedents = self.precedent_scorer.get_precedents(target_smi=reaction.product,
-                                                                   topn=1,
-                                                                   cutoff=self.similarity_cutoff,
-                                                                   reaction_name=reaction.name)
+        reaction.precedents = self.similarity_scorer.get_precedents(target_smi=reaction.product,
+                                                                    topn=1,
+                                                                    cutoff=self.similarity_cutoff,
+                                                                    reaction_name=reaction.name)
 
     def final_processing_function(self, reactions):
         if self.require_precedent == True:

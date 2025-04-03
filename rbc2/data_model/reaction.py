@@ -17,8 +17,12 @@ class Reaction():
 
     template_metadata: dict[str: dict] = field(default_factory=dict)
     precedents: List[Precedent] = field(default_factory=list)
+    data: dict = field(default_factory=dict)  # for anything else that isn't template data or similar precedents
+
     feasability_filter_scores: dict[str: float] = field(default_factory=dict)
     complexity_change: Optional[float] = None
+
+
 
     def __post_init__(self):
         if self.unique_id == '':
@@ -42,7 +46,9 @@ class Reaction():
         return self.precedents[0].similarity
 
     def reaction_smiles(self) -> str:
-        rxn_smi = ".".join(self.substrates)
+        rxn_smi = ''
+        if len(self.substrates) != 0:
+            rxn_smi += ".".join(self.substrates)
         rxn_smi += '>>'
         rxn_smi += self.product
         return rxn_smi
@@ -68,8 +74,10 @@ def reaction_from_dict(reaction_dict) -> Reaction:
                     score=reaction_dict.get('score', 0),
                     precedents=[Precedent(**precedent_dict) for precedent_dict in reaction_dict.get('precedents', [])],
                     template_metadata=reaction_dict.get('template_metadata', {}),
+                    data=reaction_dict.get('data', {}),
                     feasability_filter_scores=reaction_dict.get('feasability_filter_scores', {}),
                     complexity_change=reaction_dict.get('complexity_change', None))
+
 
 def reactions_to_dicts(reactions: List[Reaction]) -> List[dict]:
     """ Converts a list of reactions to a list of dictionaries, such as would be returned by asdict(Reaction) """

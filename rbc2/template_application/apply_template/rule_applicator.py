@@ -15,15 +15,17 @@ from rbc2.configs.expansion_config import Expansion_Config
 
 class RuleApplicator():
 
-    def __init__(self, config=None, log_level='WARNING'):
+    def __init__(self, config=None):
         self.config = config
         if self.config is None:
             self.config = Expansion_Config()
 
-        self.rdkit_applicator = RdKit_Applicator(config=self.config, log_level=log_level)
-        self.rdchiral_applicator = RdChiral_Applicator(config=self.config, log_level=log_level)
-        self.multi_step_applicator = Multi_step_applicator(config=self.config, log_level=log_level)
-        self.logger = add_logger('RuleApplicator', level=log_level)
+        self.logger = add_logger('RuleApplicator', level=self.config.rule_applicator_log_level)
+
+        self.rdkit_applicator = RdKit_Applicator(config=self.config, log_level=self.config.rule_applicator_log_level)
+        self.rdchiral_applicator = RdChiral_Applicator(config=self.config, log_level=self.config.rule_applicator_log_level)
+        self.multi_step_applicator = Multi_step_applicator(config=self.config, log_level=self.config.rule_applicator_log_level)
+        self.logger = add_logger('RuleApplicator', level=self.config.rule_applicator_log_level)
         self.rule_applications = 0
 
     def apply(self, smi: str, rxns: dict[str: List],
@@ -120,7 +122,7 @@ class RuleApplicator():
 
 if __name__ == '__main__':
 
-    applier = RuleApplicator(log_level='DEBUG')
+    applier = RuleApplicator()
 
     rxn1 = '[#6X4;z1:2]-[#7X3;z0:3]>>[#6X3;z1:2]=[#7X2;z0:3]'
     rxn2 = '[#6:1]-[#6@@H;X4:3](-[#6:2])-[#7X3;z0:4]>>[#6:1]-[#6H0;X3:3](-[#6:2])=[#7X2;z0:4]'

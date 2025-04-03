@@ -1,0 +1,3 @@
+{"type":"mol","smiles":"N[C@@H](Cc1cc(F)cc(F)c1)c1nc(Br)ccc1Br",
+  "children":[{"type":"reaction",
+    "smiles":"CC(C)(C)[S@](=O)/N=C\\c1nc(Br)ccc1Br.Fc1cc(F)cc(CBr)c1>>N[C@@H](Cc1cc(F)cc(F)c1)c1nc(Br)ccc1Br","children":[{"type":"mol","smiles":"CC(C)(C)[S@](=O)/N=C\\c1nc(Br)ccc1Br","children":[{"type":"reaction","smiles":"O=Cc1nc(Br)ccc1Br.CC(C)(C)[S@@](N)=O>>CC(C)(C)[S@](=O)/N=C\\c1nc(Br)ccc1Br","children":[{"type":"mol","smiles":"O=Cc1nc(Br)ccc1Br","in_stock":false},{"type":"mol","smiles":"CC(C)(C)[S@@](N)=O","in_stock":true}]}],"in_stock":false},{"type":"mol","smiles":"Fc1cc(F)cc(CBr)c1","in_stock":true}]}],"in_stock":false}

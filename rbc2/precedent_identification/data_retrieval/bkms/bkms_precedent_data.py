@@ -4,12 +4,12 @@ import pandas as pd
 
 from rbc2.configs.data_path import path_to_data_folder
 from rbc2.configs.download_data_files.download_bkms import does_bkms_exist, download_bkms_model
-from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
+from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentDataQuery
 from rbc2.precedent_identification.similarity_tools import get_fingerprints
 
 data_folder = f'{path_to_data_folder}/bkms'
 
-class BKMS_Data(PrecedentData):
+class BKMS_DataQuery(PrecedentDataQuery):
     df = None
     fp_df = None
 
@@ -42,7 +42,7 @@ class BKMS_Data(PrecedentData):
         return get_fingerprints(smis)
 
 if __name__ == '__main__':
-    bkms_data = BKMS_Data()
+    bkms_data = BKMS_DataQuery()
     bkms_data.load_df()
     query_ids = [4417, 4418, 4419, 4420, 4421, 4422, 4423, 4424, 4425, 4426, 4427, 4428, 4429, 4430, 4431, 4432, 4433, 4434, 4435, 4436, 4437, 4438, 4439, 4440, 4441, 4442, 4443, 4444, 4445, 4446, 4447, 4448, 4449, 4450, 4451, 4452, 4453, 4454, 4455, 4456, 4457, 4458]
     result = bkms_data.query_data(query_ids)

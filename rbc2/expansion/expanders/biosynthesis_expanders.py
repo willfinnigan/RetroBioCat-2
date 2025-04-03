@@ -10,10 +10,10 @@ from rbc2.expansion.expanders.policy_models.enzymemap.enzymemap_action_getter im
     EnzymeMap_Action_Getter
 from rbc2.expansion.expanders.policy_models.retrorules.retrorules_getter import RetroRules_Getter
 from rbc2.expansion.default_expander import DefaultExpander
-from rbc2.precedent_identification.data_retrieval.bkms.bkms_precedent_data import BKMS_Data
-from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentData
-from rbc2.precedent_identification.data_retrieval.enzymemap.enzymemap_precedent_data import EnzymeMap_Data
-from rbc2.precedent_identification.similarity_scorer import SimilarityScorer
+from rbc2.precedent_identification.data_retrieval.bkms.bkms_precedent_data import BKMS_DataQuery
+from rbc2.precedent_identification.data_retrieval.data_interface import PrecedentDataQuery
+from rbc2.precedent_identification.data_retrieval.enzymemap.enzymemap_precedent_data import EnzymeMap_DataQuery
+from rbc2.precedent_identification.similarity_scorer import PandasSimilarityScorer
 from rbc2.data_model.network import Network
 from rbc2.data_model.reaction import Reaction
 
@@ -86,7 +86,7 @@ class BKMSExpander(DefaultExpander):
     def __init__(self,
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None,
-                 precedent_data: Optional[PrecedentData] = None,
+                 precedent_data: Optional[PrecedentDataQuery] = None,
                  cutoff_cumulative=0.995,
                  cutoff_number=50,
                  allow_multi_product_templates=False,
@@ -105,8 +105,8 @@ class BKMSExpander(DefaultExpander):
         self.score_key = 'score'
 
         if precedent_data is None:
-            precedent_data = BKMS_Data()
-        self.precedent_scorer = SimilarityScorer(precedent_data)
+            precedent_data = BKMS_DataQuery()
+        self.precedent_scorer = PandasSimilarityScorer(precedent_data)
 
         self.require_precedent = require_precedent
 
@@ -138,7 +138,7 @@ class EnzymeMapExpander(DefaultExpander):
     def __init__(self,
                  network: Network = None,
                  config: Expansion_Config = None,
-                 precedent_data: PrecedentData = None,
+                 precedent_data: PrecedentDataQuery = None,
                  cutoff_cumulative=0.995,
                  cutoff_number=50,
                  enable_precedent_search=True,
@@ -156,8 +156,8 @@ class EnzymeMapExpander(DefaultExpander):
         self.rxn_domain = 'biosynthesis'
         self.score_key = 'score'
         if precedent_data is None:
-            precedent_data = EnzymeMap_Data()
-        self.precedent_scorer = SimilarityScorer(precedent_data)
+            precedent_data = EnzymeMap_DataQuery()
+        self.precedent_scorer = PandasSimilarityScorer(precedent_data)
 
         self._load_cofactor_csv()
 
