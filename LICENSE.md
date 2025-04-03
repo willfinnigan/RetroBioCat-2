@@ -25,14 +25,3 @@ You do not have to comply with the license for elements of the material in the p
 
 No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
 
-## How to apply this license to your work:
-
-To apply this license to your software or other creative work, include the following text with your work:
-
-```
-This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
-To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/ or send a letter to
-Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
-```
-
-You may also include the CC BY-NC icon with your work, which can be downloaded from the Creative Commons website.
