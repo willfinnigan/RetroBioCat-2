@@ -1,6 +1,7 @@
 rdkit>=2021.03.5
 scikit-learn>=1.0.0
 tensorflow>=2.13.0
+scipy==1.13.1
 pytest
 sqlalchemy
 six
@@ -12,5 +13,5 @@ jupyter
 tqdm
 gdown
 mkdocs
-protobuf<=3.20.3
+protobuf>=5.0.0,<6.0.0
 numpy==1.26.4
