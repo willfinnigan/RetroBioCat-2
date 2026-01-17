@@ -144,6 +144,23 @@ class RetroBioCat_Reaction_Interface():
                 self.multi_rxns[reaction.name] = self.get_multi_smarts_from_named_steps(self.rxns,
                                                                                         reaction.steps,)
 
+                # add enzymes from two-step reactions to the enzyme map
+                # for YAML reactions, enzymes is a dict with enzyme names as keys
+                # for MongoDB reactions, enzymes is a list of enzyme names
+                if isinstance(reaction.enzymes, dict):
+                    for enzyme in reaction.enzymes.keys():
+                        enzyme_names.add(enzyme)
+                        self.reaction_enzyme_map.setdefault(reaction.name, set()).add(enzyme)
+                elif isinstance(reaction.enzymes, list):
+                    for enzyme in reaction.enzymes:
+                        enzyme_names.add(enzyme)
+                        self.reaction_enzyme_map.setdefault(reaction.name, set()).add(enzyme)
+
+                # update the reactions and enzymes lists
+                self.reactions = list(reaction_names | {reaction.name})
+                self.enzymes = list(enzyme_names)
+                self.reaction_enzyme_map = {k: list(v) for k, v in self.reaction_enzyme_map.items()}
+
     def get_multi_smarts_from_named_steps(self, rxns, steps) -> List[List[List]]:
         processed_steps = []
         for group_steps in steps:

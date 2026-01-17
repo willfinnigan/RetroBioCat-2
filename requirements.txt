@@ -1,6 +1,6 @@
 rdkit>=2021.03.5
 scikit-learn>=1.0.0
-tensorflow>=2.6.0,<=2.8.0
+tensorflow>=2.13.0
 pytest
 sqlalchemy
 six

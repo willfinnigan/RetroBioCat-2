@@ -57,6 +57,10 @@ def get_rxn_smi_vectorized(df, product_column, substrate_columns):
     mask = joined_substrates != ''
     rxn_smiles[mask] = joined_substrates[mask] + '>>' + products[mask]
 
+    # For rows without substrates but with products, create rxn_smi as ">>product"
+    mask_no_substrates = (joined_substrates == '') & (products != '')
+    rxn_smiles[mask_no_substrates] = '>>' + products[mask_no_substrates]
+
     return rxn_smiles
 
 
