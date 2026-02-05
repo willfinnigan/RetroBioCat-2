@@ -30,7 +30,7 @@ class rdchiralReaction(object):
     Args:
         reaction_smarts (str): Reaction SMARTS string
     '''
-    def __init__(self, reaction_smarts, remove_incorrect_atom_numbering=True):
+    def __init__(self, reaction_smarts, remove_incorrect_atom_numbering=True, check_consistency=False):
         # Keep smarts, useful for reporting
         if remove_incorrect_atom_numbering==True:
             reaction_smarts = check_atom_numbering(reaction_smarts)
@@ -55,9 +55,10 @@ class rdchiralReaction(object):
             for a in self.template_p.GetAtoms()}
 
         # Check consistency (this should not be necessary...)
-        if any(self.atoms_rt_map[i].GetAtomicNum() != self.atoms_pt_map[i].GetAtomicNum() \
-                for i in self.atoms_rt_map if i in self.atoms_pt_map):
-            raise ValueError('Atomic identity should not change in a reaction!')
+        if check_consistency == True:
+            if any(self.atoms_rt_map[i].GetAtomicNum() != self.atoms_pt_map[i].GetAtomicNum() \
+                    for i in self.atoms_rt_map if i in self.atoms_pt_map):
+                raise ValueError('Atomic identity should not change in a reaction!')
 
         # Call template_atom_could_have_been_tetra to pre-assign value to atom
         [template_atom_could_have_been_tetra(a) for a in self.template_r.GetAtoms()]
