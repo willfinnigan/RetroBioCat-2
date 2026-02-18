@@ -1,3 +1,5 @@
+from itertools import permutations
+
 from rdkit import Chem
 from rdkit.Chem import rdChemReactions
 
@@ -34,7 +36,12 @@ class RdKit_Applicator():
             return []
 
         try:
-            products = rxn.RunReactants(reactant)
+            if len(reactant) > 1:
+                products = []
+                for perm in permutations(reactant):
+                    products.extend(rxn.RunReactants(tuple(perm)))
+            else:
+                products = rxn.RunReactants(tuple(reactant))
             products = self.rdkit_out_to_rdchiral_output(products)
             return products
 

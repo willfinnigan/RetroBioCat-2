@@ -52,3 +52,13 @@ def test_multi_reactant_rule():
     rxns = applicator.get_rxns(["[#6:1]=[O:2].[#6:3]-[N:4]>>[#6:1]-[N:4]-[#6:3]"])
     reactant = applicator.get_reactant('C=O.CN')
     products = applicator.apply_reactions(reactant, rxns)
+
+def test_multi_reactant_rule_with_reversed_order():
+    """Reactants given in opposite order to SMARTS template should still produce results via permutation."""
+    applicator = RdKit_Applicator()
+    # SMARTS expects ketone first, amine second
+    rxns = applicator.get_rxns(["[#6:1]=[O:2].[#6:3]-[N:4]>>[#6:1]-[N:4]-[#6:3]"])
+    # Input has amine first, ketone second
+    reactant = applicator.get_reactant('CN.C=O')
+    products = applicator.apply_reactions(reactant, rxns)
+    assert len(products) > 0
