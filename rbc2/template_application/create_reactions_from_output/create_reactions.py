@@ -32,9 +32,7 @@ def create_reactions(target_smi: str,
 
             if fwd_rxn == True:
                 # then the target smi is the substrate(s), and the outcomes are products.  Flip these for creation.
-                if len(rxn_outcome) > 1:
-                    raise Exception("Fwd reaction application should only have one product")
-                product = rxn_outcome[0]  # only one product is expected
+                product = '.'.join(rxn_outcome)
                 substrates = target_smi.split('.')  # list of substrates is expected
             else:
                 product = target_smi

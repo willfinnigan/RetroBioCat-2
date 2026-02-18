@@ -8,7 +8,7 @@ setup(
   packages = find_packages(include=['rbc2', 'rbc2.*']),
   include_package_data=True,
   install_requires=requirements,
-  version = '2026.02.05',
+  version = '2026.02.18',
   license='',
   description = 'RetroBioCat 2.0',
   author = 'William Finnigan',
