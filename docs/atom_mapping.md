@@ -177,10 +177,3 @@ same template match always map to the same target atoms.
 - Expanders other than RetroBioCat — same, no key present
 - Use `rxn.data.get('atom_mapping', [])` to safely handle both cases
 
-## Examples
-
-See `examples/` for runnable scripts:
-
-- `examples/atom_mapping_example.py` — low-level through full pipeline
-- `examples/atom_mapping_edge_cases.py` — stereochemistry, dedup, serialization
-- `examples/retrobiocat_atom_mapping.py` — RetroBioCat expander with single-step and multi-step
