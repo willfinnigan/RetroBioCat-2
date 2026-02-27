@@ -1,6 +1,7 @@
 from typing import List, Optional
 from rbc2.configs.mcts_config import MCTS_Config
 from rbc2.pathway_tools.pathway_context_checking import number_of_chemistry_reactions, \
+    number_of_biocatalysis_reactions, \
     is_previous_reaction_chemistry, count_continuous_previous_chemistry_reactions, \
     count_continous_reactions
 from rbc2.data_model.pathway import Pathway
@@ -18,6 +19,20 @@ def filter_by_max_chemistry_nodes(options: List[ReactionOption],
     # if we're at max chemistry nodes, remove all chemistry options
     if number_of_chemistry_reactions(pathway) >= max_chemistry:  # no more chemistry allowed
         options = [opt for opt in options if opt.rxn_domain != 'chemistry']
+
+    return options
+
+
+def filter_by_max_biocatalysis_nodes(options: List[ReactionOption],
+                                     pathway: Pathway,
+                                     max_biocatalysis: int) -> List[ReactionOption]:
+    """ If there is a max biocatalysis option, ensure we don't go over this"""
+
+    if max_biocatalysis is None:
+        return options
+
+    if number_of_biocatalysis_reactions(pathway) >= max_biocatalysis:
+        options = [opt for opt in options if opt.rxn_domain == 'chemistry']
 
     return options
 
@@ -76,6 +91,9 @@ def apply_criteria_based_filtering(options: List[ReactionOption],
 
     # overall max chemistry nodes allowed
     options = filter_by_max_chemistry_nodes(options, pathway, mcts_config.max_chemistry_nodes)
+
+    # overall max biocatalysis nodes allowed
+    options = filter_by_max_biocatalysis_nodes(options, pathway, mcts_config.max_biocatalysis_nodes)
 
     # filtering if there are limitations on use of chemistry and beginning/end
     if mcts_config.chemistry_only_at_beginning_or_end == True:

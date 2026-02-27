@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"BrC(N=C1[C@H](O)C)=CC=C1N2N=CC=C2","children":[{"type":"reaction","smiles":"BrC(N=C1[C@H](O)C)=CC=C1N2N=CC=C2>>CC(=O)c1nc(Br)ccc1-n1cccn1_rxnto_BrC(N=C1[C@H](O)C)=CC=C1N2N=CC=C2","children":[{"type":"mol","smiles":"CC(=O)c1nc(Br)ccc1-n1cccn1","in_stock":false}]}],"in_stock":false}

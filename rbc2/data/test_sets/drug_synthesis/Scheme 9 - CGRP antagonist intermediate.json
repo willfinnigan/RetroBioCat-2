@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"F[C@H]([C@H](N)CC1)CN1C2CCOCC2","children":[{"type":"reaction","smiles":"F[C@H]([C@H](N)CC1)CN1C2CCOCC2>>F[C@H]([C@H](NC(C1=CC=CC=C1)=O)CC2)CN2C3CCOCC3_rxnto_F[C@H]([C@H](N)CC1)CN1C2CCOCC2","children":[{"type":"mol","smiles":"F[C@H]([C@H](NC(C1=CC=CC=C1)=O)CC2)CN2C3CCOCC3","in_stock":false}]}],"in_stock":false}

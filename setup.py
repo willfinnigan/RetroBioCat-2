@@ -8,7 +8,7 @@ setup(
   packages = find_packages(include=['rbc2', 'rbc2.*']),
   include_package_data=True,
   install_requires=requirements,
-  version = '2026.02.18b',
+  version = '2026.02.27',
   license='',
   description = 'RetroBioCat 2.0',
   author = 'William Finnigan',
@@ -18,6 +18,5 @@ setup(
   keywords = ['enzyme'],
   classifiers=[
     'Development Status :: 3 - Alpha',
-    'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 3'],
 )

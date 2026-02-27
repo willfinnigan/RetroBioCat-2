@@ -55,3 +55,8 @@ Thumbs.db
 
 # Jupyter Notebook
 .ipynb_checkpoints/
+
+# Large data/model files
+rbc2/data/data/
+rbc2/data/template_free/
+rbc2/data/askcos/fast_filter/

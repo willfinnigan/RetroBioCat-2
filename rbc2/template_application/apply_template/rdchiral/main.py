@@ -92,11 +92,11 @@ def rdchiralRunText(reaction_smarts, reactant_smiles, **kwargs):
     return rdchiralRun(rxn, reactants, **kwargs)
 
 def rdchiralRun(rxn, reactants, keep_mapnums=False, combine_enantiomers=True, return_mapped=False,
-                check_chiral_products=True, allow_chiral_symmetry=False):
+                check_chiral_products=True, allow_chiral_symmetry=False, return_atom_mapping=False):
     '''Run rdchiral reaction
 
     NOTE: there is a fair amount of initialization (assigning stereochem), most
-    importantly assigning atom map numbers to the reactant atoms. It is 
+    importantly assigning atom map numbers to the reactant atoms. It is
     HIGHLY recommended to use the custom classes for initialization.
 
     Args:
@@ -105,10 +105,14 @@ def rdchiralRun(rxn, reactants, keep_mapnums=False, combine_enantiomers=True, re
         keep_mapnums (bool): Whether to keep map numbers or not
         combine_enantiomers (bool): Whether to combine enantiomers
         return_mapped (bool): Whether to additionally return atom mapped SMILES strings
+        return_atom_mapping (bool): Whether to additionally return atom mapping dicts.
+            Each dict maps template atom map number -> input (reactant/target) molecule atom index (0-based).
+            In retrosynthesis, the "input" molecule is the target product being disconnected.
 
     Returns:
         (list, str (optional)): Returns list of outcomes. If `return_mapped` is True,
-            additionally return atom mapped SMILES strings
+            additionally return atom mapped SMILES strings. If `return_atom_mapping` is True,
+            additionally return dict of {smiles: {template_mapnum: mol_atom_idx}}.
     '''
 
     # New: reset atom map numbers for templates in case they have been overwritten
@@ -120,7 +124,14 @@ def rdchiralRun(rxn, reactants, keep_mapnums=False, combine_enantiomers=True, re
     outcomes = rxn.rxn.RunReactants((reactants.reactants_achiral,))
     if PLEVEL >= (1): print('Using naive RunReactants, {} outcomes'.format(len(outcomes)))
     if not outcomes:
-        return []
+        if return_mapped and return_atom_mapping:
+            return [], {}, {}
+        elif return_mapped:
+            return [], {}
+        elif return_atom_mapping:
+            return [], {}
+        else:
+            return []
     ###############################################################################
     
 
@@ -129,6 +140,7 @@ def rdchiralRun(rxn, reactants, keep_mapnums=False, combine_enantiomers=True, re
 
     final_outcomes = set()
     mapped_outcomes = {}
+    atom_mapping_dict = {}
     # We need to keep track of what map numbers correspond to which atoms
     # note: all reactant atoms must be mapped, so this is safe
     atoms_r = reactants.atoms_r
@@ -167,6 +179,17 @@ def rdchiralRun(rxn, reactants, keep_mapnums=False, combine_enantiomers=True, re
         # Define map num -> reactant template atom map
         atoms_rt =  {a.GetAtomMapNum(): atoms_rt_map[a.GetIntProp('old_mapno')] \
             for m in outcome for a in m.GetAtoms() if a.HasProp('old_mapno')}
+
+        # Build template-to-molecule atom mapping if requested
+        if return_atom_mapping:
+            template_to_mol = {}
+            for m in outcome:
+                for a in m.GetAtoms():
+                    if a.HasProp('old_mapno'):
+                        original_mapnum = a.GetIntProp('old_mapno')
+                        if original_mapnum < 700:  # only template-specified atoms, not unmapped (700+)
+                            mol_atom_idx = a.GetAtomMapNum() - 1  # map nums are 1-indexed atom indices
+                            template_to_mol[original_mapnum] = mol_atom_idx
 
         # Set map numbers of reactant template to be consistent with reactant/product molecules
         # note: this is okay to do within the loop, because ALL atoms must be matched
@@ -522,13 +545,33 @@ def rdchiralRun(rxn, reactants, keep_mapnums=False, combine_enantiomers=True, re
 
         final_outcomes.add(smiles_new)
         mapped_outcomes[smiles_new] = (mapped_outcome, atoms_changed)
+        if return_atom_mapping and smiles_new not in atom_mapping_dict:
+            atom_mapping_dict[smiles_new] = template_to_mol
     ###############################################################################
     # One last fix for consolidating multiple stereospecified products...
     if combine_enantiomers:
+        pre_racemic = set(final_outcomes)
         final_outcomes = combine_enantiomers_into_racemic(final_outcomes)
+        # Re-key atom_mapping_dict: racemized SMILES replace stereospecific ones
+        if return_atom_mapping:
+            new_smiles = final_outcomes - pre_racemic
+            removed_smiles = pre_racemic - final_outcomes
+            for new_smi in new_smiles:
+                # Find a removed stereospecific key that has a mapping
+                for old_smi in removed_smiles:
+                    if old_smi in atom_mapping_dict:
+                        atom_mapping_dict[new_smi] = atom_mapping_dict[old_smi]
+                        break
+            # Clean up stale stereospecific keys
+            for old_smi in removed_smiles:
+                atom_mapping_dict.pop(old_smi, None)
     ###############################################################################
-    if return_mapped:
+    if return_mapped and return_atom_mapping:
+        return list(final_outcomes), mapped_outcomes, atom_mapping_dict
+    elif return_mapped:
         return list(final_outcomes), mapped_outcomes
+    elif return_atom_mapping:
+        return list(final_outcomes), atom_mapping_dict
     else:
         return list(final_outcomes)
 

@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"N[C@H]1CC[C@H](CO)CC1","children":[{"type":"reaction","smiles":"N[C@@H]1CC[C@H]2CO[C@@H]1O2>>N[C@H]1CC[C@H](CO)CC1"}],"in_stock":true}

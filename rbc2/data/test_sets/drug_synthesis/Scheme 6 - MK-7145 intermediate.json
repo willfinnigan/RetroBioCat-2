@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"O=C(OC1)C2=C1C(C)=C([C@@H]3CO3)C=C2","children":[{"type":"reaction","smiles":"O=C(OC1)C2=C1C(C)=C([C@@H]3CO3)C=C2>>Cc1c([C@@H](O)CBr)ccc2c1COC2=O_rxnto_O=C(OC1)C2=C1C(C)=C([C@@H]3CO3)C=C2","children":[{"type":"mol","smiles":"Cc1c([C@@H](O)CBr)ccc2c1COC2=O","in_stock":false}]}],"in_stock":false}

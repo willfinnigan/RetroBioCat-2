@@ -15,3 +15,6 @@ gdown
 mkdocs
 protobuf>=5.0.0,<6.0.0
 numpy==1.26.4
+torch>=2.0.0
+OpenNMT-py==2.3.0
+networkx

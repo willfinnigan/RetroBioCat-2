@@ -16,18 +16,18 @@ def create_reactions(target_smi: str,
                      metadata: Optional[dict] = None,
                      rxn_type: str = '',
                      rxn_domain: str = '',
-                     fwd_rxn=False) -> List[Reaction]:
+                     fwd_rxn=False,
+                     atom_mappings: Optional[dict] = None) -> List[Reaction]:
 
     if metadata is None:
         metadata = {}
 
-
     new_reactions = []
     for rxn_name, outcome_list in outcomes_dict.items():
-
-
         rxn_metadata = metadata.get(rxn_name, {})
-        for rxn_outcome in outcome_list:
+        mapping_list = atom_mappings.get(rxn_name, []) if atom_mappings else []
+
+        for i, rxn_outcome in enumerate(outcome_list):
             unique_id = make_unique_id(rxn_name)
 
             if fwd_rxn == True:
@@ -38,6 +38,23 @@ def create_reactions(target_smi: str,
                 product = target_smi
                 substrates = rxn_outcome
 
+            data = {}
+            if atom_mappings is not None:
+                mapping = mapping_list[i] if i < len(mapping_list) else {}
+                if isinstance(mapping, list):
+                    # Multi-step: already a chain of step dicts
+                    data['atom_mapping'] = mapping
+                else:
+                    # Single-step: wrap flat mapping dict in step format
+                    data['atom_mapping'] = [
+                        {
+                            'rxn_name': rxn_name,
+                            'target_smi': product,
+                            'substrate_smis': substrates,
+                            'mapping': mapping
+                        }
+                    ]
+
             reaction = Reaction(product=product,
                                 substrates=substrates,
                                 unique_id=unique_id,
@@ -45,7 +62,8 @@ def create_reactions(target_smi: str,
                                 rxn_type=rxn_type,
                                 rxn_domain=rxn_domain,
                                 template_metadata={rxn_name: rxn_metadata},
-                                score=score)
+                                score=score,
+                                data=data)
             new_reactions.append(reaction)
 
     return new_reactions

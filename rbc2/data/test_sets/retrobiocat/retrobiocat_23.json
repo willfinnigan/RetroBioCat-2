@@ -1,0 +1,1 @@
+{"type": "mol", "smiles": "CCCCCCN", "in_stock": false, "children": [{"type": "reaction", "smiles": "CCCCCC=O>>CCCCCCN", "children": [{"type": "mol", "smiles": "CCCCCC=O", "in_stock": true, "children": [{"type": "reaction", "smiles": "CCCCCC(=O)O>>CCCCCC=O", "children": [{"type": "mol", "smiles": "CCCCCC(=O)O", "in_stock": true}]}]}]}]}

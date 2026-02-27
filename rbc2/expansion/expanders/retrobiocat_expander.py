@@ -22,6 +22,8 @@ from rbc2.template_application.create_reactions_from_output.process_reactions im
 
 class RetroBioCatExpander(DefaultExpander):
 
+    supports_atom_mapping: bool = True
+
     def __init__(self,
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None,
@@ -176,7 +178,15 @@ class RetroBioCatExpander(DefaultExpander):
             single_step_rxns = {name: rxns for name, rxns in single_step_rxns.items() if name in self.only_named_reactions}
             multi_step_rxns = {name: rxns for name, rxns in multi_step_rxns.items() if name in self.only_named_reactions}
 
-        outcomes = self.rule_applicator.apply(target_smi, single_step_rxns, multistep_rxns=multi_step_rxns)
+        use_atom_mapping = self.config.store_atom_mappings and self.supports_atom_mapping
+
+        if use_atom_mapping:
+            outcomes, atom_mappings = self.rule_applicator.apply(
+                target_smi, single_step_rxns, multistep_rxns=multi_step_rxns,
+                return_atom_mapping=True)
+        else:
+            outcomes = self.rule_applicator.apply(target_smi, single_step_rxns, multistep_rxns=multi_step_rxns)
+            atom_mappings = None
 
         metadata = self._get_metadata(list(outcomes.keys()))
         reactions = create_reactions(target_smi,
@@ -184,7 +194,8 @@ class RetroBioCatExpander(DefaultExpander):
                                      metadata=metadata,
                                      rxn_type=self.rxn_type,
                                      rxn_domain=self.rxn_domain,
-                                     fwd_rxn=self.reverse_rules)
+                                     fwd_rxn=self.reverse_rules,
+                                     atom_mappings=atom_mappings)
 
         reactions = reaction_sanity_check(reactions)
 

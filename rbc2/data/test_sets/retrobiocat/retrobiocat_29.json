@@ -1,0 +1,1 @@
+{"type": "mol", "smiles": "CC1CCC(=O)N1", "in_stock": false, "children": [{"type": "reaction", "smiles": "COC(=O)CCC(C)N>>CC1CCC(=O)N1", "children": [{"type": "mol", "smiles": "COC(=O)CCC(C)N", "in_stock": false, "children": [{"type": "reaction", "smiles": "COC(=O)CCC(C)=O>>COC(=O)CCC(C)N", "children": [{"type": "mol", "smiles": "COC(=O)CCC(C)=O", "in_stock": true}]}]}]}]}

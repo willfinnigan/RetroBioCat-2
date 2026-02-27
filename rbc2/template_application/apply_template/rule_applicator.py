@@ -29,7 +29,8 @@ class RuleApplicator():
         self.rule_applications = 0
 
     def apply(self, smi: str, rxns: dict[str: List],
-              multistep_rxns=None, template_flags: Optional[dict] = None):
+              multistep_rxns=None, template_flags: Optional[dict] = None,
+              return_atom_mapping=False):
 
         self.rule_applications += sum([len(v) for v in rxns.values()])
 
@@ -38,15 +39,31 @@ class RuleApplicator():
         else:
             applicator = self.rdkit_applicator
 
-        product_dict = applicator.apply_rules(smi, rxns)
+        if return_atom_mapping and self.config.use_rdchiral:
+            product_dict, atom_mappings = applicator.apply_rules(smi, rxns,
+                                                                  return_atom_mapping=True)
+        else:
+            product_dict = applicator.apply_rules(smi, rxns)
+            atom_mappings = {}
+            if return_atom_mapping and not self.config.use_rdchiral:
+                self.logger.warning("return_atom_mapping is only supported with rdchiral; returning empty atom_mappings")
+
         if multistep_rxns is not None:
-            multi_product_dict = self.multi_step_applicator.apply_multi_step_rules(applicator,
-                                                                                   smi,
-                                                                                   multistep_rxns)
+            if return_atom_mapping:
+                multi_product_dict, multi_mapping_dict = self.multi_step_applicator.apply_multi_step_rules(
+                    applicator, smi, multistep_rxns, return_atom_mapping=True)
+                atom_mappings.update(multi_mapping_dict)
+            else:
+                multi_product_dict = self.multi_step_applicator.apply_multi_step_rules(
+                    applicator, smi, multistep_rxns)
             product_dict.update(multi_product_dict)
 
-        product_dict = self._apply_template_flag_checks(smi, product_dict, template_flags)
+        if return_atom_mapping:
+            product_dict, atom_mappings = self._apply_template_flag_checks_with_mappings(
+                smi, product_dict, template_flags, atom_mappings)
+            return product_dict, atom_mappings
 
+        product_dict = self._apply_template_flag_checks(smi, product_dict, template_flags)
         return product_dict
 
     # def _get_correct_format_rxns(self, rxns: List):
@@ -77,6 +94,25 @@ class RuleApplicator():
     #     return rxns
 
 
+
+    def _apply_template_flag_checks_with_mappings(self, target_smi: str, product_dict: dict[str: list],
+                                                      template_flags: Optional[dict], atom_mappings: dict):
+        checked_product_dict = defaultdict(list)
+        checked_mappings = defaultdict(list)
+
+        if template_flags is None:
+            template_flags = {}
+
+        for name, outcome_list in product_dict.items():
+            flags = template_flags.get(name, None)
+            mapping_list = atom_mappings.get(name, [])
+            for i, rxn_outcome in enumerate(outcome_list):
+                if self._does_rxn_outcome_pass_checks(target_smi, rxn_outcome, flags) is True:
+                    checked_product_dict[name].append(rxn_outcome)
+                    if i < len(mapping_list):
+                        checked_mappings[name].append(mapping_list[i])
+
+        return checked_product_dict, dict(checked_mappings)
 
     def _apply_template_flag_checks(self, target_smi: str, product_dict: dict[str: list], template_flags: Optional[dict]):
         checked_product_dict = defaultdict(list)

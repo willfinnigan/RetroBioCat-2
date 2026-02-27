@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"CCCCCCCCCCN","children":[{"type":"reaction","smiles":"CCCCCCCCCC=O>>CCCCCCCCCCN","children":[{"type":"mol","smiles":"CCCCCCCCCC=O","children":[{"type":"reaction","smiles":"CCCCCCCCCCO>>CCCCCCCCCC=O","children":[{"type":"mol","smiles":"CCCCCCCCCCO","in_stock":true}]}],"in_stock":true}]}],"in_stock":false}

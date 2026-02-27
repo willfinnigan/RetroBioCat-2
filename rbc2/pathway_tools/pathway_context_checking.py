@@ -73,3 +73,11 @@ def get_non_chemistry_reactions(pathway: Pathway) -> list:
 def number_of_chemistry_reactions(pathway: Pathway) -> int:
     """ Return the number of chemistry reactions in the pathway """
     return len(get_chemistry_reactions(pathway))
+
+def get_biocatalysis_reactions(pathway: Pathway) -> list:
+    """ Return the biocatalysis/biosynthesis reactions in the pathway """
+    return [rxn for rxn in pathway.reactions if rxn.rxn_domain != 'chemistry']
+
+def number_of_biocatalysis_reactions(pathway: Pathway) -> int:
+    """ Return the number of biocatalysis/biosynthesis reactions in the pathway """
+    return len(get_biocatalysis_reactions(pathway))

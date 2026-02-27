@@ -1,5 +1,5 @@
 from rbc2.configs.mcts_config import MCTS_Config
-from rbc2.mcts.mcts_loop.expansion.expansion_context_filtering import filter_by_max_chemistry_nodes, apply_beginning_and_end_chemistry_filter
+from rbc2.mcts.mcts_loop.expansion.expansion_context_filtering import filter_by_max_chemistry_nodes, filter_by_max_biocatalysis_nodes, apply_beginning_and_end_chemistry_filter
 from rbc2.data_model.pathway import Pathway
 from rbc2.data_model.reaction import Reaction
 from rbc2.data_model.reaction_option import ReactionOption
@@ -112,4 +112,63 @@ def test_chem_filtering():
     assert apply_beginning_and_end_chemistry_filter(options,
                                                     pathway,
                                                     1, 1) == [option2]
+
+
+def test_max_biocatalysis_removes_bio_options_when_at_limit():
+    pathway = Pathway([Reaction('CCCO', ['CCC=O'], rxn_domain='biocatalysis'),
+                       Reaction('CCC=O', ['CCC(=O)O'], rxn_domain='biocatalysis'),
+                       Reaction('CCC(=O)O', ['CCC(=O)NC'], rxn_domain='chemistry')])
+
+    option1 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'chemistry', 0.0, lambda x: x)
+    option2 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'biocatalysis', 0.0, lambda x: x)
+
+    options = [option1, option2]
+
+    # at limit of 2 biocatalysis, only chemistry allowed
+    assert filter_by_max_biocatalysis_nodes(options, pathway, 2) == [option1]
+
+    # under limit, both allowed
+    assert filter_by_max_biocatalysis_nodes(options, pathway, 3) == [option1, option2]
+
+
+def test_max_biocatalysis_counts_biosynthesis():
+    pathway = Pathway([Reaction('CCCO', ['CCC=O'], rxn_domain='biosynthesis'),
+                       Reaction('CCC=O', ['CCC(=O)NC'], rxn_domain='biocatalysis')])
+
+    option1 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'chemistry', 0.0, lambda x: x)
+    option2 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'biocatalysis', 0.0, lambda x: x)
+
+    options = [option1, option2]
+
+    # biosynthesis + biocatalysis = 2, at limit
+    assert filter_by_max_biocatalysis_nodes(options, pathway, 2) == [option1]
+
+    # under limit
+    assert filter_by_max_biocatalysis_nodes(options, pathway, 3) == [option1, option2]
+
+
+def test_max_biocatalysis_none_means_no_limit():
+    pathway = Pathway([Reaction('CCCO', ['CCC=O'], rxn_domain='biocatalysis'),
+                       Reaction('CCC=O', ['CCC(=O)O'], rxn_domain='biocatalysis'),
+                       Reaction('CCC(=O)O', ['CCC(=O)NC'], rxn_domain='biocatalysis')])
+
+    option1 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'chemistry', 0.0, lambda x: x)
+    option2 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'biocatalysis', 0.0, lambda x: x)
+
+    options = [option1, option2]
+
+    # None means no limit
+    assert filter_by_max_biocatalysis_nodes(options, pathway, None) == [option1, option2]
+
+
+def test_max_biocatalysis_chemistry_options_remain():
+    pathway = Pathway([Reaction('CCCO', ['CCC=O'], rxn_domain='biocatalysis'),
+                       Reaction('CCC=O', ['CCC(=O)NC'], rxn_domain='biocatalysis')])
+
+    option1 = ReactionOption('CCC(=O)NC', 'test', [], {}, 'test', 'chemistry', 0.0, lambda x: x)
+
+    options = [option1]
+
+    # at biocatalysis limit, chemistry options should still be allowed
+    assert filter_by_max_biocatalysis_nodes(options, pathway, 2) == [option1]
 

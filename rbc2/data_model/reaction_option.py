@@ -58,20 +58,28 @@ class ReactionOption():
 def create_evaluate_option_method(rule_applicator: RuleApplicator,
                                   config: Expansion_Config,
                                   network: Optional[Network] = None,
-                                  reaction_processing_function: Optional[callable] = None):
+                                  reaction_processing_function: Optional[callable] = None,
+                                  supports_atom_mapping: bool = True):
 
     def evaluate_method(option: ReactionOption):
         """ Evaluates the option to return reactions """
 
         rdchiral_rxns = rule_applicator.smarts_to_rdchiral(option.smarts)
         rxn = {option.name: rdchiral_rxns}
-        outcomes = rule_applicator.apply(option.target_smi, rxn)
+
+        if config.store_atom_mappings and supports_atom_mapping:
+            outcomes, atom_mappings = rule_applicator.apply(option.target_smi, rxn, return_atom_mapping=True)
+        else:
+            outcomes = rule_applicator.apply(option.target_smi, rxn)
+            atom_mappings = None
+
         reactions = create_reactions(option.target_smi,
                                      outcomes,
                                      score=option.score,
                                      metadata=option.metadata,
                                      rxn_type=option.rxn_type,
-                                     rxn_domain=option.rxn_domain)
+                                     rxn_domain=option.rxn_domain,
+                                     atom_mappings=atom_mappings)
 
         if reaction_processing_function is not None:
             reactions = reaction_processing_function(reactions)

@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"O=C(O)c1ccc(CN2CCC(CN[C@@H]3C[C@H]3c3ccccc3)CC2)cc1","children":[{"type":"reaction","smiles":"O=C(C1=CC=C(CN2CCC(CN[C@H]3[C@H](C4=CC=CC=C4)C3)CC2)C=C1)OC(C)(C)C>>O=C(O)c1ccc(CN2CCC(CN[C@@H]3C[C@H]3c3ccccc3)CC2)cc1"}],"in_stock":false}

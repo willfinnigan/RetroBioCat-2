@@ -33,6 +33,7 @@ class MCTS_Config():
         self.boost_enzyme_in_cascade_score_by = 0.2
 
         self.max_chemistry_nodes = None
+        self.max_biocatalysis_nodes = None
 
         self.chemistry_only_at_beginning_or_end = False  # if true, only allow chemistry at beginning or end of pathway
         self.max_chemistry_at_beginning = None  # if only allowing chemistry at beginning or end, optionally set a max number of chemistry nodes at beginning

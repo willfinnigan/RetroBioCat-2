@@ -1,0 +1,57 @@
+{
+  "type": "mol",
+  "smiles": "C(O)(=O)CCCCCCCC(=O)O",
+  "in_stock": false,
+  "children": [
+    {
+      "type": "reaction",
+      "smiles": "CCCOC(=O)CCCCCCCC(O)=O>>C(O)(=O)CCCCCCCC(=O)O",
+      "children": [
+        {
+          "type": "mol",
+          "smiles": "CCCOC(=O)CCCCCCCC(O)=O",
+          "in_stock": false,
+          "children": [
+            {
+              "type": "reaction",
+              "smiles": "CCCC(=O)CCCCCCCC(O)=O>>CCCOC(=O)CCCCCCCC(O)=O",
+              "children": [
+                {
+                  "type": "mol",
+                  "smiles": "CCCC(=O)CCCCCCCC(O)=O",
+                  "in_stock": false,
+                  "children": [
+                    {
+                      "type": "reaction",
+                      "smiles": "CCCC(O)CCCCCCCC(=O)O>>CCCC(=O)CCCCCCCC(O)=O",
+                      "children": [
+                        {
+                          "type": "mol",
+                          "smiles": "CCCC(O)CCCCCCCC(=O)O",
+                          "in_stock": false,
+                          "children": [
+                            {
+                              "type": "reaction",
+                              "smiles": "CC/C=C/CCCCCCCC(=O)O>>CCCC(O)CCCCCCCC(=O)O",
+                              "children": [
+                                {
+                                  "type": "mol",
+                                  "smiles": "CC/C=C/CCCCCCCC(=O)O",
+                                  "in_stock": false
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

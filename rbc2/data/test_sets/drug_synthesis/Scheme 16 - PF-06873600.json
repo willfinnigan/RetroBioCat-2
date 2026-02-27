@@ -1,0 +1,1 @@
+{"type":"mol","smiles":"C[C@@]1(O)CCC[C@H]1Nc1nc(NC2CCN(S(C)(=O)=O)CC2)ncc1Br","children":[{"type":"reaction","smiles":"ClC1=NC(N[C@@H]2CCC[C@@]2(C)O)=C(Br)C=N1,NC3CCN(S(=O)(C)=O)CC3>>C[C@@]1(O)CCC[C@H]1Nc1nc(NC2CCN(S(C)(=O)=O)CC2)ncc1Br"}],"in_stock":false}

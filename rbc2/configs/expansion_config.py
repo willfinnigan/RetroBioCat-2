@@ -20,6 +20,9 @@ class Expansion_Config():
         self.merge_duplicate_metadata = True
         self.force_rdkit_smis = True
 
+        # atom mapping
+        self.store_atom_mappings = False
+
         # expanders general
         self.max_reactions = None  # max reactions (not options)
 

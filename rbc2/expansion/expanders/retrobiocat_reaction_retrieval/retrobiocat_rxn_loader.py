@@ -140,7 +140,7 @@ class RetroBioCat_Reaction_Interface():
         # load multi_step reactions
         for reaction in reactions:
             if reaction.two_step == True and len(reaction.steps) != 0:
-                # this will become a list of lists of lists: [[[r1a, r1b], [r2a, r2b]], [[r1a, r1b], [r2a, r2b]]]
+                # Returns (grouped_list_steps, step_names_per_group) tuple
                 self.multi_rxns[reaction.name] = self.get_multi_smarts_from_named_steps(self.rxns,
                                                                                         reaction.steps,)
 
@@ -161,10 +161,17 @@ class RetroBioCat_Reaction_Interface():
                 self.enzymes = list(enzyme_names)
                 self.reaction_enzyme_map = {k: list(v) for k, v in self.reaction_enzyme_map.items()}
 
-    def get_multi_smarts_from_named_steps(self, rxns, steps) -> List[List[List]]:
+    def get_multi_smarts_from_named_steps(self, rxns, steps) -> tuple:
+        """Returns (processed_steps, step_names_per_group).
+
+        processed_steps: List[List[List[rdchiralReaction]]]
+        step_names_per_group: List[List[str]] — parallel structure with step reaction names.
+        """
         processed_steps = []
+        step_names_per_group = []
         for group_steps in steps:
             group_smas = []
+            group_names = []
             for step_rxn in group_steps:
                 step = []
                 step_rdchiral_rxns = rxns[step_rxn]
@@ -175,12 +182,15 @@ class RetroBioCat_Reaction_Interface():
                     step.reverse()
 
                 group_smas.append(step)
+                group_names.append(step_rxn)
 
             if self.reverse == True:
                 group_smas.reverse()
+                group_names.reverse()
             processed_steps.append(group_smas)
+            step_names_per_group.append(group_names)
 
-        return processed_steps
+        return processed_steps, step_names_per_group
 
 
 if __name__ == '__main__':

@@ -16,6 +16,9 @@ RETRORULES = 'retrorules'
 ASKCOS = 'askcos'
 BKMS = 'bkms'
 ENZYMEMAP = 'enzymemap'
+EGRAPH2RSMILES = 'egraph2rsmiles'
+GRAPH2SMILES = 'graph2smiles'
+AUGMENTED_TRANSFORMER = 'augmented_transformer'
 
 expander_repo = {RETROBIOCAT:  RetroBioCatExpander,
                  AIZYNTHFINDER: AIZynthfinderExpander,
@@ -23,8 +26,27 @@ expander_repo = {RETROBIOCAT:  RetroBioCatExpander,
                  RETRORULES: RetroRulesExpander,
                  ASKCOS: AskcosPolicyExpander,
                  BKMS: BKMSExpander,
-                 ENZYMEMAP: EnzymeMapExpander
+                 ENZYMEMAP: EnzymeMapExpander,
                  }
+
+
+def _register_template_free_expanders():
+    """Lazily register template-free expanders (require torch)."""
+    try:
+        from rbc2.expansion.expanders.template_free.template_free_expanders import (
+            EGraph2RSmilesExpander, Graph2SmilesExpander, AugmentedTransformerExpander
+        )
+        expander_repo[EGRAPH2RSMILES] = EGraph2RSmilesExpander
+        expander_repo[GRAPH2SMILES] = Graph2SmilesExpander
+        expander_repo[AUGMENTED_TRANSFORMER] = AugmentedTransformerExpander
+    except ImportError as e:
+        import logging
+        logging.getLogger(__name__).debug(
+            "Template-free expanders not available: %s", e)
+
+
+_register_template_free_expanders()
+
 
 def get_expanders(expander_names: Sequence[str],
                   network: Optional[Network] = None,
@@ -45,4 +67,3 @@ def get_expanders(expander_names: Sequence[str],
         expanders.append(exp)
 
     return expanders
-

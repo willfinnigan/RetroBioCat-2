@@ -14,6 +14,8 @@ class DefaultExpander(Expander):
     """A default base class for expanders.  Contains methods which should be overwritten by subclasses,
     and others that optionally can be overwritten"""
 
+    supports_atom_mapping: bool = False
+
     def __init__(self,
                  network: Optional[Network] = None,
                  config: Optional[Expansion_Config] = None):
@@ -28,7 +30,8 @@ class DefaultExpander(Expander):
         self.option_evaluation_method = create_evaluate_option_method(self.rule_applicator,
                                                                       self.config,
                                                                       self.network,
-                                                                      reaction_processing_function=self.reaction_processing_function)
+                                                                      reaction_processing_function=self.reaction_processing_function,
+                                                                      supports_atom_mapping=self.supports_atom_mapping)
 
         self.calls = 0
 
